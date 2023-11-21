@@ -1,6 +1,6 @@
 @extends('ADMIN/index')
 @section('content')
-<form method="POST" action="{{route('SIZE.xl-cap-nhat',['id'=>$size->id])}}">
+<form method="POST" action="{{route('MAU.xl-cap-nhat',['id'=>$mau->id])}}">
 		@csrf
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
@@ -12,9 +12,9 @@
 					<div class="row p-5 border-bottom">
 						<div class="col-sm-12 col-md-12 col-xl-3">
 							<div class="form-group">
-								<label for="size-name" class="form-label text-muted">Tên size:</label>
+								<label for="color-name" class="form-label text-muted">Tên màu:</label>
 								<div class="input-group">
-									<input id="size-name" name="ten" type="text" class="form-control text-dark" placeholder="Nhập tên size" value="{{$size->ten}}">
+									<input id="color-name" name="ten" type="text" class="form-control text-dark" placeholder="Nhập tên màu" value="{{$mau->ten}}">
 
 								</div>
 							</div>
@@ -25,7 +25,7 @@
 
 					<div class="row p-5">
 						<div class="btn-list text-end">
-							<a class="btn btn-outline-danger"href ="{{route('SIZE.danh-sach')}}">
+							<a class="btn btn-outline-danger"href ="{{route('MAU.danh-sach')}}">
 
 								Cancel
 </a>
