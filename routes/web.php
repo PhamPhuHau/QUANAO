@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SizeController;
+
+use App\Http\Controllers\MauController;
+
 use App\Http\Controllers\SanPhamController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,13 +44,18 @@ Route::name('Loai_')->group(function(){
 });
 
 /*-----------------------MAU-------------------- */
+Route::prefix('MAU')->group(function(){
+    Route::name('MAU.')->group(function(){
+    Route::get('/danh-sach-mau',[MauController::class,'View'])->name('danh-sach');
+    Route::get("/them",[MauController::class, 'themMoi'])->name('them');
+    Route::post("/them",[MauController::class, 'xuLyThemMoi'])->name('xl-them');
 
-Route::name('Mau_')->group(function(){
-    Route::get('/mau-danh-sach', function () {
-        return view('MAU/danh-sach');
-    })->name('Danh_Sach');
+    Route::get("/cap-nhat/{id}",[MauController::class, 'Edit'])->name('cap-nhat');
+    Route::post("/cap-nhat/{id}",[MauController::class, 'xlEdit'])->name('xl-cap-nhat');
+
+    Route::get("/xoa/{id}",[MauController::class, 'Delete'])->name('xoa');
 });
-
+});
 /*----------------------------------------------------------------------------*/
 Route::prefix('SIZE')->group(function(){
     Route::name('SIZE.')->group(function(){
