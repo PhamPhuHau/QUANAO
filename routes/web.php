@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SanPhamController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,8 @@ Route::name('San_Pham_')->group(function(){
     Route::get('/cap-nhat-san-pham', function () {
         return view('SANPHAM/cap-nhat');
     })->name('Cap_Nhat');
+
+    Route::get('Nhap',[SanPhamController::class,'View']);
 });
 
 /*-----------------------LOAI-------------------- */
