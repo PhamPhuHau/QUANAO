@@ -6,6 +6,7 @@ use App\Http\Controllers\SizeController;
 use App\Http\Controllers\MauController;
 
 use App\Http\Controllers\SanPhamController;
+use App\Http\Controllers\LoaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,16 +33,20 @@ Route::prefix('SAN-PHAM')->group(function(){
             return view('SANPHAM/cap-nhat');
         })->name('cap-nhat');
 
-        Route::get('nhap-hang',[SanPhamController::class,'View'])->name('nhap-hang');
+        Route::get('nhap-hang',[SanPhamController::class,'themMoi'])->name('nhap-hang');
+        Route::post('nhap-hang',[SanPhamController::class,'xuLyThemMoi'])->name('xl-nhap-hang');
     });
 });
 
 /*-----------------------LOAI-------------------- */
 Route::prefix('LOAI')->group(function(){
     Route::name('LOAI.')->group(function(){
-        Route::get('/danh-sach', function () {
-            return view('LOAI/danh-sach');
-        })->name('danh-sach');
+        Route::get('danh-sach',[LoaiController::class,'View'])->name('danh-sach');
+        Route::get("/them",[LoaiController::class, 'themMoi'])->name('them');
+        Route::post("/them",[LoaiController::class, 'xuLyThemMoi'])->name('xl-them');
+        Route::get("/cap-nhat/{id}",[LoaiController::class, 'Edit'])->name('cap-nhat');
+        Route::post("/cap-nhat/{id}",[LoaiController::class, 'xlEdit'])->name('xl-cap-nhat');
+        Route::get("/xoa/{id}",[LoaiController::class, 'Delete'])->name('xoa');
     });
 });
 
