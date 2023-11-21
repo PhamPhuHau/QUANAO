@@ -49,22 +49,13 @@
 @endsection
 @section('chon')
                     <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <!------------------------------ Sản Phẩm ------------------------------------>
-                    <!-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="#" class="dropdown-item">Danh Sách</a>
-                            <a href="#" class="dropdown-item">Loại</a>
-                            <a href="#" class="dropdown-item">Màu</a>
-                            <a href="#" class="dropdown-item">Size</a>
-                        </div>
-                    </div> -->
                     
-                    <a href="/danh-sach-san-pham" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
-                    <a href="/danh-sach-loai" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
-                    <a href="/danh-sach-mau" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
-                    <a href="/danh-sach-size" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
+                    
+                    <a href="{{ Route('SAN-PHAM.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
+                    <a href="{{ Route('LOAI.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
+                    <a href="{{ Route('MAU.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
+                    <a href="{{ Route('SIZE.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
 
-                    <a href="#" class="nav-item nav-link"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>
+                    <a href="{{ Route('SAN-PHAM.nhap-hang') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>
                     <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 @endsection
