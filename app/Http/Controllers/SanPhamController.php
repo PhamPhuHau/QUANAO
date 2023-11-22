@@ -124,4 +124,11 @@ class SanPhamController extends Controller
         $nhap_Hang->save();
         return redirect()->route('SAN-PHAM.danh-sach');
     }
+
+    public function view_Chi_Tiet($id)
+    {
+        $CT_San_Pham = Chi_Tiet_San_Pham::where('san_pham_id',$id)->get();
+        $san_Pham = San_Pham::where('id',$id)->first();
+        return view('SANPHAM/danh-sach-chi-tiet',compact('CT_San_Pham','san_Pham'));
+    }
 }

@@ -33,7 +33,7 @@ Route::prefix('SAN-PHAM')->group(function(){
         Route::get('nhap-hang',[SanPhamController::class,'themMoi'])->name('nhap-hang');
         Route::post('nhap-hang',[SanPhamController::class,'xuLyThemMoi'])->name('xl-nhap-hang');
         Route::get('lich-su-nhap-hang',[SanPhamController::class,'lsnhaphang'])->name('lich-su-nhap-hang');
-
+        Route::get('san-pham/{id}',[SanPhamController::class,'view_Chi_Tiet'])->name('chi-tiet-san-pham');
     });
 });
 /*-----------------------LOAI-------------------- */
