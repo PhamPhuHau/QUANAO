@@ -98,6 +98,11 @@
                         </a>
 
                     </div>
+                    <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3" href="{{ route('dang-xuat') }}">Sign out</a>
+    </div>
+  </div>
                 </div>
             </nav>
             <!-- Navbar End -->
