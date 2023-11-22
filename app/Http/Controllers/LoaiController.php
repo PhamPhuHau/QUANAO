@@ -47,7 +47,7 @@ class LoaiController extends Controller
         {
             return redirect()->route("LOAI.danh-sach");
         }
-        $mau->delete();
+        $loai->delete();
         return redirect()->route("LOAI.danh-sach");
     }
 }
