@@ -25,23 +25,21 @@ Route::get('/', [QuanLyController::class, 'trangChu'])->name('ADMIN.trang-chu');
 /*-----------------------SANPHAM-------------------- */
 Route::prefix('SAN-PHAM')->group(function(){
     Route::name('SAN-PHAM.')->group(function(){
-        Route::get('/san-pham-danh-sach', function () {
-            return view('SANPHAM/danh-sach');
-        })->name('danh-sach');
-        Route::get('danh-sach-san-pham',[SanPhamController::class,'View'])->name('danh-sach');
-
+        Route::get('/danh-sach',[SanPhamController::class,'view'] )->name('danh-sach');
         Route::get('/cap-nhat', function () {
             return view('SANPHAM/cap-nhat');
         })->name('cap-nhat');
 
         Route::get('nhap-hang',[SanPhamController::class,'themMoi'])->name('nhap-hang');
         Route::post('nhap-hang',[SanPhamController::class,'xuLyThemMoi'])->name('xl-nhap-hang');
+        Route::get('lich-su-nhap-hang',[SanPhamController::class,'lsnhaphang'])->name('lich-su-nhap-hang');
+
     });
 });
 /*-----------------------LOAI-------------------- */
 Route::prefix('LOAI')->group(function(){
     Route::name('LOAI.')->group(function(){
-        Route::get('danh-sach-loai',[LoaiController::class,'View'])->name('danh-sach');
+        Route::get('danh-sach',[LoaiController::class,'View'])->name('danh-sach');
         Route::get("/them",[LoaiController::class, 'themMoi'])->name('them');
         Route::post("/them",[LoaiController::class, 'xuLyThemMoi'])->name('xl-them');
         Route::get("/cap-nhat/{id}",[LoaiController::class, 'Edit'])->name('cap-nhat');

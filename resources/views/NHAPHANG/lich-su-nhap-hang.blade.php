@@ -9,13 +9,13 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{asset('img/favicon.icon')}}" rel="icon">
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -35,7 +35,7 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Recent Salse</h6>
-                        <a href="{{ route('MAU.them') }}" type="button" class="btn btn-sm btn-outline-secondary">Thêm mới</a>
+                        <a href="">Show All</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -43,24 +43,13 @@
                                 <tr class="text-dark">
                                     <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
                                     <th scope="col">ID</th>
-                                    <th scope="col">TÊN</th>
-
+                                    <th scope="col">TỔNG TIỀN</th>
+                                    <th scope="col">NHÀ CUNG CẤP</th>
+                                    <th scope="col">NGÀY NHẬP</th>
+                                    <th scope="col">TRẠNG THÁI</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach($Mau as $mau)
-                                <tr>
-                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-
-
-                                    <td>{{ $mau->id }}</td>
-                                    <td>{{ $mau->ten }}</td>
-
-                                    <td><a class="btn btn-outline-primary" href="{{ route('MAU.cap-nhat',['id'=>$mau->id]) }}">Cập nhật</a>
-                                    <a class="btn btn-outline-danger" href="{{ route('MAU.xoa',['id'=>$mau->id]) }}">Xóa</a></td>
-                                </tr>
-                                @endforeach
-                            </tbody>
+                            
                         </table>
                     </div>
                 </div>
@@ -68,10 +57,10 @@
 
 @endsection
 @section('chon')
-    <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>                  
+    <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
     <a href="{{ Route('SAN-PHAM.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
     <a href="{{ Route('LOAI.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
-    <a href="{{ Route('MAU.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>MÀU</a>
+    <a href="{{ Route('MAU.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
     <a href="{{ Route('SIZE.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
     <div class="nav-item dropdown ">
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>
