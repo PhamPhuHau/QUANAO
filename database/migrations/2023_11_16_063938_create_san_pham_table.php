@@ -18,6 +18,7 @@ return new class extends Migration
             $table->double('gia_ban');
             $table->integer('so_luong');
             $table->integer('trang_thai');
+            $table->string('thong_tin',5000);
             $table->timestamps();
         });
     }
