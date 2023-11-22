@@ -52,21 +52,23 @@
                                     <th scope="col">TRẠNG THÁI</th>
                                 </tr>
                             </thead>
+                            @foreach($san_Pham as $San_Pham)
                             <tbody>
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
                                     <td><img src="bootstrap-admin-template-free.jpg" width="100%" height="50px" alt=""></td>
-
-                                    <td>01</td>
-                                    <td>INV-0123</td>
-                                    <td>$123</td>
-                                    <td>$234</td>
-                                    <td>100</td>
-                                    <td>1</td>
+                                   
+                                    <td>{{ $San_Pham->id }}</td>
+                                    <td>{{ $San_Pham->ten }}</td>
+                                    <td>{{ $San_Pham->gia_nhap }}</td>
+                                    <td>{{ $San_Pham->gia_ban }}</td>
+                                    <td>{{ $San_Pham->so_luong }}</td>
+                                    <td>{{ $San_Pham->trang_thai}}</td>
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
                                 </tr>
                                 
                             </tbody>
+                            @endforeach
                         </table>
                     </div>
                 </div>

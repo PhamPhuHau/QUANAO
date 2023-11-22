@@ -26,9 +26,7 @@ Route::get('/', function () {
 /*-----------------------SANPHAM-------------------- */
 Route::prefix('SAN-PHAM')->group(function(){
     Route::name('SAN-PHAM.')->group(function(){
-        Route::get('/san-pham-danh-sach', function () {
-            return view('SANPHAM/danh-sach');
-        })->name('danh-sach');
+        Route::get('/danh-sach',[SanPhamController::class,'view'] )->name('danh-sach');
         Route::get('/cap-nhat', function () {
             return view('SANPHAM/cap-nhat');
         })->name('cap-nhat');
