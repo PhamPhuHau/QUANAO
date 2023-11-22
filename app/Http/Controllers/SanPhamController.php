@@ -19,7 +19,10 @@ class SanPhamController extends Controller
         return view('SANPHAM/danh-sach',compact('san_Pham'));
             
     }
-
+    public function lsnhaphang()
+    {
+        return view('NHAPHANG/lich-su-nhap-hang');
+    }
     public function themMoi()
     {
         $nha_Cung_Cap = Nha_Cung_Cap::all();
