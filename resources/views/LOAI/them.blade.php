@@ -12,7 +12,7 @@
 					<div class="row p-5 border-bottom">
 						<div class="col-sm-12 col-md-12 col-xl-3">
 							<div class="form-group">
-								<label for="color-name" class="form-label text-muted">Tên màu:</label>
+								<label for="color-name" class="form-label text-muted">Tên loại:</label>
 								<div class="input-group">
 									<input id="color-name" name="ten" type="text" class="form-control text-dark" placeholder="Enter ">
 								</div>
