@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('mau_id');
             $table->integer('size_id');
             $table->integer('loai_id');
+            $table->integer('so_luong');
             $table->timestamps();
         });
     }
