@@ -9,13 +9,13 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="{{asset('img/favicon.icon')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -35,37 +35,39 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
+                        <a href="{{ route('SAN-PHAM.them') }}" type="button" class="btn btn-sm btn-outline-secondary">Thêm mới</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-dark">
                                     <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
-                                    <th scope="col">HÌNH</th>
-
                                     <th scope="col">ID</th>
                                     <th scope="col">TÊN</th>
                                     <th scope="col">GIÁ NHẬP</th>
                                     <th scope="col">GIÁ BÁN</th>
                                     <th scope="col">SỐ LƯỢNG</th>
                                     <th scope="col">TRẠNG THÁI</th>
+
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($san_Pham as $sp)
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                    <td><img src="bootstrap-admin-template-free.jpg" width="100%" height="50px" alt=""></td>
 
-                                    <td>01</td>
-                                    <td>INV-0123</td>
-                                    <td>$123</td>
-                                    <td>$234</td>
-                                    <td>100</td>
-                                    <td>1</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+
+                                    <td>{{ $sp->id }}</td>
+                                    <td>{{ $sp->ten }}</td>
+                                    <td>{{ $sp->gia_nhap }}</td>
+                                    <td>{{ $sp->gia_ban }}</td>
+                                    <td>{{ $sp->so_luong }}</td>
+                                    <td>{{ $sp->trang_thai }}</td>
+
+                                    <td><a class="btn btn-outline-primary" href="{{ route('SAN-PHAM.cap-nhat',['id'=>$sp->id]) }}">Cập nhật</a>
+                                    <a class="btn btn-outline-danger" href="{{ route('SAN-PHAM.xoa',['id'=>$sp->id]) }}">Xóa</a></td>
                                 </tr>
-                                
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -74,11 +76,16 @@
 
 @endsection
 @section('chon')
-    <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-    <a href="{{ Route('SAN-PHAM.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
-    <a href="{{ Route('LOAI.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
-    <a href="{{ Route('MAU.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
-    <a href="{{ Route('SIZE.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
-    <a href="{{ Route('SAN-PHAM.nhap-hang') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>
-    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
+
+                    <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+
+
+                    <a href="{{ Route('SAN-PHAM.danh-sach') }}" class="nav-item nav-link active "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
+                    <a href="{{ Route('LOAI.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
+                    <a href="{{ Route('MAU.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
+
+                    <a href="{{ Route('SIZE.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-chart-bar me-2"></i>SIZE</a>
+
+                    <a href="{{ Route('SAN-PHAM.nhap-hang') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>
+                    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 @endsection
