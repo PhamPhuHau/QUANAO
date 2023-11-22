@@ -5,7 +5,7 @@
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">CẬP NHẬT SẢN PHẨM</h6>
+                <h6 class="mb-0">NHẬP HÀNG</h6>
                 
             </div>
             <div class="table-responsive">
@@ -112,3 +112,8 @@
                     <a href="{{ Route('SAN-PHAM.nhap-hang') }}" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>
                     <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 @endsection
+
+
+@if(session('thong_bao'))
+    <script>alert("{{ session('thong_bao') }}")</script>
+@endif
