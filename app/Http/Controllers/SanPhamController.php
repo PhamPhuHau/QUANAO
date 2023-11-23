@@ -34,22 +34,28 @@ class SanPhamController extends Controller
 
     public function xuLyThemMoi(Request $request)
     {
-        if (empty($request->nha_cung_cap)) {
+        
+        //if này kiểm tra xem đã có nhà cung cấp và tên chưa nếu chưa có thì 1 trong 2 thì sẽ trả về thông báo
+        if (empty($request->nha_cung_cap) || empty($request->ten)) {
             return redirect()->route('SAN-PHAM.nhap-hang')->with('thong_bao', 'vui lòng nhập đầy đủ thông tin');
         }
-       
+       //tạo mới nhập hàng
         $nhap_Hang = new Nhap_Hang();
         $nhap_Hang->tong_tien = 0;
         $nhap_Hang->nha_cung_cap_id = (int)$request->nha_cung_cap;
         $nhap_Hang->trang_thai = 1;
         $nhap_Hang->save();
+        //biến dùng để tính lại tổng tiền từng thành tiền của sản phẩm cộng lại
         $tong_Tien = 0;
+
         for($i = 0; $i < count($request->ten) ; $i++){
-             
+            //biến này dùng để lưu thanhf tiền từng sản phẩm
             $thanh_Tien = (double)$request->so_Luong[$i] * (double)$request->gia_Nhap[$i];
             $tong_Tien += $thanh_Tien;
             $san_Pham = San_Pham::where('ten', $request->ten[$i])->first();
+            //if này kiểm tra sản phẩm có tồn tại chưa nếu chưa thì sẽ tạo 1 sản phẩm mới
             if(empty($san_Pham)){
+                //if này kiểm tra xem người dùng đã ghi đầy đủ thông tin chưa nếu chưa thì sẽ bỏ qua sản phẩm đó
                 if($request->so_Luong[$i] == null || $request->gia_Nhap[$i] == null || $request->gia_Ban[$i] == null || $request->loai[$i] == null || $request->mau[$i] == null || $request->size[$i] == null){
                     continue;
                 }
@@ -66,48 +72,56 @@ class SanPhamController extends Controller
                 $chi_Tiet_San_Pham->mau_id	= (int)$request->mau[$i];
                 $chi_Tiet_San_Pham->size_id = (int)$request->size[$i];
                 $chi_Tiet_San_Pham->loai_id = (int)$request->loai[$i];
+                $chi_Tiet_San_Pham->so_luong = (int)$request->so_Luong[$i];
                 $chi_Tiet_San_Pham->save();
             }
-
-            $chi_Tiet_San_Pham = Chi_Tiet_San_Pham::where('san_pham_id',$san_Pham->id)->where('mau_id',$request->mau)->where('loai_id',$request->loai)->where('size_id',$request->size)->first();
-
-            if(empty($chi_Tiet_San_Pham))
+            else
             {
-                $chi_Tiet_San_Pham = new Chi_Tiet_San_Pham();
-                $chi_Tiet_San_Pham->san_pham_id = (int)$san_Pham->id;
-                $chi_Tiet_San_Pham->mau_id	= (int)$request->mau[$i];
-                $chi_Tiet_San_Pham->size_id = (int)$request->size[$i];
-                $chi_Tiet_San_Pham->loai_id = (int)$request->loai[$i];
-                $chi_Tiet_San_Pham->save();
-            }
-            else{
+                $chi_Tiet_San_Pham = Chi_Tiet_San_Pham::where('san_pham_id',$san_Pham->id)->where('mau_id',$request->mau)->where('loai_id',$request->loai)->where('size_id',$request->size)->first();
+                //if này kiểm tra xem màu trong chi tiết đó có tồn tại chưa nếu chưa tồn tại thì sẽ tạo mới 
+                //nếu đã tông tại thì sẽ update số lượng và các thay đổi đã nhập vào
+                if(empty($chi_Tiet_San_Pham))
+                {
+                    $chi_Tiet_San_Pham = new Chi_Tiet_San_Pham();
+                    $chi_Tiet_San_Pham->san_pham_id = (int)$san_Pham->id;
+                    $chi_Tiet_San_Pham->mau_id	= (int)$request->mau[$i];
+                    $chi_Tiet_San_Pham->size_id = (int)$request->size[$i];
+                    $chi_Tiet_San_Pham->loai_id = (int)$request->loai[$i];
+                    $chi_Tiet_San_Pham->so_luong = (int)$request->so_Luong[$i];
+                    $chi_Tiet_San_Pham->save();
+                }
+                else
+                {
+                    if(!empty($request->gia_Nhap[$i])){
+                        $san_Pham->gia_nhap = (double)$request->gia_Nhap[$i];
+                    }
+                    
+                    if (!empty($request->gia_Ban[$i])) {
+                        $san_Pham->gia_ban = (double)$request->gia_Ban[$i];
+                    }
+                    if(!empty($request->mau[$i])){
+                        $chi_Tiet_San_Pham->mau_id	= (int)$request->mau[$i];
+                    }
+                    if(!empty($request->size[$i])){
+                        $chi_Tiet_San_Pham->size_id = (int)$request->size[$i];
+                    }
 
-                if(!empty($request->gia_Nhap[$i])){
-                    $san_Pham->gia_nhap = (double)$request->gia_Nhap[$i];
+                    if(!empty($request->loai[$i])){
+                        $chi_Tiet_San_Pham->loai_id = (int)$request->loai[$i];
+                    }
+                    $chi_Tiet_San_Pham->so_luong += (int)$request->so_Luong[$i];
+                    $chi_Tiet_San_Pham->save();
                 }
-                if (!empty($request->gia_Ban[$i])) {
-                    $san_Pham->gia_ban = (double)$request->gia_Ban[$i];
-                }
-                
-                
+
+
+
+               
                 $san_Pham->so_luong += (int)$request->so_Luong[$i];
                 $san_Pham->trang_thai = 1;
                 $san_Pham->save();
+            }            
 
-
-                $chi_Tiet_San_Pham = Chi_Tiet_San_Pham::where('san_pham_id',$san_Pham->id)->first();
-                if(!empty($request->mau[$i])){
-                    $chi_Tiet_San_Pham->mau_id	= (int)$request->mau[$i];
-                }
-                if(!empty($request->size[$i])){
-                    $chi_Tiet_San_Pham->size_id = (int)$request->size[$i];
-                }
-
-                if(!empty($request->loai[$i])){
-                    $chi_Tiet_San_Pham->loai_id = (int)$request->loai[$i];
-                }
-                $chi_Tiet_San_Pham->save();
-            }
+            
 
             $chi_Tiet_Nhap_Hang = new Chi_Tiet_Nhap_Hang();
             $chi_Tiet_Nhap_Hang->nhap_hang_id = (int)$nhap_Hang->id;
@@ -123,5 +137,12 @@ class SanPhamController extends Controller
         $nhap_Hang->tong_tien = $tong_Tien;
         $nhap_Hang->save();
         return redirect()->route('SAN-PHAM.danh-sach');
+    }
+
+    public function view_Chi_Tiet($id)
+    {
+        $CT_San_Pham = Chi_Tiet_San_Pham::where('san_pham_id',$id)->get();
+        $san_Pham = San_Pham::where('id',$id)->first();
+        return view('SANPHAM/danh-sach-chi-tiet',compact('CT_San_Pham','san_Pham'));
     }
 }
