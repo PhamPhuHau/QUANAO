@@ -47,9 +47,19 @@
                                     <th scope="col">NHÀ CUNG CẤP</th>
                                     <th scope="col">NGÀY NHẬP</th>
                                     <th scope="col">TRẠNG THÁI</th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            
+                            @foreach($nhap_Hang as $nhap_hang)
+                            <tbody>
+                                <td style="width: 25%;">{{ $nhap_hang->id }}</td>
+                                <td style="width: 25%;">{{ $nhap_hang->tong_tien }}</td>
+                                <td style="width: 25%;">{{ $nhap_hang->nha_cung_cap_id }}</td>
+                                <td style="width: 25%;">{{ $nhap_hang->created_at }}</td>
+                                <td style="width: 25%;">{{ $nhap_hang->trang_thai }}</td>
+                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                            </tbody>
+                            @endforeach
                         </table>
                     </div>
                 </div>

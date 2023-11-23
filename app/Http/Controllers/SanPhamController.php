@@ -11,6 +11,7 @@ use App\models\Nhap_Hang;
 use App\models\Chi_Tiet_Nhap_Hang;
 use App\models\San_Pham;
 use App\models\Chi_Tiet_San_Pham;
+use App\models\Hinh_Anh;
 class SanPhamController extends Controller
 {
     public function view()
@@ -19,9 +20,16 @@ class SanPhamController extends Controller
         return view('SANPHAM/danh-sach',compact('san_Pham'));
             
     }
-    public function lsnhaphang()
+    public function lsNhapHang()
     {
-        return view('NHAPHANG/lich-su-nhap-hang');
+        $nhap_Hang = Nhap_Hang::all();
+        return view('NHAPHANG/lich-su-nhap-hang',compact('nhap_Hang'));
+    }
+    public function lsChiTietNhapHang($id)
+    {
+        $chi_Tiet_Nhap_Hang = Chi_Tiet_Nhap_Hang::where('nhap_hang_id',$id)->get();
+        
+        dd($chi_Tiet_Nhap_Hang);
     }
     public function themMoi()
     {
@@ -143,6 +151,22 @@ class SanPhamController extends Controller
     {
         $CT_San_Pham = Chi_Tiet_San_Pham::where('san_pham_id',$id)->get();
         $san_Pham = San_Pham::where('id',$id)->first();
-        return view('SANPHAM/danh-sach-chi-tiet',compact('CT_San_Pham','san_Pham'));
+        $hinh_Anh = Hinh_Anh::where('san_pham_id',$id)->get();
+        return view('SANPHAM/danh-sach-chi-tiet',compact('CT_San_Pham','san_Pham','hinh_Anh'));
+    }
+
+    public function them_Anh(Request $request,$id)
+    {
+        $files = $request->HinhAnh;  
+        if($files)
+        {
+            foreach ($files as $file) {
+                $hinh_Anh= new Hinh_Anh();
+                $hinh_Anh->url = $file->store('Hinh_Anh');
+                $hinh_Anh->san_pham_id = $id;
+                $hinh_Anh->save();
+            }
+        }
+        return 'thành công';
     }
 }

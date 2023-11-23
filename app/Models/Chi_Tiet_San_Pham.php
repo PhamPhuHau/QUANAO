@@ -19,4 +19,7 @@ class Chi_Tiet_San_Pham extends Model
     public function Size(){
         return $this->belongsto(Size::class);
     }
+    public function DS_San_Pham(){
+        return $this->belongsto(San_Pham::class);
+    }
 }
