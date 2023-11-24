@@ -50,46 +50,50 @@
                                     
                                 </tr>
                             </thead>
-                           
+                           @foreach($CT_San_Pham as $chi_tiet_san_pham)
                             <tbody>
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
                                    <td>
-                                        {{$san_Pham->id}}
+                                        {{ $chi_tiet_san_pham->id }}
                                     </td>
                                     <td>
                                         {{$san_Pham->ten}}
                                     </td>
                                     <td>
-                                    <select>    
-                                    @foreach($CT_San_Pham as $San_Pham)
-                                    <option>{{ $San_Pham->Loai->ten }}</option>
-                                    @endforeach
-                                    </select>
+                                        {{ $chi_tiet_san_pham->Loai->ten }}
+                                    </td>
+                                    <td>
+                                        {{ $chi_tiet_san_pham->Mau->ten }}
+                                    </td>
+                                    <td>
+                                        {{ $chi_tiet_san_pham->Size->ten }}
                                     </td>
 
-                                    <td>
-                                        <select>    
-                                            @foreach($CT_San_Pham as $San_Pham)
-                                                <option>{{ $San_Pham->Mau->ten }}</option>
-                                            @endforeach
-                                            </select>
-                                    </td>
                                     
-                                    <td>
-                                        <select>    
-                                            @foreach($CT_San_Pham as $San_Pham)
-                                                <option>{{ $San_Pham->Size->ten }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
+                                    
                                   
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
                                 </tr>
                                 
                             </tbody>
-                            
+                           
+
+                            @endforeach
                         </table>
+
+                        @foreach($hinh_Anh as $item)
+                                <img src="{{ asset($item->url) }}"  class="AnhSP"/>
+                                
+                            @endforeach
+
+
+
+                            <form method="POST"  enctype="multipart/form-data" action="">
+                                @csrf
+                                <input type="file" name="HinhAnh[]" multiple require="true"><br>
+                                <button type="submit">LƯU</button>
+                            </form>
                     </div>
                 </div>
 </div>
