@@ -62,7 +62,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Quan_Ly::class,
+            'model' => App\Models\QuanLy::class,
         ],
     ],
 

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Quan_Ly;
+use App\Models\QuanLy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
