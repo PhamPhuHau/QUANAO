@@ -58,7 +58,7 @@
                                         {{ $chi_tiet_san_pham->id }}
                                     </td>
                                     <td>
-                                        {{$san_Pham->ten}}
+                                        {{$chi_tiet_san_pham->san_pham->ten}}
                                     </td>
                                     <td>
                                         {{ $chi_tiet_san_pham->Loai->ten }}
@@ -82,7 +82,7 @@
                             @endforeach
                         </table>
 
-                        @foreach($hinh_Anh as $item)
+                        @foreach($HinhAnh as $item)
                                 <img src="{{ asset($item->url) }}"  class="AnhSP"/>
                                 
                             @endforeach
