@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Quan_Ly;
+use App\Models\QuanLy;
 use Illuminate\Support\Facades\Hash;
 
 class QuanLySeeder extends Seeder
