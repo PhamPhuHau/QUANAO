@@ -275,4 +275,7 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+.AnhSP{
+    width: 80%;
+}
 
