@@ -36,6 +36,8 @@ Route::prefix('SAN-PHAM')->group(function(){
         Route::get('lich-su-chi-tiet-nhap-hang/{id}',[SanPhamController::class,'lsChiTietNhapHang'])->name('lich-su-chi-tiet-nhap-hang');
         Route::get('san-pham/{id}',[SanPhamController::class,'view_Chi_Tiet'])->name('chi-tiet-san-pham');
         Route::post('san-pham/{id}',[SanPhamController::class,'them_Anh'])->name('them-anh');
+        Route::get('xoa-anh/{id}', [SanPhamController::class, 'xoa_Anh'])->name('xoa-anh');
+
 
     });
 });
