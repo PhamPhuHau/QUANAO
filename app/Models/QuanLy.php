@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Quan_Ly extends Model implements Authenticatable{
+class QuanLy extends Model implements Authenticatable{
     use HasFactory, Notifiable;
     protected $table="quan_ly";
      public function getAuthIdentifierName()
