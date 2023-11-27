@@ -1,6 +1,6 @@
 @extends('ADMIN/index')
 @section('content')
-<form method="POST" action="{{route('MAU.xl-cap-nhat',['id'=>$mau->id])}}">
+<form method="POST" action="{{route('mau.xl-cap-nhat',['id'=>$mau->id])}}">
 		@csrf
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
@@ -25,7 +25,7 @@
 
 					<div class="row p-5">
 						<div class="btn-list text-end">
-							<a class="btn btn-outline-danger"href ="{{route('MAU.danh-sach')}}">
+							<a class="btn btn-outline-danger"href ="{{route('mau.danh-sach')}}">
 
 								Cancel
 </a>
@@ -43,15 +43,16 @@
 @endsection
 @section('chon')
 	<a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>                  
-    <a href="{{ Route('SAN-PHAM.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
-    <a href="{{ Route('LOAI.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
-    <a href="{{ Route('MAU.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>MÀU</a>
-    <a href="{{ Route('SIZE.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
+	<a href="{{ Route('san-pham.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
+                    <a href="{{ Route('loai.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
+                    <a href="{{ Route('mau.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>MÀU</a>
+                    <a href="{{ Route('size.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
+                    <a href="{{ Route('nha-cung-cap.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-home me-2"></i>NHÀ CUNG CẤP</a>
 	<div class="nav-item dropdown ">
                         <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ Route('SAN-PHAM.nhap-hang') }}" class="dropdown-item">MỚI</a>
-                            <a href="{{ Route('SAN-PHAM.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
+                            <a href="{{ Route('san-pham.nhap-hang') }}" class="dropdown-item">MỚI</a>
+                            <a href="{{ Route('san-pham.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
                             
                         </div>
                     </div>    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
