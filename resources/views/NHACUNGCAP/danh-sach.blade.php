@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="{{asset('img/favicon.icon')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,56 +34,37 @@
 <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Danh sách</h6>
+                        <h6 class="mb-0">Recent Salse</h6>
+                        <a href="{{ route('#') }}" type="button" class="btn btn-sm btn-outline-secondary">Thêm mới</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-dark">
                                     <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
-                                    <th scope="col">HÌNH</th>
-
                                     <th scope="col">ID</th>
                                     <th scope="col">TÊN</th>
-                                    <th scope="col">GIÁ NHẬP</th>
-                                    <th scope="col">GIÁ BÁN</th>
-                                    <th scope="col">SỐ LƯỢNG</th>
-                                    <th scope="col">TRẠNG THÁI</th>
+                                    <th scope="col">ĐỊA CHỈ</th>
+                                    <th scope="col">EMAIL</th>
+
                                 </tr>
                             </thead>
-                            @foreach($san_Pham as $SanPham)
                             <tbody>
+                                @foreach($nha_Cung_Cap as $NCC)
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
 
 
-                                    <td>
-                                        @if($SanPham->hinh_anh->isNotEmpty())
-                                        <?php $hinhAnhMinId = $SanPham->hinh_anh->min('id'); ?>
-                                        <?php $hinhAnhMin = $SanPham->hinh_anh->where('id', $hinhAnhMinId)->first();?>
-                                        <img src="{{ asset($hinhAnhMin->url) }}" width="100%" height="50px" alt="">
+                                    <td>{{ $NCC->id }}</td>
+                                    <td>{{ $NCC->ten }}</td>
+                                    <td>{{ $NCC->dia_chi }}</td>
+                                    <td>{{ $NCC->email }}</td>
 
-
-
-
-                                        @endif
-                                    </td>
-
-                                    <td>{{ $SanPham->id }}</td>
-                                    <td>{{ $SanPham->ten }}</td>
-                                    <td>{{ $SanPham->gia_nhap }}</td>
-                                    <td>{{ $SanPham->gia_ban }}</td>
-                                    <td>{{ $SanPham->so_luong }}</td>
-                                    <td>{{ $SanPham->trang_thai}}</td>
-
-                                    <td><a class="btn btn-outline-dark" href="{{ route('SAN-PHAM.chi-tiet-san-pham',['id'=>$SanPham->id]) }}">Chi tiết</a>
-                                    <a class="btn btn-outline-danger" href="{{ route('SAN-PHAM.xoa',['id'=>$SanPham->id]) }}">Xóa</a>
-                                    </td>
-
+                                    <td><a class="btn btn-outline-primary" href="{{ route('SIZE.cap-nhat',['id'=>$size->id]) }}">Cập nhật</a>
+                                    <a class="btn btn-outline-danger" href="{{ route('SIZE.xoa',['id'=>$size->id]) }}">Xóa</a></td>
                                 </tr>
-
+                                @endforeach
                             </tbody>
-                            @endforeach
                         </table>
                     </div>
                 </div>
@@ -91,17 +72,22 @@
 
 @endsection
 @section('chon')
-    <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-    <a href="{{ Route('SAN-PHAM.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
-    <a href="{{ Route('LOAI.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
-    <a href="{{ Route('MAU.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
-    <a href="{{ Route('SIZE.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
-    <div class="nav-item dropdown ">
+
+                    <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    
+                    
+                    <a href="{{ Route('SAN-PHAM.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
+                    <a href="{{ Route('LOAI.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
+                    <a href="{{ Route('MAU.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
+
+                    <a href="{{ Route('SIZE.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
+
+                    <div class="nav-item dropdown ">
                         <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ Route('SAN-PHAM.nhap-hang') }}" class="dropdown-item">MỚI</a>
                             <a href="{{ Route('SAN-PHAM.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
-
+                            
                         </div>
-                    </div>    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
+                    </div>                    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 @endsection
