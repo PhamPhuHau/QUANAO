@@ -10,7 +10,7 @@ class SanPham extends Model
     use HasFactory;
     protected $table = 'san_pham';
 
-    // public function CT_San_Pham(){
-    //     return $this->belongsto(ChiTietSanPham::class);
-    // }
+    public function hinh_anh(){
+        return $this->hasMany(HinhAnh::class);
+    }
 }

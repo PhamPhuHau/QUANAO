@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Quan_Ly;
+use App\Models\QuanLy;
 use Illuminate\Support\Facades\Hash;
 
 class QuanLySeeder extends Seeder
@@ -14,7 +14,7 @@ class QuanLySeeder extends Seeder
      */
     public function run(): void
     {
-        $quanly = new Quan_Ly();
+        $quanly = new QuanLy();
         $quanly->ten_dang_nhap='hachiba';
         $quanly->password=Hash::make('hachiba123');
 
