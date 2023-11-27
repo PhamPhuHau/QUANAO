@@ -12,13 +12,15 @@ use App\models\ChiTietNhapHang;
 use App\models\SanPham;
 use App\models\ChiTietSanPham;
 use App\models\HinhAnh;
+use Illuminate\Support\Facades\Storage;
+
 class SanPhamController extends Controller
 {
     public function view()
     {
         $san_Pham = SanPham::all();
         return view('SANPHAM/danh-sach',compact('san_Pham'));
-            
+
     }
     public function lsNhapHang()
     {
@@ -28,7 +30,7 @@ class SanPhamController extends Controller
     public function lsChiTietNhapHang($id)
     {
         $ChiTietNhapHang = ChiTietNhapHang::where('NhapHang_id',$id)->get();
-        
+
         dd($ChiTietNhapHang);
     }
     public function themMoi()
@@ -52,17 +54,12 @@ class SanPhamController extends Controller
 
     public function xuLyThemMoi(Request $request)
     {
-<<<<<<< Updated upstream
-       
-=======
 
-
->>>>>>> Stashed changes
         //if này kiểm tra xem đã có nhà cung cấp và tên chưa nếu chưa có thì 1 trong 2 thì sẽ trả về thông báo
         if (empty($request->nha_cung_cap) || empty($request->ten)) {
             return redirect()->route('SAN-PHAM.nhap-hang')->with('thong_bao', 'vui lòng nhập đầy đủ thông tin');
         }
-       
+
        //tạo mới nhập hàng
         $NhapHang = new NhapHang();
         $NhapHang->tong_tien = 0;
@@ -105,7 +102,7 @@ class SanPhamController extends Controller
             else
             {
                 $chi_Tiet_San_Pham = ChiTietSanPham::where('san_pham_id',$san_Pham->id)->where('mau_id',$request->mau)->where('loai_id',$request->loai)->where('size_id',$request->size)->first();
-                //if này kiểm tra xem màu trong chi tiết đó có tồn tại chưa nếu chưa tồn tại thì sẽ tạo mới 
+                //if này kiểm tra xem màu trong chi tiết đó có tồn tại chưa nếu chưa tồn tại thì sẽ tạo mới
                 //nếu đã tông tại thì sẽ update số lượng và các thay đổi đã nhập vào
                 if(empty($chi_Tiet_San_Pham))
                 {
@@ -122,7 +119,7 @@ class SanPhamController extends Controller
                     if(!empty($request->gia_Nhap[$i])){
                         $san_Pham->gia_nhap = (double)$request->gia_Nhap[$i];
                     }
-                    
+
                     if (!empty($request->gia_Ban[$i])) {
                         $san_Pham->gia_ban = (double)$request->gia_Ban[$i];
                     }
@@ -142,14 +139,14 @@ class SanPhamController extends Controller
 
 
 
-               
+
                 $san_Pham->so_luong += (int)$request->so_Luong[$i];
                 $san_Pham->trang_thai = 1;
                  $san_Pham->thong_tin=$request->Thong_Tin[$i];
                 $san_Pham->save();
-            }            
+            }
 
-            
+
 
             $ChiTietNhapHang = new ChiTietNhapHang();
             $ChiTietNhapHang->nhap_hang_id = (int)$NhapHang->id;
@@ -160,7 +157,7 @@ class SanPhamController extends Controller
             $ChiTietNhapHang->thanh_tien	= (double)$thanh_Tien;
             $ChiTietNhapHang->save();
 
-            
+
         }
         $NhapHang->tong_tien = $tong_Tien;
         $NhapHang->save();
@@ -170,24 +167,38 @@ class SanPhamController extends Controller
     public function view_Chi_Tiet($id)
     {
         $CT_San_Pham = ChiTietSanPham::where('san_pham_id',$id)->get();
-        
+
         $san_Pham = SanPham::where('id',$id)->first();
-        $HinhAnh = HinhAnh::where('san_pham_id',$id)->get();
-        return view('SANPHAM/danh-sach-chi-tiet',compact('CT_San_Pham','san_Pham','HinhAnh'));
+        $hinh_Anh = HinhAnh::where('san_pham_id',$id)->get();
+        return view('SANPHAM/danh-sach-chi-tiet',compact('CT_San_Pham','san_Pham','hinh_Anh'));
     }
 
     public function them_Anh(Request $request,$id)
     {
-        $files = $request->HinhAnh;  
+        $files = $request->HinhAnh;
         if($files)
         {
             foreach ($files as $file) {
                 $HinhAnh= new HinhAnh();
-                $HinhAnh->url = $file->store('HinhAnh');
+                $HinhAnh->url = $file->store('Hinh_Anh');
                 $HinhAnh->san_pham_id = $id;
                 $HinhAnh->save();
             }
         }
-        return 'thành công';
+        return redirect()->route('SAN-PHAM.chi-tiet-san-pham', $id)->with('success', 'Thêm ảnh thành công');
+
     }
+    public function xoa_Anh($id)
+{
+    $hinhAnh = HinhAnh::find($id);
+
+    if ($hinhAnh) {
+        Storage::delete($hinhAnh->url);
+
+        $hinhAnh->delete();
+
+        return redirect()->back()->with('success', 'Xóa ảnh thành công');
+    }
+
+}
 }

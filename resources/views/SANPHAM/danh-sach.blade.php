@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -34,8 +34,7 @@
 <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
+                        <h6 class="mb-0">Danh sách</h6>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -56,10 +55,9 @@
                             <tbody>
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-<<<<<<< Updated upstream
+
                                     <td><img src="bootstrap-admin-template-free.jpg" width="100%" height="50px" alt=""></td>
-                                   
-=======
+
                                     <td>
                                         @if($SanPham->hinh_anh->isNotEmpty())
                                         <?php $hinhAnhMinId = $SanPham->hinh_anh->min('id'); ?>
@@ -71,22 +69,21 @@
 
                                         @endif
                                     </td>
->>>>>>> Stashed changes
+
                                     <td>{{ $SanPham->id }}</td>
                                     <td>{{ $SanPham->ten }}</td>
                                     <td>{{ $SanPham->gia_nhap }}</td>
                                     <td>{{ $SanPham->gia_ban }}</td>
                                     <td>{{ $SanPham->so_luong }}</td>
                                     <td>{{ $SanPham->trang_thai}}</td>
-<<<<<<< Updated upstream
+
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-=======
                                     <td><a class="btn btn-outline-dark" href="{{ route('SAN-PHAM.chi-tiet-san-pham',['id'=>$SanPham->id]) }}">Chi tiết</a>
                                     <a class="btn btn-outline-danger" href="{{ route('SAN-PHAM.xoa',['id'=>$SanPham->id]) }}">Xóa</a>
                                     </td>
->>>>>>> Stashed changes
+
                                 </tr>
-                                
+
                             </tbody>
                             @endforeach
                         </table>
@@ -106,7 +103,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ Route('SAN-PHAM.nhap-hang') }}" class="dropdown-item">MỚI</a>
                             <a href="{{ Route('SAN-PHAM.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
-                            
+
                         </div>
                     </div>    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 @endsection

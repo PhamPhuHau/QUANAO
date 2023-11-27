@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -31,11 +31,12 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
+
 <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
+                        <h6 class="mb-0">Danh sách chi tiết</h6>
+                        <a href="{{ Route('SAN-PHAM.danh-sach') }}">Quay lại</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -47,7 +48,7 @@
                                     <th scope="col">LOẠI</th>
                                     <th scope="col">MÀU</th>
                                     <th scope="col">SIZE</th>
-                                    
+
                                 </tr>
                             </thead>
                            @foreach($CT_San_Pham as $chi_tiet_san_pham)
@@ -70,51 +71,55 @@
                                         {{ $chi_tiet_san_pham->Size->ten }}
                                     </td>
 
-<<<<<<< Updated upstream
-                                    
-                                    
-                                  
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-=======
+
 
 
 
                                     <td><a class="btn btn-outline-primary" href="">Cập nhật</a></td>
->>>>>>> Stashed changes
+
                                 </tr>
-                                
+
                             </tbody>
-                           
+
 
                             @endforeach
                         </table>
+                        <div class="row">
+                        @foreach($hinh_Anh as $item)
 
-                        @foreach($HinhAnh as $item)
-                                <img src="{{ asset($item->url) }}"  class="AnhSP"/>
-                                
+                        <div class="col-sm-6">
+                            <img src="{{ asset($item->url) }}"  class="AnhSP"/>
+                            <a class="btn btn-outline-danger" href="{{ route('SAN-PHAM.xoa-anh', ['id' => $item->id ])}}">Xoá</a>
+
+                        </div>
+
+
+
+
+
+
+
                             @endforeach
-
+                            </div>
 
 
                             <form method="POST"  enctype="multipart/form-data" action="">
                                 @csrf
-<<<<<<< Updated upstream
-                                <input type="file" name="HinhAnh[]" multiple require="true"><br>
-                                <button type="submit">LƯU</button>
-=======
+
 
                                 <td >
 
                                 <input class="form-control" type="file" name="HinhAnh[]" multiple required="true"  ><br>
                                 </td>
 
-                                </td>
+
+
+
 
                                 <td>
                                     <button type="submit" class="btn btn-outline-success" >LƯU</button>
                                 </td>
 
->>>>>>> Stashed changes
                             </form>
 
                     </div>
@@ -133,7 +138,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ Route('SAN-PHAM.nhap-hang') }}" class="dropdown-item">MỚI</a>
                             <a href="{{ Route('SAN-PHAM.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
-                            
+
                         </div>
                     </div>    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 @endsection
