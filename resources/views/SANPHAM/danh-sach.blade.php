@@ -56,15 +56,35 @@
                             <tbody>
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+<<<<<<< Updated upstream
                                     <td><img src="bootstrap-admin-template-free.jpg" width="100%" height="50px" alt=""></td>
                                    
+=======
+                                    <td>
+                                        @if($SanPham->hinh_anh->isNotEmpty())
+                                        <?php $hinhAnhMinId = $SanPham->hinh_anh->min('id'); ?>
+                                        <?php $hinhAnhMin = $SanPham->hinh_anh->where('id', $hinhAnhMinId)->first();?>
+                                        <img src="{{ asset($hinhAnhMin->url) }}" width="100%" height="50px" alt="">
+
+
+
+
+                                        @endif
+                                    </td>
+>>>>>>> Stashed changes
                                     <td>{{ $SanPham->id }}</td>
                                     <td>{{ $SanPham->ten }}</td>
                                     <td>{{ $SanPham->gia_nhap }}</td>
                                     <td>{{ $SanPham->gia_ban }}</td>
                                     <td>{{ $SanPham->so_luong }}</td>
                                     <td>{{ $SanPham->trang_thai}}</td>
+<<<<<<< Updated upstream
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+=======
+                                    <td><a class="btn btn-outline-dark" href="{{ route('SAN-PHAM.chi-tiet-san-pham',['id'=>$SanPham->id]) }}">Chi tiết</a>
+                                    <a class="btn btn-outline-danger" href="{{ route('SAN-PHAM.xoa',['id'=>$SanPham->id]) }}">Xóa</a>
+                                    </td>
+>>>>>>> Stashed changes
                                 </tr>
                                 
                             </tbody>

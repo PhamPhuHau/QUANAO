@@ -70,10 +70,17 @@
                                         {{ $chi_tiet_san_pham->Size->ten }}
                                     </td>
 
+<<<<<<< Updated upstream
                                     
                                     
                                   
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+=======
+
+
+
+                                    <td><a class="btn btn-outline-primary" href="">Cập nhật</a></td>
+>>>>>>> Stashed changes
                                 </tr>
                                 
                             </tbody>
@@ -91,9 +98,25 @@
 
                             <form method="POST"  enctype="multipart/form-data" action="">
                                 @csrf
+<<<<<<< Updated upstream
                                 <input type="file" name="HinhAnh[]" multiple require="true"><br>
                                 <button type="submit">LƯU</button>
+=======
+
+                                <td >
+
+                                <input class="form-control" type="file" name="HinhAnh[]" multiple required="true"  ><br>
+                                </td>
+
+                                </td>
+
+                                <td>
+                                    <button type="submit" class="btn btn-outline-success" >LƯU</button>
+                                </td>
+
+>>>>>>> Stashed changes
                             </form>
+
                     </div>
                 </div>
 </div>
