@@ -6,7 +6,7 @@
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h6 class="mb-0">NHẬP HÀNG</h6>
-                
+
             </div>
             <div class="table-responsive">
                 <h2>NHÀ CUNG CẤP</h2>
@@ -29,7 +29,7 @@
                             <th scope="col">MÀU</th>
                             <th scope="col">SIZE</th>
                             <th scope="col">THÔNG TIN</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -51,7 +51,7 @@
                                 <select name="mau[]">
                                     <option></option>
                                     @foreach($mau as $Mau)
-                                    <option value="{{ $Mau->id }}">{{ $Mau->ten }}</option>
+                                    <option  value="{{ $Mau->id }}">{{ $Mau->ten }}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -64,21 +64,21 @@
                                 </select>
                             </td>
                             <td style="width: 25%;"><textarea rows="4" cols="50" name="Thong_Tin[]"></textarea></td>
-                            <td><button onclick="removeRow(this)">xoá</button></td></tbody>
-                            
-                            
+                            <td><button class="btn btn-outline-danger" onclick="removeRow(this)">xoá</button></td></tbody>
+
+
                         </tr>
-                        
+
                     </tbody>
-                    
-                    
+
+
                 </table>
-                
+
             </div>
-            <td><a class="btn btn-sm btn-primary" style="margin: 15px 0 0 0;"onclick="add()"    >THÊM HÀNG</a></td>
-            <td><button class="btn btn-sm btn-primary" style="margin: 15px 0 0 0;" type="submit">LƯU</button></td>
+            <td><a class="btn btn-outline-primary" style="margin: 15px 0 0 0;"onclick="add()"    >THÊM HÀNG</a></td>
+            <td><button class="btn btn-outline-success" style="margin: 15px 0 0 0;" type="submit">LƯU</button></td>
         </div>
-                    
+
     </div>
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -104,7 +104,7 @@
 
 @endsection
 @section('chon')
-                    <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>                  
+                    <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="{{ Route('SAN-PHAM.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
                     <a href="{{ Route('LOAI.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
                     <a href="{{ Route('MAU.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
@@ -114,7 +114,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ Route('SAN-PHAM.nhap-hang') }}" class="dropdown-item">MỚI</a>
                             <a href="{{ Route('SAN-PHAM.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
-                            
+
                         </div>
                     </div>                    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 @endsection

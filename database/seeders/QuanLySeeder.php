@@ -14,7 +14,7 @@ class QuanLySeeder extends Seeder
      */
     public function run(): void
     {
-        $quanly = new Quan_Ly();
+        $quanly = new QuanLy();
         $quanly->ten_dang_nhap='hachiba';
         $quanly->password=Hash::make('hachiba123');
 

@@ -41,6 +41,16 @@ class SanPhamController extends Controller
         $size = Size::all();
         return view('NHAPHANG/danh-sach',compact('nha_Cung_Cap','loai','mau','size'));
     }
+    public function Delete($id)
+    {
+        $san_Pham=SanPham::find($id);
+        if(empty($san_Pham))
+        {
+            return redirect()->route("SAN-PHAM.danh-sach");
+        }
+        $san_Pham->delete();
+        return redirect()->route("SAN-PHAM.danh-sach");
+    }
 
     public function xuLyThemMoi(Request $request)
     {
@@ -66,15 +76,18 @@ class SanPhamController extends Controller
             $san_Pham = SanPham::where('ten', $request->ten[$i])->first();
             //if này kiểm tra sản phẩm có tồn tại chưa nếu chưa thì sẽ tạo 1 sản phẩm mới
             if(empty($san_Pham)){
+
                 //if này kiểm tra xem người dùng đã ghi đầy đủ thông tin chưa nếu chưa thì sẽ bỏ qua sản phẩm đó
                 if($request->so_Luong[$i] == null || $request->gia_Nhap[$i] == null || $request->gia_Ban[$i] == null || $request->loai[$i] == null || $request->mau[$i] == null || $request->size[$i] == null){
                     continue;
                 }
+
                 $san_Pham = new SanPham();
                 $san_Pham->ten = $request->ten[$i];
                 $san_Pham->gia_nhap = (double)$request->gia_Nhap[$i];
                 $san_Pham->gia_ban	= (double)$request->gia_Ban[$i];
                 $san_Pham->so_luong = (int)$request->so_Luong[$i];
+                $san_Pham->thong_tin=$request->Thong_Tin[$i];
                 $san_Pham->trang_thai = 1;
                 $san_Pham->save();
 
@@ -129,6 +142,7 @@ class SanPhamController extends Controller
 
                 $san_Pham->so_luong += (int)$request->so_Luong[$i];
                 $san_Pham->trang_thai = 1;
+                 $san_Pham->thong_tin=$request->Thong_Tin[$i];
                 $san_Pham->save();
             }
 

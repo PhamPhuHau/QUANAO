@@ -74,7 +74,9 @@
 
 
 
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+
+                                    <td><a class="btn btn-outline-primary" href="">Cập nhật</a></td>
+
                                 </tr>
 
                             </tbody>
@@ -104,16 +106,22 @@
                             <form method="POST"  enctype="multipart/form-data" action="">
                                 @csrf
 
-                                <td>
 
-                                <input type="file" name="HinhAnh[]" multiple require="true" class="btn btn-outline-white" ><br>
+                                <td >
+
+                                <input class="form-control" type="file" name="HinhAnh[]" multiple required="true"  ><br>
                                 </td>
+
+
+
+
 
                                 <td>
                                     <button type="submit" class="btn btn-outline-success" >LƯU</button>
                                 </td>
 
                             </form>
+
                     </div>
                 </div>
 </div>
