@@ -19,7 +19,7 @@ class MauController extends Controller
         $mau->ten=$request->ten;
 
         $mau->save();
-        return redirect()->route("MAU.danh-sach");
+        return redirect()->route("mau.danh-sach");
     }
     public function themMoi()
     {
@@ -30,7 +30,7 @@ class MauController extends Controller
         $mau=Mau::find($id);
         if(empty($mau))
         {
-            return redirect()->route("MAU.danh-sach");
+            return redirect()->route("mau.danh-sach");
         }
         return view("MAU.cap-nhat", compact("mau"));
     }
@@ -40,16 +40,16 @@ class MauController extends Controller
         $mau->ten=$request->ten;
 
         $mau->save();
-        return redirect()->route("MAU.danh-sach");
+        return redirect()->route("mau.danh-sach");
     }
     public function Delete($id)
     {
         $mau=Mau::find($id);
         if(empty($mau))
         {
-            return redirect()->route("MAU.danh-sach");
+            return redirect()->route("mau.danh-sach");
         }
         $mau->delete();
-        return redirect()->route("MAU.danh-sach");
+        return redirect()->route("mau.danh-sach");
     }
 }

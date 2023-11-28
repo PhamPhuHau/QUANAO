@@ -46,10 +46,10 @@ class SanPhamController extends Controller
         $san_Pham=SanPham::find($id);
         if(empty($san_Pham))
         {
-            return redirect()->route("SAN-PHAM.danh-sach");
+            return redirect()->route("san-pham.danh-sach");
         }
         $san_Pham->delete();
-        return redirect()->route("SAN-PHAM.danh-sach");
+        return redirect()->route("san-pham.danh-sach");
     }
 
     public function xuLyThemMoi(Request $request)
@@ -57,7 +57,7 @@ class SanPhamController extends Controller
 
         //if này kiểm tra xem đã có nhà cung cấp và tên chưa nếu chưa có thì 1 trong 2 thì sẽ trả về thông báo
         if (empty($request->nha_cung_cap) || empty($request->ten)) {
-            return redirect()->route('SAN-PHAM.nhap-hang')->with('thong_bao', 'vui lòng nhập đầy đủ thông tin');
+            return redirect()->route('san-pham.nhap-hang')->with('thong_bao', 'vui lòng nhập đầy đủ thông tin');
         }
 
        //tạo mới nhập hàng
@@ -161,7 +161,7 @@ class SanPhamController extends Controller
         }
         $NhapHang->tong_tien = $tong_Tien;
         $NhapHang->save();
-        return redirect()->route('SAN-PHAM.danh-sach');
+        return redirect()->route('san-pham.danh-sach');
     }
 
     public function view_Chi_Tiet($id)
@@ -185,20 +185,32 @@ class SanPhamController extends Controller
                 $HinhAnh->save();
             }
         }
-        return redirect()->route('SAN-PHAM.chi-tiet-san-pham', $id)->with('success', 'Thêm ảnh thành công');
+        return redirect()->route('san-pham.chi-tiet-san-pham', $id)->with('success', 'Thêm ảnh thành công');
 
     }
     public function xoa_Anh($id)
-{
-    $hinhAnh = HinhAnh::find($id);
+    {
+        $hinhAnh = HinhAnh::find($id);
 
-    if ($hinhAnh) {
-        Storage::delete($hinhAnh->url);
+        if ($hinhAnh) {
+            Storage::delete($hinhAnh->url);
 
-        $hinhAnh->delete();
+            $hinhAnh->delete();
 
-        return redirect()->back()->with('success', 'Xóa ảnh thành công');
-    }
+            return redirect()->back()->with('success', 'Xóa ảnh thành công');
+        }
+        
 
 }
+    public function xu_Ly_Sua(Request $request)
+    {
+        
+        $san_Pham = SanPham::where('id',$request->id)->first();
+        $san_Pham->ten = $request->ten;
+        $san_Pham->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'sửa thành công'
+        ]);
+    }
 }

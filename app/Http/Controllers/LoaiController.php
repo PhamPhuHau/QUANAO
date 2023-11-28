@@ -22,14 +22,14 @@ class LoaiController extends Controller
         $loai->ten=$request->ten;
 
         $loai->save();
-        return redirect()->route("LOAI.danh-sach");
+        return redirect()->route("loai.danh-sach");
     }
     public function Edit($id)
     {
         $loai=Loai::find($id);
         if(empty($loai))
         {
-            return redirect()->route("LOAI.danh-sach");
+            return redirect()->route("loai.danh-sach");
         }
         return view("LOAI.cap-nhat", compact("loai"));
     }
@@ -38,16 +38,16 @@ class LoaiController extends Controller
         $loai=Loai::find($id);
         $loai->ten=$request->ten;
         $loai->save();
-        return redirect()->route("LOAI.danh-sach");
+        return redirect()->route("loai.danh-sach");
     }
     public function Delete($id)
     {
         $loai=Loai::find($id);
         if(empty($loai))
         {
-            return redirect()->route("LOAI.danh-sach");
+            return redirect()->route("loai.danh-sach");
         }
         $loai->delete();
-        return redirect()->route("LOAI.danh-sach");
+        return redirect()->route("loai.danh-sach");
     }
 }
