@@ -3,7 +3,7 @@
 <html>
 
 
-<form method="POST" action="{{route('size.xl-them')}}">
+<form method="POST" action="{{route('nha-cung-cap.xl-them')}}">
 	@csrf
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
@@ -15,9 +15,21 @@
 					<div class="row p-5 border-bottom">
 						<div class="col-sm-12 col-md-12 col-xl-3">
 							<div class="form-group">
-								<label for="size-name" class="form-label text-muted">Tên size:</label>
+								<label for="ncc-name" class="form-label text-muted">Tên:</label>
 								<div class="input-group">
-									<input id="size-name" name="ten" type="text" class="form-control text-dark" placeholder="Enter ">
+									<input id="size-name" name="ten" type="text" class="form-control text-dark" placeholder="... ">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="ncc-dia-chi" class="form-label text-muted">Địa Chỉ:</label>
+								<div class="input-group">
+									<input id="ncc-dia-chi" name="dia_chi" type="text" class="form-control text-dark" placeholder="... ">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="ncc-email" class="form-label text-muted">Email:</label>
+								<div class="input-group">
+									<input id="ncc-email" name="email" type="text" class="form-control text-dark" placeholder="... ">
 								</div>
 							</div>
 						</div>
@@ -26,7 +38,7 @@
 
 					<div class="row p-5">
 						<div class="btn-list text-end">
-							<a class="btn btn-outline-danger" href ="{{route('size.danh-sach')}}">
+							<a class="btn btn-outline-danger" href ="{{route('nha-cung-cap.danh-sach')}}">
 								Cancel</a>
 
                             <button class="btn btn-outline-success">
@@ -47,11 +59,11 @@
                     <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     
                     
-                    <a href="{{ Route('san-pham.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
+					<a href="{{ Route('san-pham.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
                     <a href="{{ Route('loai.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
                     <a href="{{ Route('mau.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
-                    <a href="{{ Route('size.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
-                    <a href="{{ Route('nha-cung-cap.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-home me-2"></i>NHÀ CUNG CẤP</a>
+                    <a href="{{ Route('size.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
+                    <a href="{{ Route('nha-cung-cap.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-home me-2"></i>NHÀ CUNG CẤP</a>
 
 					<div class="nav-item dropdown ">
                         <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>

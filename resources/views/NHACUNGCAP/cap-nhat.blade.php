@@ -1,6 +1,7 @@
 @extends('ADMIN/index')
 @section('content')
-<form method="POST" action="{{route('nha-cung-cap.xl-cap-nhat',['id'=>$NCC->id])}}">
+
+<form method="POST" action="{{route('nha-cung-cap.xl-cap-nhat',['id'=>$nha_Cung_Cap->id])}}">
 		@csrf
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
@@ -11,11 +12,22 @@
 				<div class="card-body p-0 create-project-main">
 					<div class="row p-5 border-bottom">
 						<div class="col-sm-12 col-md-12 col-xl-3">
-							<div class="form-group">
-								<label for="size-name" class="form-label text-muted">Tên size:</label>
+						<div class="form-group">
+								<label for="ncc-ten" class="form-label text-muted">Tên:</label>
 								<div class="input-group">
-									<input id="size-name" name="ten" type="text" class="form-control text-dark" placeholder="Nhập tên size" value="{{$size->ten}}">
-
+									<input id="ncc-ten" name="ten" type="text" class="form-control text-dark"value="{{$nha_Cung_Cap->ten}}" placeholder="... ">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="ncc-dia-chi" class="form-label text-muted">Địa Chỉ:</label>
+								<div class="input-group">
+									<input id="ncc-dia-chi" name="dia_chi" type="text" class="form-control text-dark" value="{{$nha_Cung_Cap->dia_chi}}"placeholder="... ">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="ncc-email" class="form-label text-muted">Email:</label>
+								<div class="input-group">
+									<input id="ncc-email" name="email" type="text" class="form-control text-dark" value="{{$nha_Cung_Cap->email}}" placeholder="... ">
 								</div>
 							</div>
 						</div>
@@ -25,7 +37,7 @@
 
 					<div class="row p-5">
 						<div class="btn-list text-end">
-							<a class="btn btn-outline-danger"href ="{{route('size.danh-sach')}}">
+							<a class="btn btn-outline-danger"href ="{{route('nha-cung-cap.danh-sach')}}">
 
 								Cancel
 </a>

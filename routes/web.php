@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SizeController;
 
 use App\Http\Controllers\MauController;
+use App\Http\Controllers\NhaCungCapController;
 
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\LoaiController;
@@ -23,8 +24,8 @@ use App\Http\Controllers\QuanLyController;
 Route::middleware('auth')->group(function(){
 Route::get('/', [QuanLyController::class, 'trangChu'])->name('ADMIN.trang-chu');
 /*-----------------------SANPHAM-------------------- */
-Route::prefix('SAN-PHAM')->group(function(){
-    Route::name('SAN-PHAM.')->group(function(){
+Route::prefix('san-pham')->group(function(){
+    Route::name('san-pham.')->group(function(){
         Route::get('/danh-sach',[SanPhamController::class,'view'] )->name('danh-sach');
         Route::get('/cap-nhat', function () {
             return view('SANPHAM/cap-nhat');
@@ -44,8 +45,8 @@ Route::prefix('SAN-PHAM')->group(function(){
     });
 });
 /*-----------------------LOAI-------------------- */
-Route::prefix('LOAI')->group(function(){
-    Route::name('LOAI.')->group(function(){
+Route::prefix('loai')->group(function(){
+    Route::name('loai.')->group(function(){
         Route::get('danh-sach',[LoaiController::class,'View'])->name('danh-sach');
         Route::get("/them",[LoaiController::class, 'themMoi'])->name('them');
         Route::post("/them",[LoaiController::class, 'xuLyThemMoi'])->name('xl-them');
@@ -55,10 +56,10 @@ Route::prefix('LOAI')->group(function(){
     });
 });
 /*-----------------------MAU-------------------- */
-Route::prefix('MAU')->group(function(){
-    Route::name('MAU.')->group(function(){
+Route::prefix('mau')->group(function(){
+    Route::name('mau.')->group(function(){
 
-    Route::get('/danh-sach-mau',[MauController::class,'View'])->name('danh-sach');
+    Route::get('/danh-sach',[MauController::class,'View'])->name('danh-sach');
     Route::get("/them",[MauController::class, 'themMoi'])->name('them');
     Route::post("/them",[MauController::class, 'xuLyThemMoi'])->name('xl-them');
 
@@ -69,9 +70,9 @@ Route::prefix('MAU')->group(function(){
 });
 });
 /*-----------------------------------SIZE-----------------------------------------*/
-Route::prefix('SIZE')->group(function(){
-    Route::name('SIZE.')->group(function(){
-        Route::get('/danh-sach-size',[SizeController::class,'View'])->name('danh-sach');
+Route::prefix('size')->group(function(){
+    Route::name('size.')->group(function(){
+        Route::get('/danh-sach',[SizeController::class,'View'])->name('danh-sach');
         Route::get("/them",[SizeController::class, 'themMoi'])->name('them');
         Route::post("/them",[SizeController::class, 'xuLyThemMoi'])->name('xl-them');
 
@@ -84,6 +85,17 @@ Route::prefix('SIZE')->group(function(){
 });
 Route::get('/dang-xuat',[QuanLyController::class,'dangXuat'])->name('dang-xuat');
 Route::get('/thong-tin',[QuanLyController::class,'thongTinhNguoiDung'])->name('thong-tin');
+});
+//----------------------------------NHACUNGCAP--------------------------------------------
+Route::prefix('nha-cung-cap')->group(function(){
+    Route::name('nha-cung-cap.')->group(function(){
+        Route::get('/danh-sach',[NhaCungCapController::class,'View'])->name('danh-sach');
+        Route::get("/them",[NhaCungCapController::class, 'themMoi'])->name('them');
+        Route::post("/them",[NhaCungCapController::class, 'xuLyThemMoi'])->name('xl-them');
+        Route::get("/xoa/{id}",[NhaCungCapController::class, 'Delete'])->name('xoa');
+        Route::get("/cap-nhat/{id}",[NhaCungCapController::class, 'Edit'])->name('cap-nhat');
+        Route::post("/cap-nhat/{id}",[NhaCungCapController::class, 'xlEdit'])->name('xl-cap-nhat');
+    });
 });
 
 //-------------------QUANLY-----------------------

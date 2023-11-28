@@ -35,7 +35,7 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Recent Salse</h6>
-                        <a href="{{ route('size.them') }}" type="button" class="btn btn-sm btn-outline-secondary">Thêm mới</a>
+                        <a href="{{route('nha-cung-cap.them')}}" type="button" class="btn btn-sm btn-outline-secondary">Thêm mới</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -44,20 +44,25 @@
                                     <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
                                     <th scope="col">ID</th>
                                     <th scope="col">TÊN</th>
+                                    <th scope="col">ĐỊA CHỈ</th>
+                                    <th scope="col">EMAIL</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($Size as $size)
+                                @foreach($nha_Cung_Cap as $NCC)
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
 
 
-                                    <td>{{ $size->id }}</td>
-                                    <td>{{ $size->ten }}</td>
+                                    <td>{{ $NCC->id }}</td>
+                                    <td>{{ $NCC->ten }}</td>
+                                    <td>{{ $NCC->dia_chi }}</td>
+                                    <td>{{ $NCC->email }}</td>
 
-                                    <td><a class="btn btn-outline-primary" href="{{ route('size.cap-nhat',['id'=>$size->id]) }}">Cập nhật</a>
-                                    <a class="btn btn-outline-danger" href="{{ route('size.xoa',['id'=>$size->id]) }}">Xóa</a></td>
+                                    <td><a class="btn btn-outline-primary" href="{{ route('nha-cung-cap.cap-nhat',['id'=>$NCC->id]) }}">Cập nhật</a>
+
+                                    <td><a class="btn btn-outline-danger" href="{{ route('nha-cung-cap.xoa',['id'=>$NCC->id]) }}">Xóa</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -75,8 +80,8 @@
                     <a href="{{ Route('san-pham.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
                     <a href="{{ Route('loai.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
                     <a href="{{ Route('mau.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
-                    <a href="{{ Route('size.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
-                    <a href="{{ Route('nha-cung-cap.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-home me-2"></i>NHÀ CUNG CẤP</a>
+                    <a href="{{ Route('size.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
+                    <a href="{{ Route('nha-cung-cap.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-home me-2"></i>NHÀ CUNG CẤP</a>
 
                     <div class="nav-item dropdown ">
                         <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>NHẬP HÀNG</a>
