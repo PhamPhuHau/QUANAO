@@ -84,7 +84,10 @@
 
                             @endforeach
                         </table>
+                        <div class="sua"></div>
+                        
                         <div class="row">
+                            <h1 class="danh-sach-chi-tiet-hinh-anh">HINH ANH</h1>
                         @foreach($hinh_Anh as $item)
 
                         <div class="col-sm-6">

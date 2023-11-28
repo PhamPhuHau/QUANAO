@@ -22,7 +22,7 @@ use App\Http\Controllers\QuanLyController;
 |
 */
 Route::middleware('auth')->group(function(){
-Route::get('/', [QuanLyController::class, 'trangChu'])->name('ADMIN.trang-chu');
+Route::get('/', [QuanLyController::class, 'trangChu'])->name('quan-ly.trang-chu');
 /*-----------------------SANPHAM-------------------- */
 Route::prefix('san-pham')->group(function(){
     Route::name('san-pham.')->group(function(){
@@ -40,7 +40,7 @@ Route::prefix('san-pham')->group(function(){
         Route::get('san-pham/{id}',[SanPhamController::class,'view_Chi_Tiet'])->name('chi-tiet-san-pham');
         Route::post('san-pham/{id}',[SanPhamController::class,'them_Anh'])->name('them-anh');
         Route::get('xoa-anh/{id}', [SanPhamController::class, 'xoa_Anh'])->name('xoa-anh');
-
+        Route::post("sua",[SanPhamController::class,'xu_Ly_Sua'])->name('sua');
 
     });
 });

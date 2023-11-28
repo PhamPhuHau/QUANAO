@@ -93,7 +93,7 @@
                 '<td style="width: 25%;"> <select name="mau[]"><option></option>@foreach($mau as $Mau)<option value="{{ $Mau->id }}">{{ $Mau->ten }}</option>@endforeach</select></td>'+
                 '<td style="width: 25%;"> <select name="size[]"><option></option>@foreach($size as $Size)<option value="{{ $Size->id }}">{{ $Size->ten }}</option>@endforeach</select></td>'+
                 '<td style="width: 25%;"><textarea rows="4" cols="50" name="Thong_Tin[]"></textarea></td>'+
-                '<td><button onclick="removeRow(this)">xoá</button></td></tbody>'
+                '<td><button class="btn btn-outline-danger" onclick="removeRow(this)">xoá</button></td></tbody>'
             );
         }
 
