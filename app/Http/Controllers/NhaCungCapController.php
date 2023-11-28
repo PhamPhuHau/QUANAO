@@ -38,12 +38,13 @@ class NhaCungCapController extends Controller
    }
    public function Edit($id)
    {
-      $nha_Cung_Cap=NhaCungCap::find($id);
+      $nha_Cung_Cap=NhaCungCap::where('id',$id)->first();
       if(empty($nha_Cung_Cap))
       {
          return redirect()->route("nha-cung-cap.danh-sach");
       }
-      return view("nha-cung-cap.cap-nhat", compact("nha_Cung_Cap"));
+      
+      return view("NHACUNGCAP.cap-nhat", compact("nha_Cung_Cap"));
    }
    public function xlEdit(Request $request, $id)
    {
