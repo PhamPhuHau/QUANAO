@@ -10,13 +10,13 @@ class ChiTietSanPham extends Model
     use HasFactory;
     protected $table = 'chi_tiet_san_pham';
 
-    public function Loai(){
+    public function loai(){
         return $this->belongsTo(Loai::class);
     }
-    public function Mau(){
+    public function mau(){
         return $this->belongsTo(Mau::class);
     }
-    public function Size(){
+    public function size(){
         return $this->belongsTo(Size::class);
     }
 
