@@ -89,8 +89,7 @@
                     </div>
                 </div>
 </div>
-<script src="{{asset('axios.min.js')}}"></script>
-    <script src="{{asset('jquery-3.7.1.min.js')}}"></script>
+
     <script>
         function them(id,ten){
             $('.sua').html(` 

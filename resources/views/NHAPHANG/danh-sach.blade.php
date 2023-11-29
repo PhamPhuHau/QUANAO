@@ -101,7 +101,18 @@
             $(button).parent().parent().remove();
         }
     </script>
+@if(session('thong_bao'))
+<script src="{{ asset('sweetalert2/sweetalert2.all.min.js') }}"></script>
+<script>
+Swal.fire({
+  icon: "error",
+  title: "THÔNG BÁO",
+  text: "{{ session('thong_bao') }}",
+});
 
+</script>
+
+@endif
 @endsection
 @section('chon')
                     <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
@@ -121,6 +132,4 @@
 @endsection
 
 
-@if(session('thong_bao'))
-    <script>alert("{{ session('thong_bao') }}")</script>
-@endif
+

@@ -150,9 +150,11 @@
     <script src="{{asset('lib/tempusdominus/js/moment.min.js')}}"></script>
     <script src="{{asset('ib/tempusdominus/js/moment-timezone.min.js')}}"></script>
     <script src="{{asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-
+    <script src="{{asset('axios.min.js')}}"></script>
+    <script src="{{asset('jquery-3.7.1.min.js')}}"></script>
     <!-- Template Javascript -->
     <script src="{{asset('js/main.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
