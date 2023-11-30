@@ -31,9 +31,9 @@ class SanPhamController extends Controller
 
     public function lsChiTietNhapHang($id)
     {
-        $ChiTietNhapHang = ChiTietNhapHang::where('NhapHang_id',$id)->get();
-
-        dd($ChiTietNhapHang);
+        $ChiTietNhapHang = ChiTietNhapHang::where('nhap_hang_id',$id)->get();
+       
+        return view('NHAPHANG/lich-su-chi-tiet-nhap-hang',compact('ChiTietNhapHang'));
     }
     
     public function Delete($id)
@@ -223,7 +223,7 @@ class SanPhamController extends Controller
             $tong_Tien += $thanh_Tien;
             $san_Pham = SanPham::where('ten', $request->ten[$i])->first();
             //if này kiểm tra sản phẩm có tồn tại chưa nếu chưa thì sẽ tạo 1 sản phẩm mới
-            if(empty($chi_Tiet_San_Pham)){
+            if(empty($san_Pham)){
 
                 //if này kiểm tra xem người dùng đã ghi đầy đủ thông tin chưa nếu chưa thì sẽ bỏ qua sản phẩm đó
                 if($request->so_Luong[$i] == null || $request->gia_Nhap[$i] == null || $request->gia_Ban[$i] == null || $request->loai[$i] == null || $request->mau[$i] == null || $request->size[$i] == null){

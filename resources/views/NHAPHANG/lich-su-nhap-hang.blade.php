@@ -57,7 +57,7 @@
                                 <td style="width: 25%;">{{ $nhap_hang->nha_cung_cap_id }}</td>
                                 <td style="width: 25%;">{{ $nhap_hang->created_at }}</td>
                                 <td style="width: 25%;">{{ $nhap_hang->trang_thai }}</td>
-                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                <td><a class="btn btn-sm btn-primary" href="{{ route('san-pham.lich-su-chi-tiet-nhap-hang',['id'=>$nhap_hang->id]) }}">Detail</a></td>
                             </tbody>
                             @endforeach
                         </table>
@@ -78,7 +78,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ Route('san-pham.nhap-hang') }}" class="dropdown-item">MỚI</a>
                             <a href="{{ Route('san-pham.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
-                            
+                            <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
                     </div>    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 @endsection
