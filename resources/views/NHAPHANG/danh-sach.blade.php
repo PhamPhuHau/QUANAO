@@ -93,7 +93,7 @@
                 '<td style="width: 25%;"> <select name="mau[]"><option></option>@foreach($mau as $Mau)<option value="{{ $Mau->id }}">{{ $Mau->ten }}</option>@endforeach</select></td>'+
                 '<td style="width: 25%;"> <select name="size[]"><option></option>@foreach($size as $Size)<option value="{{ $Size->id }}">{{ $Size->ten }}</option>@endforeach</select></td>'+
                 '<td style="width: 25%;"><textarea rows="4" cols="50" name="Thong_Tin[]"></textarea></td>'+
-                '<td><button onclick="removeRow(this)">xoá</button></td></tbody>'
+                '<td><button class="btn btn-outline-danger" onclick="removeRow(this)">xoá</button></td></tbody>'
             );
         }
 
@@ -101,7 +101,18 @@
             $(button).parent().parent().remove();
         }
     </script>
+@if(session('thong_bao'))
+<script src="{{ asset('sweetalert2/sweetalert2.all.min.js') }}"></script>
+<script>
+Swal.fire({
+  icon: "error",
+  title: "THÔNG BÁO",
+  text: "{{ session('thong_bao') }}",
+});
 
+</script>
+
+@endif
 @endsection
 @section('chon')
                     <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
@@ -121,6 +132,4 @@
 @endsection
 
 
-@if(session('thong_bao'))
-    <script>alert("{{ session('thong_bao') }}")</script>
-@endif
+

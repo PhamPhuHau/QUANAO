@@ -18,7 +18,7 @@ class QuanLyController extends Controller
     public function xuLyDangNhap(Request $request)
     {
         if (Auth::attempt(['ten_dang_nhap' => $request->ten_dang_nhap, 'password' => $request->password])) {
-            return redirect()->route('ADMIN.trang-chu');
+            return redirect()->route('quan-ly.trang-chu');
         }
 
     return redirect()->route('dang-nhap');

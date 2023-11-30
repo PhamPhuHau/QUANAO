@@ -279,4 +279,19 @@
     width: 60%;
     height: 70%;
 }
-
+.danh-sach-chi-tiet-hinh-anh{
+    background-color: black;
+    color: #FFFFFF;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.col-xl-3{
+    margin:auto
+}
+.from-cap-nhat{
+    margin: auto;
+    text-align: center;
+    margin-top: 15px;
+    border: 3px solid #ddd;
+    padding: 20px;
+}

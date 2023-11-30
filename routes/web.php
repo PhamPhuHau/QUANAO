@@ -22,7 +22,7 @@ use App\Http\Controllers\QuanLyController;
 |
 */
 Route::middleware('auth')->group(function(){
-Route::get('/', [QuanLyController::class, 'trangChu'])->name('ADMIN.trang-chu');
+Route::get('/', [QuanLyController::class, 'trangChu'])->name('quan-ly.trang-chu');
 /*-----------------------SANPHAM-------------------- */
 Route::prefix('san-pham')->group(function(){
     Route::name('san-pham.')->group(function(){
@@ -33,6 +33,12 @@ Route::prefix('san-pham')->group(function(){
 
         Route::get('nhap-hang',[SanPhamController::class,'themMoi'])->name('nhap-hang');
         Route::post('nhap-hang',[SanPhamController::class,'xuLyThemMoi'])->name('xl-nhap-hang');
+        Route::get('nhap-so-luong',[SanPhamController::class,'themSoLuong'])->name('nhap-so-luong');
+        Route::get('lay-thong-tin-san-pham-loai',[SanPhamController::class,'layThongTinLoai'])->name('lay-thong-tin-san-pham-loai');
+        Route::get('lay-thong-tin-san-pham-mau',[SanPhamController::class,'layThongTinMau'])->name('lay-thong-tin-san-pham-mau');
+        Route::get('lay-thong-tin-san-pham-size',[SanPhamController::class,'layThongTinSize'])->name('lay-thong-tin-san-pham-size');
+        Route::post('xu-ly-them-so-luong',[SanPhamController::class,'xuLyThemSoLuong'])->name('xu-ly-them-so-luong');
+
         Route::get("/xoa/{id}",[SanPhamController::class, 'Delete'])->name('xoa');
 
         Route::get('lich-su-nhap-hang',[SanPhamController::class,'lsNhapHang'])->name('lich-su-nhap-hang');
@@ -40,7 +46,7 @@ Route::prefix('san-pham')->group(function(){
         Route::get('san-pham/{id}',[SanPhamController::class,'view_Chi_Tiet'])->name('chi-tiet-san-pham');
         Route::post('san-pham/{id}',[SanPhamController::class,'them_Anh'])->name('them-anh');
         Route::get('xoa-anh/{id}', [SanPhamController::class, 'xoa_Anh'])->name('xoa-anh');
-
+        Route::post("sua",[SanPhamController::class,'xu_Ly_Sua'])->name('sua');
 
     });
 });

@@ -1,6 +1,6 @@
 @extends('ADMIN/index')
 @section('content')
-<form method="POST" action="{{route('nha-cung-cap.xl-cap-nhat',['id'=>$NCC->id])}}">
+<form method="POST" action="{{route('size.xl-cap-nhat',['id'=>$size->id])}}">
 		@csrf
 	<div class="row">
 		<div class="col-lg-12 col-md-12">

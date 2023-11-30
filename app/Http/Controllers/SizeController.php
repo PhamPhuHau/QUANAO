@@ -19,7 +19,7 @@ class SizeController extends Controller
         $size->ten=$request->ten;
 
         $size->save();
-        return redirect()->route("SIZE.danh-sach");
+        return redirect()->route("size.danh-sach");
     }
     public function themMoi()
     {
@@ -30,7 +30,7 @@ class SizeController extends Controller
         $size=Size::find($id);
         if(empty($size))
         {
-            return redirect()->route("SIZE.danh-sach");
+            return redirect()->route("size.danh-sach");
         }
         return view("SIZE.cap-nhat", compact("size"));
     }
@@ -40,16 +40,16 @@ class SizeController extends Controller
         $size->ten=$request->ten;
 
         $size->save();
-        return redirect()->route("SIZE.danh-sach");
+        return redirect()->route("size.danh-sach");
     }
     public function Delete($id)
     {
         $size=Size::find($id);
         if(empty($size))
         {
-            return redirect()->route("SIZE.danh-sach");
+            return redirect()->route("size.danh-sach");
         }
         $size->delete();
-        return redirect()->route("SIZE.danh-sach");
+        return redirect()->route("size.danh-sach");
     }
 }

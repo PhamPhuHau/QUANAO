@@ -53,7 +53,7 @@
                             </thead>
                             @foreach($san_Pham as $SanPham)
                             <tbody>
-                                <tr>
+                            <tr data-id="{{ $SanPham->id }}">
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
 
 
@@ -62,22 +62,22 @@
                                         <?php $hinhAnhMinId = $SanPham->hinh_anh->min('id'); ?>
                                         <?php $hinhAnhMin = $SanPham->hinh_anh->where('id', $hinhAnhMinId)->first();?>
                                         <img src="{{ asset($hinhAnhMin->url) }}" width="100%" height="50px" alt="">
-
-
-
-
                                         @endif
                                     </td>
-
                                     <td>{{ $SanPham->id }}</td>
-                                    <td>{{ $SanPham->ten }}</td>
+                                    
+                                    <!-- ... Các cột thông tin sản phẩm ... -->
+                                    <td class="ten-san-pham">{{ $SanPham->ten }}</td>
+                                    <!-- ... Các cột khác ... -->
                                     <td>{{ $SanPham->gia_nhap }}</td>
                                     <td>{{ $SanPham->gia_ban }}</td>
                                     <td>{{ $SanPham->so_luong }}</td>
                                     <td>{{ $SanPham->trang_thai}}</td>
 
                                     <td><a class="btn btn-outline-dark" href="{{ route('san-pham.chi-tiet-san-pham',['id'=>$SanPham->id]) }}">Chi tiết</a>
-                                    <a class="btn btn-outline-danger" href="{{ route('SAN-PHAM.xoa',['id'=>$SanPham->id]) }}">Xóa</a>
+                                    <button class="btn btn-outline-primary" onclick="them({{ $SanPham->id }}, '{{ $SanPham->ten }}')">Cập nhật</button>
+                                    <a class="btn btn-outline-danger" href="{{ route('san-pham.xoa',['id'=>$SanPham->id]) }}">Xóa</a>
+
                                     </td>
 
                                 </tr>
@@ -85,10 +85,59 @@
                             </tbody>
                             @endforeach
                         </table>
+                        <div class="sua"></div>
                     </div>
                 </div>
 </div>
 
+    <script>
+        function them(id,ten){
+            $('.sua').html(` 
+            <div class="col-xl-3 from-cap-nhat">
+                <h4>SỬA SẢN PHẨM</h4>
+                <h6>ID: `+id+`</h6>
+                <div style="display: flex; align-items: center;">
+                    <lable for="ten">tên:</lable> 
+                    <input  name="ten" id="inputTen" type="text" class="form-control text-dark" value="`+ten+`" placeholder="Nhập tên sản phẩm" > 
+                </div> 
+                <button onclick="XuLySua(${id},document.getElementById('inputTen').value)"> thuc hien </button> 
+            </div>`);                  
+       }
+
+       function XuLySua(id, ten) {
+    $.ajax({
+        method: "POST",
+        url: "{{ route('san-pham.sua') }}",
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "id": id,
+            "ten": ten
+        },
+        success: function(response) {
+            if (response.success) {
+                alert('Sửa thành công');
+
+                // Cập nhật nội dung trang mà không cần tải lại trang
+                // Ví dụ: nếu có thông tin cập nhật từ server, bạn có thể sử dụng nó để cập nhật nội dung
+
+                // Tìm thẻ tr chứa thông tin sản phẩm cần cập nhật
+                var trElement = $("tr[data-id='" + id + "']");
+                
+                // Cập nhật các ô thông tin sản phẩm
+                trElement.find('.ten-san-pham').text(ten);
+
+            } else {
+                alert('Sửa thất bại: ' + response.message);
+            }
+        },
+        error: function(error) {
+            console.log(error);
+            alert('Lỗi khi thực hiện sửa sản phẩm');
+        }
+    });
+}
+
+    </script>
 @endsection
 @section('chon')
     <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
