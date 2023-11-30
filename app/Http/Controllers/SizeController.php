@@ -9,7 +9,7 @@ class SizeController extends Controller
 {
     public function View()
     {
-        $Size = Size::all();
+        $Size = Size::paginate(10);
         return view('SIZE/danh-sach',compact('Size'));
     }
     public function xuLyThemMoi(Request $request)

@@ -18,8 +18,10 @@ class SanPhamController extends Controller
 {
     public function view()
     {
-        $san_Pham = SanPham::all();
+        // $san_Pham = SanPham::all();
+        $san_Pham = SanPham::paginate(10);
         return view('SANPHAM/danh-sach',compact('san_Pham'));
+
 
     }
 

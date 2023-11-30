@@ -73,6 +73,17 @@
 
 
                 </table>
+                <div class="row">
+                            <div class="col-sm-10">
+
+                            </div>
+                            <div class="col-sm-2">
+                            <div class="phantrang">
+                        {{ $san_Pham->links() }}
+                        </div>
+                            </div>
+
+                        </div>
 
             </div>
             <td><a class="btn btn-outline-primary" style="margin: 15px 0 0 0;"onclick="add()"    >THÊM HÀNG</a></td>

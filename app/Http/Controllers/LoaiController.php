@@ -8,7 +8,7 @@ class LoaiController extends Controller
 {
     public function View()
     {
-        $loai = Loai::all();
+        $loai = Loai::paginate(10);
         return view('LOAI/danh-sach',compact('loai'));
     }
     public function themMoi()

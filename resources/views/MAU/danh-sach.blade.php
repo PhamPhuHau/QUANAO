@@ -62,6 +62,17 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="row">
+                            <div class="col-sm-10">
+
+                            </div>
+                            <div class="col-sm-2">
+                            <div class="phantrang">
+                        {{ $san_Pham->links() }}
+                        </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 </div>
