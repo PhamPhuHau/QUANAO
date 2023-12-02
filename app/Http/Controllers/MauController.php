@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Mau;
 
+
 class MauController extends Controller
 {
     public function View()
     {
-        $Mau = Mau::paginate(10);
+        $Mau = Mau::paginate(9);
         return view('MAU/danh-sach',compact('Mau'));
     }
     public function xuLyThemMoi(Request $request)

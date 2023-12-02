@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-sm-2">
                             <div class="phantrang">
-                        {{ $san_Pham->links() }}
+                        {{ $loai->links() }}
                         </div>
                             </div>
 
