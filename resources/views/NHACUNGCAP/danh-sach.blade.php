@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-sm-2">
                             <div class="phantrang">
-                        {{ $san_Pham->links() }}
+                        {{ $nha_Cung_Cap->links() }}
                         </div>
                             </div>
 
