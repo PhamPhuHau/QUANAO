@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KhachHangController;
+use App\Http\Controllers\KhachHangAPIController;
 use  App\Http\Controllers\SanPhamAPIController;
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login',[KhachHangController::class,'login'])->middleware('api');
+Route::post('login',[KhachHangAPIController::class,'login'])->middleware('api');
+Route::post('me',[KhachHangAPIController::class,'me'])->middleware('api');
 
-route::get('danh-sach-san-pham',[SanPhamAPIController::class,'Danh_Sach_San_Pham']);
+Route::post('/logout',[KhachHangAPIController::class,'logout'])->middleware('api');
+
+Route::post('/regester',[KhachHangAPIController::class,'Regester'])->middleware('api');
+
+
+route::get('danh-sach-san-pham',[SanPhamAPIController::class,'DanhSachSanPham']);
+
+route::get('chi-tiet-san-pham/{id}',[SanPhamAPIController::class,'ChiTietSanPham']);
+
