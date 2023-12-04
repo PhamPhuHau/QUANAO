@@ -239,6 +239,7 @@ class SanPhamController extends Controller
                 $san_Pham->so_luong = (int)$request->so_Luong[$i];
                 $san_Pham->thong_tin=$request->Thong_Tin[$i];
                 $san_Pham->trang_thai = 1;
+                $san_Pham->nha_cung_cap_id = (int)$request->nha_cung_cap;
                 $san_Pham->save();
                 //tạo mới chi tiết sản phẩm
                 $chi_Tiet_San_Pham = new ChiTietSanPham();
@@ -251,9 +252,16 @@ class SanPhamController extends Controller
             }
             else
             {
-                $chi_Tiet_San_Pham = ChiTietSanPham::where('san_pham_id',$san_Pham->id)->where('loai_id',$request->loai)->where('mau_id',$request->mau)->where('size_id',$request->size)->first();
+
+                $chi_Tiet_San_Pham = ChiTietSanPham::where('san_pham_id',$san_Pham->id)->where('loai_id',$request->loai[$i])->where('mau_id',$request->mau[$i])->where('size_id',$request->size[$i])->first();
+                
                 if(empty($chi_Tiet_San_Pham))
                 {
+                    if(!empty($request->Thong_Tin[$i])){
+                       
+                        $san_Pham->thong_tin = $request->Thong_Tin[$i];
+                        $san_Pham->save();
+                    }
                     $chi_Tiet_San_Pham = new ChiTietSanPham();
                     $chi_Tiet_San_Pham->san_pham_id = (int)$san_Pham->id;
                     $chi_Tiet_San_Pham->mau_id	= (int)$request->mau[$i];
@@ -262,6 +270,7 @@ class SanPhamController extends Controller
                     $chi_Tiet_San_Pham->so_luong = (int)$request->so_Luong[$i];
                     $chi_Tiet_San_Pham->save();
                 }
+
                 else{
                 return redirect()->route('san-pham.nhap-hang')->with('thong_bao','Sản phẩm đã tồn tại');
                 }
@@ -280,7 +289,7 @@ class SanPhamController extends Controller
 
 
         }
-        $NhapHang->tong_tien = $tong_Tien;
+        $NhapHang->tong_tien += $tong_Tien;
         $NhapHang->save();
         return redirect()->route('san-pham.danh-sach');
     }
