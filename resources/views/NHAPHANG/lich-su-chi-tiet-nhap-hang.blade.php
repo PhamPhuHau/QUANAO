@@ -42,22 +42,24 @@
                             <thead>
                                 <tr class="text-dark">
                                     <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
-                                    <th scope="col">ID</th>
-                                    <th scope="col">TỔNG TIỀN</th>
-                                    <th scope="col">NHÀ CUNG CẤP</th>
-                                    <th scope="col">NGÀY NHẬP</th>
-                                    <th scope="col">TRẠNG THÁI</th>
-                                    <th></th>
+                                    <th scope="col">ID NHẬP HÀNG </th>
+                                    <th scope="col">TÊN SẢN PHẨM</th>
+                                    <th scope="col">GIÁ NHẬP</th>
+                                    <th scope="col">GIÁ BÁN</th>
+                                    <th scope="col">SỐ LƯỢNG</th>
+                                    <th scope="col">THÀNH TIỀN</th>
+                                    
                                 </tr>
                             </thead>
-                            @foreach($nhap_Hang as $nhap_hang)
+                            @foreach($ChiTietNhapHang as $item)
                             <tbody>
-                                <td style="width: 25%;">{{ $nhap_hang->id }}</td>
-                                <td style="width: 25%;">{{ $nhap_hang->tong_tien }}</td>
-                                <td style="width: 25%;">{{ $nhap_hang->nha_cung_cap_id }}</td>
-                                <td style="width: 25%;">{{ $nhap_hang->created_at }}</td>
-                                <td style="width: 25%;">{{ $nhap_hang->trang_thai }}</td>
-                                <td><a class="btn btn-sm btn-primary" href="{{ route('san-pham.lich-su-chi-tiet-nhap-hang',['id'=>$nhap_hang->id]) }}">Detail</a></td>
+                                <td style="width: 25%;">{{ $item->nhap_hang_id }}</td>
+                                <td style="width: 25%;">{{ $item->san_pham->ten }}</td>
+                                <td style="width: 25%;">{{ $item->gia_nhap }}</td>
+                                <td style="width: 25%;">{{ $item->gia_ban }}</td>
+                                <td style="width: 25%;">{{ $item->so_luong }}</td>
+                                <td style="width: 25%;">{{ $item->thanh_tien }}</td>
+                                
                             </tbody>
                             @endforeach
                         </table>

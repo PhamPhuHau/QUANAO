@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('nha_cung_cap', function (Blueprint $table) {
             $table->id();
             $table->string('ten',200);
-            $table->string('dia_chi',300);
+            $table->string('dia_chi',300)->nullable();
             $table->string('email',200);
             $table->timestamps();
         });

@@ -8,7 +8,7 @@ class NhaCungCapController extends Controller
 {
    public function View()
    {
-    $nha_Cung_Cap=NhaCungCap::all();
+    $nha_Cung_Cap=NhaCungCap::paginate(9);
     return view('NHACUNGCAP/danh-sach',compact('nha_Cung_Cap'));
    } 
    public function themMoi()

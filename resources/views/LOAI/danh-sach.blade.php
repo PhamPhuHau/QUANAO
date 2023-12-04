@@ -31,6 +31,17 @@
                             </tbody>
                             @endforeach
                         </table>
+                        <div class="row">
+                            <div class="col-sm-10">
+
+                            </div>
+                            <div class="col-sm-2">
+                            <div class="phantrang">
+                        {{ $loai->links() }}
+                        </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 </div>
@@ -48,7 +59,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ Route('san-pham.nhap-hang') }}" class="dropdown-item">MỚI</a>
                             <a href="{{ Route('san-pham.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
-                            
+                            <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
                     </div>    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 @endsection

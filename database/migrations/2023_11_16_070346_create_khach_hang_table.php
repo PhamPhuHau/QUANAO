@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('ho_ten',100);
             $table->string('email',100);
             $table->string('password',100);
-            $table->string('so_dien_thoai',10);
-            $table->string('dia_chi',200);
+            $table->string('so_dien_thoai',10)->nullable();
+            $table->string('dia_chi',200)->nullable();
             $table->timestamps();
         });
     }
