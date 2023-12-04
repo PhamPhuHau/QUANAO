@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('gia_nhap');
             $table->double('gia_ban');
             $table->integer('so_luong');
+            $table->integer('nha_cung_cap_id');
             $table->integer('trang_thai');
             $table->string('thong_tin',5000)->nullable();
             $table->timestamps();
