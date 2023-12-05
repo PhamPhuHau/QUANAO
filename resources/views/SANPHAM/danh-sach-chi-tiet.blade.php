@@ -62,7 +62,7 @@
                                         {{$chi_tiet_san_pham->san_pham->ten}}
                                     </td>
                                     <td>
-                                        {{ $chi_tiet_san_pham->Loai->ten }}
+                                    {{$chi_tiet_san_pham->san_pham->loai->ten}}
                                     </td>
                                     <td>
                                         {{ $chi_tiet_san_pham->Mau->ten }}

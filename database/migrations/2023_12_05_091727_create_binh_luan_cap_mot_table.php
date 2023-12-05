@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nhap_hang', function (Blueprint $table) {
+        Schema::create('binh_luan_cap_mot', function (Blueprint $table) {
             $table->id();
-            $table->double('tong_tien');
-            $table->foreignId('nha_cung_cap_id');
-            $table->softDeletes();
+            $table->foreignId('san_pham_id');
+            $table->foreignId('khach_hang_id');
+            $table->string('noi_dung');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nhap_hang');
+        Schema::dropIfExists('binh_luan_cap_mot');
     }
 };

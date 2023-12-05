@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('chi_tiet_san_pham', function (Blueprint $table) {
             $table->id();
-            $table->integer('san_pham_id');
-            $table->integer('mau_id');
-            $table->integer('size_id');
-            $table->integer('loai_id');
+            $table->foreignId('san_pham_id');
+            $table->foreignId('mau_id');
+            $table->foreignId('size_id');
             $table->integer('so_luong');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

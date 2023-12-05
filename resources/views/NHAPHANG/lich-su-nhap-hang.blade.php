@@ -24,7 +24,7 @@
                             <tbody>
                                 <td style="width: 25%;">{{ $nhap_hang->id }}</td>
                                 <td style="width: 25%;">{{ $nhap_hang->tong_tien }}</td>
-                                <td style="width: 25%;">{{ $nhap_hang->nha_cung_cap_id }}</td>
+                                <td style="width: 25%;">{{ $nhap_hang->nha_cung_cap->ten }}</td>
                                 <td style="width: 25%;">{{ $nhap_hang->created_at }}</td>
                                 <td style="width: 25%;">{{ $nhap_hang->trang_thai }}</td>
                                 <td><a class="btn btn-sm btn-primary" href="{{ route('san-pham.lich-su-chi-tiet-nhap-hang',['id'=>$nhap_hang->id]) }}">Detail</a></td>
