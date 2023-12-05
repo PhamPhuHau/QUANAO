@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password',100);
             $table->string('so_dien_thoai',10)->nullable();
             $table->string('dia_chi',200)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

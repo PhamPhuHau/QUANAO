@@ -84,7 +84,7 @@
             },
         }).done(function(response) {
             $('.loai').html('<option></option>');
-            
+            console.log(response);
             if (response.success && response.data.length > 0) {              
                 response.data.forEach(function(item) {
                     $('.loai').append(`<option value="${item.loai.id}">${item.loai.ten}</option>`);

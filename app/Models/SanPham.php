@@ -18,4 +18,9 @@ class SanPham extends Model
     {
         return $this->belongsTo(NhaCungCap::class);
     }
+
+    public function loai()
+    {
+        return $this->belongsTo(Loai::class);
+    }
 }
