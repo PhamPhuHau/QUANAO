@@ -34,8 +34,8 @@ class SanPhamController extends Controller
     public function lsChiTietNhapHang($id)
     {
         $ChiTietNhapHang = ChiTietNhapHang::where('nhap_hang_id',$id)->get();
-       
-        return view('NHAPHANG/lich-su-chi-tiet-nhap-hang',compact('ChiTietNhapHang'));
+        
+        return view('NHAPHANG/lich-su-chi-tiet-nhap-hang',compact('ChiTietNhapHang','SanPham'));
     }
     
     public function Delete($id)
@@ -298,9 +298,9 @@ class SanPhamController extends Controller
     {
         $CT_San_Pham = ChiTietSanPham::where('san_pham_id',$id)->get();
 
-        $san_Pham = SanPham::where('id',$id)->first();
+        $sanPham = SanPham::where('id',$id)->first();
         $hinh_Anh = HinhAnh::where('san_pham_id',$id)->get();
-        return view('SANPHAM/danh-sach-chi-tiet',compact('CT_San_Pham','san_Pham','hinh_Anh'));
+        return view('SANPHAM/danh-sach-chi-tiet',compact('CT_San_Pham','sanPham','hinh_Anh'));
     }
 
     public function them_Anh(Request $request,$id)

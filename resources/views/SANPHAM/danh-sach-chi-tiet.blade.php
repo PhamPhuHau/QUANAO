@@ -84,10 +84,14 @@
 
                             @endforeach
                         </table>
+                        <div class="thongtin">
+                            <h1 class="danh-sach-chi-tiet-hinh-anh">THÔNG TIN</h1>
+                            {{$sanPham->thong_tin}}
+                        </div>
                         <div class="sua"></div>
                         
                         <div class="row">
-                            <h1 class="danh-sach-chi-tiet-hinh-anh">HINH ANH</h1>
+                            <h1 class="danh-sach-chi-tiet-hinh-anh">HÌNH ẢNH</h1>
                         @foreach($hinh_Anh as $item)
 
                         <div class="col-sm-6">
@@ -122,6 +126,7 @@
                                 <td>
                                     <button type="submit" class="btn btn-outline-success" >LƯU</button>
                                 </td>
+
 
                             </form>
 
