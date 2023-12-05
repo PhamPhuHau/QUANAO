@@ -258,7 +258,7 @@ class SanPhamController extends Controller
                 if(empty($chi_Tiet_San_Pham))
                 {
                     if(!empty($request->Thong_Tin[$i])){
-                       
+                        
                         $san_Pham->thong_tin = $request->Thong_Tin[$i];
                         $san_Pham->save();
                     }
@@ -269,6 +269,8 @@ class SanPhamController extends Controller
                     $chi_Tiet_San_Pham->loai_id = (int)$request->loai[$i];
                     $chi_Tiet_San_Pham->so_luong = (int)$request->so_Luong[$i];
                     $chi_Tiet_San_Pham->save();
+                    $san_Pham->so_luong += (int)$request->so_Luong[$i];
+                    $san_Pham->save();
                 }
 
                 else{
