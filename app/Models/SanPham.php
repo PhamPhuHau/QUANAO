@@ -13,4 +13,9 @@ class SanPham extends Model
     public function hinh_anh(){
         return $this->hasMany(HinhAnh::class);
     }
+
+    public function nha_cung_cap()
+    {
+        return $this->belongsTo(NhaCungCap::class);
+    }
 }

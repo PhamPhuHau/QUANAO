@@ -24,7 +24,7 @@ class SanPhamAPIController extends Controller
         $sanPham = SanPham::where('id',$id)->first();
         
        
-        
+        $sanPham->nha_cung_cap;
         $sanPham ->hinh_anh;
         
         return response()->json([
