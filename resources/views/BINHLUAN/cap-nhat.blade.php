@@ -1,12 +1,12 @@
 @extends('ADMIN/index')
 @section('content')
-<form method="POST" action="{{route('loai.xl-them')}}">
-	@csrf
+<form method="POST" action="{{route('loai.xl-cap-nhat',['id'=>$loai->id])}}">
+		@csrf
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
-			<div class="card">
+			<div  class="card">
 				<div class="card-header border-bottom">
-					<h4 class="mb-0">Thêm mới</h4>
+					<h4 class="mb-0">Cập nhật</h4>
 				</div>
 				<div class="card-body p-0 create-project-main">
 					<div class="row p-5 border-bottom">
@@ -14,19 +14,22 @@
 							<div class="form-group">
 								<label for="color-name" class="form-label text-muted">Tên loại:</label>
 								<div class="input-group">
-									<input id="color-name" name="ten" type="text" class="form-control text-dark" placeholder="Enter ">
+									<input id="color-name" name="ten" type="text" class="form-control text-dark" placeholder="Nhập tên màu" value="{{$loai->ten}}">
+
 								</div>
 							</div>
 						</div>
 
 
 
+
 					<div class="row p-5">
 						<div class="btn-list text-end">
-							<a class="btn btn-outline-danger" href ="{{route('loai.danh-sach')}}">
-								Cancel</a>
+							<a class="btn btn-outline-danger"href ="{{route('loai.danh-sach')}}">
 
-                            <button class="btn btn-outline-success">
+								Cancel
+</a>
+							<button class="btn btn-outline-success">
 								<i class="fe fe-check-circle"></i>
 								Save
 							</button>
@@ -36,7 +39,7 @@
 			</div>
 		</div>
 	</div>
-</form>
+	</form>
 @endsection
 @section('chon')
 	<a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
@@ -56,4 +59,3 @@
 					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
                     <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
                     <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
-@endsection

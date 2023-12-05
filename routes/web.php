@@ -9,6 +9,10 @@ use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\LoaiController;
 use App\Http\Controllers\QuanLyController;
+use App\Http\Controllers\HoaDonController;
+use App\Http\Controllers\DonHangController;
+use App\Http\Controllers\TaiKhoanController;
+use App\Http\Controllers\BinhLuanController;
 
 
 /*
@@ -112,3 +116,30 @@ Route::post('/dang-nhap',[QuanLyController::class, 'xuLyDangNhap'])->name('xl-da
 });
 
 
+//-----------------------------------------HOADON-------------------------------------------------
+Route::prefix('hoa-don')->group(function(){
+    Route::name('hoa-don.')->group(function(){
+        Route::get('/danh-sach',[HoaDonController::class,'View'])->name('danh-sach');
+    });
+});
+
+//-----------------------------------------DONHANG-------------------------------------------------
+Route::prefix('don-hang')->group(function(){
+    Route::name('don-hang.')->group(function(){
+        Route::get('/danh-sach',[DonHangController::class,'View'])->name('danh-sach');
+    });
+});
+
+//-----------------------------------------TAIKHOAN-------------------------------------------------
+Route::prefix('tai-khoan')->group(function(){
+    Route::name('tai-khoan.')->group(function(){
+        Route::get('/danh-sach',[TaiKhoanController::class,'View'])->name('danh-sach');
+    });
+});
+
+//-----------------------------------------BINHLUAN-------------------------------------------------
+Route::prefix('binh-luan')->group(function(){
+    Route::name('binh-luan.')->group(function(){
+        Route::get('/danh-sach',[BinhLuanController::class,'View'])->name('danh-sach');
+    });
+});
