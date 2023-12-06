@@ -17,6 +17,16 @@ class QuanLyController extends Controller
     }
     public function xuLyDangNhap(Request $request)
     {
+        $request->validate([
+            'ten_dang_nhap'=>'required',
+            'password'=>'required|min:6',
+        ],[
+            'ten_dang_nhap.required'=>'không được để trống',
+            'password.required' => 'không được để trống mật khẩu',
+            'password.min' => 'mật khẩu có ít nhất 6 ký tự',
+        ]);
+
+
         if (Auth::attempt(['ten_dang_nhap' => $request->ten_dang_nhap, 'password' => $request->password])) {
             return redirect()->route('quan-ly.trang-chu');
         }

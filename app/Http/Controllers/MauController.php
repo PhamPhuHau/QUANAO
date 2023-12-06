@@ -15,6 +15,11 @@ class MauController extends Controller
     }
     public function xuLyThemMoi(Request $request)
     {
+        $request->validate([
+            'ten'=>'required', 
+        ],[
+            'ten.required'=>'không được để trống',
+        ]);
         $mau= new Mau();
 
         $mau->ten=$request->ten;
@@ -28,6 +33,7 @@ class MauController extends Controller
     }
     public function Edit($id)
     {
+        
         $mau=Mau::find($id);
         if(empty($mau))
         {
@@ -37,6 +43,12 @@ class MauController extends Controller
     }
     public function xlEdit(Request $request, $id)
     {
+        $request->validate([
+            'ten'=>'required', 
+        ],[
+            'ten.required'=>'không được để trống',
+        ]);
+        
         $mau=Mau::find($id);
         $mau->ten=$request->ten;
 

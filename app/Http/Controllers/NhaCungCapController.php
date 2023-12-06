@@ -17,6 +17,16 @@ class NhaCungCapController extends Controller
    }
    public function xuLyThemMoi(Request $request)
    {
+      $request->validate([
+         'ten'=>'required', 
+         'dia_chi'=>'required',
+         'email' =>'required|email',
+     ],[
+         'ten.required'=>'tên nhà cung cấp không được để trống',
+         'dia_chi.required'=>'địa chỉ nhà cung cấp không được để trống',
+         'email.required'=>'email nhà cung cấp không được để trống',
+         'email.email'=>'vui lòng ghi đúng email',
+     ]);
       $nha_Cung_Cap= new NhaCungCap();
 
       $nha_Cung_Cap->ten=$request->ten;
@@ -48,6 +58,16 @@ class NhaCungCapController extends Controller
    }
    public function xlEdit(Request $request, $id)
    {
+      $request->validate([
+         'ten'=>'required', 
+         'dia_chi'=>'required',
+         'email' =>'required|email',
+     ],[
+         'ten.required'=>'tên nhà cung cấp không được để trống',
+         'dia_chi.required'=>'địa chỉ nhà cung cấp không được để trống',
+         'email.required'=>'email nhà cung cấp không được để trống',
+         'email.email'=>'vui lòng ghi đúng email',
+     ]);
       $nha_Cung_Cap=NhaCungCap::find($id);
       
       $nha_Cung_Cap->ten=$request->ten;

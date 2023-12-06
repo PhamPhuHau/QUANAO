@@ -21,8 +21,6 @@ class SanPhamController extends Controller
         // $san_Pham = SanPham::all();
         $san_Pham = SanPham::paginate(9);
         return view('SANPHAM/danh-sach',compact('san_Pham'));
-
-
     }
 
     public function lsNhapHang()
@@ -35,7 +33,7 @@ class SanPhamController extends Controller
     {
         $ChiTietNhapHang = ChiTietNhapHang::where('nhap_hang_id',$id)->get();
         
-        return view('NHAPHANG/lich-su-chi-tiet-nhap-hang',compact('ChiTietNhapHang','SanPham'));
+        return view('NHAPHANG/lich-su-chi-tiet-nhap-hang',compact('ChiTietNhapHang'));
     }
     
     public function Delete($id)
@@ -138,6 +136,19 @@ class SanPhamController extends Controller
     public function xuLyThemSoLuong(Request $request)
     {
        
+        $request->validate([
+            "san_Pham" => 'required',
+            "so_Luong" => 'required',
+            "loai" => 'required',
+            "mau" => 'required',
+            "size" => 'required',
+        ], [
+            "so_Luong.required" => 'Số lượng không được để trống',
+            "san_Pham.required" => 'sản phẩm không được để trống',
+            "loai.required" => 'Loại không được để trống',
+            "mau.required" => 'Màu không được để trống',
+            "size.required" => 'Size không được để trống',
+        ]);
         $nhapHang = ChiTietNhapHang::where('san_pham_id',$request->san_Pham)->first();
         $sanPham = SanPham::where('id',$request->san_Pham)->first();
         $sanPham->so_luong += (int)$request->so_Luong;
@@ -198,11 +209,16 @@ class SanPhamController extends Controller
 
     public function xuLyThemMoi(Request $request)
     {
-
-        //if này kiểm tra xem đã có nhà cung cấp và tên chưa nếu chưa có thì 1 trong 2 thì sẽ trả về thông báo
-        if (empty($request->nha_cung_cap) || empty($request->ten)) {
-            return redirect()->route('san-pham.nhap-hang')->with('thong_bao', 'vui lòng nhập đầy đủ thông tin');
-        }
+   
+         $request->validate([
+         'ten.0'=>'required', 
+         'nha_cung_cap'=>'required',
+         
+     ],[
+         'ten.0.required'=>'tên sản phẩm không được để trống',
+         'nha_cung_cap.required'=>'nhà cung cấp không được để trống',
+         
+     ]); 
 
        //tạo mới nhập hàng
         $NhapHang = new NhapHang();
@@ -213,7 +229,24 @@ class SanPhamController extends Controller
         //biến dùng để tính lại tổng tiền từng thành tiền của sản phẩm cộng lại
         $tong_Tien = 0;
 
-        for($i = 0; $i < count($request->ten) ; $i++){
+        for($i = 0; $i < count($request->ten) ; $i++){ 
+            $request->validate([
+                "so_Luong.{$i}" => 'required',
+                "gia_Nhap.{$i}" => 'required',
+                "gia_Ban.{$i}" => 'required',
+                "loai.{$i}" => 'required',
+                "mau.{$i}" => 'required',
+                "size.{$i}" => 'required',
+            ], [
+                "so_Luong.{$i}.required" => 'Số lượng không được để trống',
+                "gia_Nhap.{$i}.required" => 'Giá nhập không được để trống',
+                "gia_Ban.{$i}.required" => 'Giá bán không được để trống',
+                "loai.{$i}.required" => 'Loại không được để trống',
+                "mau.{$i}.required" => 'Màu không được để trống',
+                "size.{$i}.required" => 'Size không được để trống',
+            ]);
+            
+          
             //biến này dùng để lưu thanhf tiền từng sản phẩm
             $thanh_Tien = (double)$request->so_Luong[$i] * (double)$request->gia_Nhap[$i];
             $tong_Tien += $thanh_Tien;
@@ -328,7 +361,13 @@ class SanPhamController extends Controller
 }
     public function xu_Ly_Sua(Request $request)
     {
-        
+        $request->validate([
+            'ten'=>'required',
+           
+        ],[
+            'ten.required'=>'không được để trống',
+            
+        ]);
         $san_Pham = SanPham::where('id',$request->id)->first();
         $san_Pham->ten = $request->ten;
         $san_Pham->save();

@@ -8,6 +8,14 @@
                 <h6 class="mb-0">NHẬP HÀNG</h6>
 
             </div>
+            @if ($errors->any())
+					<div class="alert alert-danger">
+						
+						@foreach($errors->all() as $error)
+						{{$error }}<br>
+					@endforeach
+					</div>
+				@endif  
             <div class="table-responsive">
                 <h2>NHÀ CUNG CẤP</h2>
                 <select style="width: 30%" name='nha_cung_cap'>

@@ -14,6 +14,11 @@ class SizeController extends Controller
     }
     public function xuLyThemMoi(Request $request)
     {
+        $request->validate([
+            'ten'=>'required', 
+        ],[
+            'ten.required'=>'không được để trống',
+        ]);
         $size= new Size();
 
         $size->ten=$request->ten;
@@ -36,6 +41,11 @@ class SizeController extends Controller
     }
     public function xlEdit(Request $request, $id)
     {
+        $request->validate([
+            'ten'=>'required', 
+        ],[
+            'ten.required'=>'không được để trống',
+        ]);
         $size=Size::find($id);
         $size->ten=$request->ten;
 

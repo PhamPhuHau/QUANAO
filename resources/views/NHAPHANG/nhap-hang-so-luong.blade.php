@@ -8,6 +8,14 @@
                 <h6 class="mb-0">NHẬP HÀNG SỐ LƯỢNG</h6>
 
             </div>
+            @if ($errors->any())
+					<div class="alert alert-danger">
+						
+						@foreach($errors->all() as $error)
+						{{$error }}<br>
+					@endforeach
+					</div>
+				@endif  
             <div class="table-responsive">
                 
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
