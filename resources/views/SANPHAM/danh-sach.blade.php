@@ -75,6 +75,7 @@
                   
                 </div>
 </div>
+
 <div id="sua"></div>
 @endsection
 @section('js')
@@ -93,35 +94,35 @@
        }
 
        function XuLySua(id, ten) {
-    $.ajax({
-        method: "POST",
-        url: "{{ route('san-pham.sua') }}",
-        data: {
-            "_token": "{{ csrf_token() }}",
-            "id": id,
-            "ten": ten
-        },
-        success: function(response) {
-            if (response.success) {
-                alert('Sửa thành công');
+            $.ajax({
+                method: "POST",
+                url: "{{ route('san-pham.sua') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id": id,
+                    "ten": ten
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Sửa thành công');
 
-                // Cập nhật nội dung trang mà không cần tải lại trang
-                // Ví dụ: nếu có thông tin cập nhật từ server, bạn có thể sử dụng nó để cập nhật nội dung
+                        // Cập nhật nội dung trang mà không cần tải lại trang
+                        // Ví dụ: nếu có thông tin cập nhật từ server, bạn có thể sử dụng nó để cập nhật nội dung
 
-                // Tìm thẻ tr chứa thông tin sản phẩm cần cập nhật
-                var trElement = $("tr[data-id='" + id + "']");
-                
-                // Cập nhật các ô thông tin sản phẩm
-                trElement.find('.ten-san-pham').text(ten);
+                        // Tìm thẻ tr chứa thông tin sản phẩm cần cập nhật
+                        var trElement = $("tr[data-id='" + id + "']");
+                        
+                        // Cập nhật các ô thông tin sản phẩm
+                        trElement.find('.ten-san-pham').text(ten);
 
-            } else {
-                alert('Sửa thất bại: ' + response.message);
-            }
-        },
-        error: function(error) {
-            console.log(error);
-            alert('Lỗi khi thực hiện sửa sản phẩm');
-        }
+                    } else {
+                        alert('Sửa thất bại: ' + response.message);
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert(error.responseJSON.message);
+                }
     });
 }
 

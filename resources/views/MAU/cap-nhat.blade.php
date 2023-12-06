@@ -8,6 +8,14 @@
 				<div class="card-header border-bottom">
 					<h4 class="mb-0">Cập nhật</h4>
 				</div>
+				@if ($errors->any())
+					<div class="alert alert-danger">
+						
+						@foreach($errors->all() as $error)
+						{{$error }}<br>
+					@endforeach
+					</div>
+				@endif
 				<div class="card-body p-0 create-project-main">
 					<div class="row p-5 border-bottom">
 						<div class="col-sm-12 col-md-12 col-xl-3">

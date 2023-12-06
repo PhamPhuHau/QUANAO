@@ -17,6 +17,12 @@ class LoaiController extends Controller
     }
     public function xuLyThemMoi(Request $request)
     {
+        
+        $request->validate([
+            'ten'=>'required', 
+        ],[
+            'ten.required'=>'không được để trống',
+        ]);
         $loai= new Loai();
 
         $loai->ten=$request->ten;
@@ -26,6 +32,7 @@ class LoaiController extends Controller
     }
     public function Edit($id)
     {
+        
         $loai=Loai::find($id);
         if(empty($loai))
         {
@@ -35,6 +42,11 @@ class LoaiController extends Controller
     }
     public function xlEdit(Request $request, $id)
     {
+        $request->validate([
+            'ten'=>'required', 
+        ],[
+            'ten.required'=>'không được để trống',
+        ]);
         $loai=Loai::find($id);
         $loai->ten=$request->ten;
         $loai->save();
