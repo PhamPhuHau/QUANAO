@@ -5,7 +5,7 @@
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">TÀI KHOẢN KHÁCH HÀNG</h6>
                         <div class="hien-danh-dach">
-                       <a type="button" href="{{ route('tai-khoan.danh-sach-khoa') }}">danh sách khoá</a>
+                        <a type="button" href="{{ route('tai-khoan.danh-sach') }}">Danh sách tài khoản chưa khoá</a>
 </div>
                     </div>
                     <div class="table-responsive">
@@ -33,7 +33,7 @@
                                     <td>{{ $KhachHang->so_dien_thoai }}</td>
                                     <td>{{ $KhachHang->dia_chi }}</td>
                                     
-                                    <td><a class="btn btn-outline-danger" href="{{ route('tai-khoan.khoa',['id'=>$KhachHang->id]) }}">Khoá</a></td>
+                                    <td><a class="btn btn-outline-success" href="{{ route('tai-khoan.mo-khoa',['id'=>$KhachHang->id]) }}">Mở</a></td>
                                 </tr>
                                 
                             </tbody>

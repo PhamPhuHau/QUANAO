@@ -134,8 +134,19 @@ Route::prefix('don-hang')->group(function(){
 Route::prefix('tai-khoan')->group(function(){
     Route::name('tai-khoan.')->group(function(){
         Route::get('/danh-sach',[TaiKhoanController::class,'View'])->name('danh-sach');
+        Route::get('/danh-sach-khoa',[TaiKhoanController::class,'HienKhoa'])->name('danh-sach-khoa');
+        Route::get('/danh-sach/{id}',[TaiKhoanController::class,'Khoa'])->name('khoa');
+        Route::get('/danh-sach-khoa/{id}',[TaiKhoanController::class,'MoKhoa'])->name('mo-khoa');
     });
 });
+
+Route::prefix('tai-khoan')->group(function(){
+    Route::name('tai-khoan.')->group(function(){
+        Route::get('/danh-sach',[TaiKhoanController::class,'View'])->name('danh-sach');
+        Route::get('/danh-sach-khoa',[TaiKhoanController::class,'HienKhoa'])->name('danh-sach-khoa');
+    });
+});
+
 
 //-----------------------------------------BINHLUAN-------------------------------------------------
 Route::prefix('binh-luan')->group(function(){
