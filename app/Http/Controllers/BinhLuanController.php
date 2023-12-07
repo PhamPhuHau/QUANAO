@@ -10,4 +10,5 @@ class BinhLuanController extends Controller
     {
         return view('BINHLUAN/danh-sach');
     }
+    
 }
