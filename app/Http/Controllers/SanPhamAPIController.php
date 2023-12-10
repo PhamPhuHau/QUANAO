@@ -32,4 +32,17 @@ class SanPhamAPIController extends Controller
             'data' => $sanPham
         ]);
     }
+
+    public function TimKiem($ten)
+    {
+        $sanPham = SanPham::where('ten','like','%'.$ten.'%')->get();
+        foreach($sanPham as $item)
+        {
+            $item->hinh_anh;
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $sanPham
+        ]);
+    }
 }

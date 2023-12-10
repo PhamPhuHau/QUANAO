@@ -32,5 +32,7 @@ route::get('danh-sach-san-pham',[SanPhamAPIController::class,'DanhSachSanPham'])
 
 route::get('chi-tiet-san-pham/{id}',[SanPhamAPIController::class,'ChiTietSanPham']);
 
+route::get('tim-kiem/{ten}',[SanPhamAPIController::class,'TimKiem']);
+
 route::post('luu-binh-luan', [BinhLuanAPIController::class, 'ThemBinhLuanCapMot']);
 route::get('danh-sach-binh-luan-cap-mot/{id}', [BinhLuanAPIController::class, 'DanhSachBinhLuanCapMot']);
