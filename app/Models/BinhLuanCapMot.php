@@ -9,5 +9,7 @@ class BinhLuanCapMot extends Model
 {
     use HasFactory;
     protected $table='binh_luan_cap_mot';
-    
+    public function khach_hang() {
+        return $this->belongsTo(KhachHang::class);
+    }
 }

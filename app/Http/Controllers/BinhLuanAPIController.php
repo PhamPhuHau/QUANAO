@@ -23,10 +23,10 @@ class BinhLuanAPIController extends Controller
     
     public function  DanhSachBinhLuanCapMot($id){
         $binhLuan = BinhLuanCapMot::where('san_pham_id',$id)->get();
-        
-       
-        
-        
+        foreach ($binhLuan as $bl) {
+            // Nếu có, in ra thông tin
+            $bl->khach_hang;
+        }
         return response()->json([
             'success' => true,
             'data' => $binhLuan
