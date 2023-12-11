@@ -9,4 +9,5 @@ class NhaCungCap extends Model
 {
     use HasFactory;
     protected $table = "nha_cung_cap";
+
 }

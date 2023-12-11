@@ -36,7 +36,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $SanPham->id }}</td>
-                                    
+
                                     <!-- ... Các cột thông tin sản phẩm ... -->
                                     <td class="ten-san-pham">{{ $SanPham->ten }}</td>
                                     <!-- ... Các cột khác ... -->
@@ -55,7 +55,7 @@
 
                             </tbody>
                             @endforeach
-                            
+
                         </table>
                         <div class="row">
                             <div class="col-sm-10">
@@ -68,11 +68,11 @@
                             </div>
 
                         </div>
-                        
-                      
-                      
+
+
+
                     </div>
-                  
+
                 </div>
 </div>
 
@@ -81,16 +81,16 @@
 @section('js')
     <script>
         function them(id,ten){
-            $('#sua').html(` 
+            $('#sua').html(`
             <div class="col-xl-3 from-cap-nhat">
                 <h4>SỬA SẢN PHẨM</h4>
                 <h6>ID: `+id+`</h6>
                 <div style="display: flex; align-items: center;">
-                    <lable for="ten">tên:</lable> 
-                    <input  name="ten" id="inputTen" type="text" class="form-control text-dark" value="`+ten+`" placeholder="Nhập tên sản phẩm" > 
-                </div> 
-                <button onclick="XuLySua(${id},document.getElementById('inputTen').value)"> thuc hien </button> 
-            </div>`);                  
+                    <lable for="ten">tên:</lable>
+                    <input  name="ten" id="inputTen" type="text" class="form-control text-dark" value="`+ten+`" placeholder="Nhập tên sản phẩm" >
+                </div>
+                <button class="btn btn-outline-success" onclick="XuLySua(${id},document.getElementById('inputTen').value)"> SAVE </button>
+            </div>`);
        }
 
        function XuLySua(id, ten) {
@@ -109,11 +109,12 @@
                         // Cập nhật nội dung trang mà không cần tải lại trang
                         // Ví dụ: nếu có thông tin cập nhật từ server, bạn có thể sử dụng nó để cập nhật nội dung
 
-                        // Tìm thẻ tr chứa thông tin sản phẩm cần cập nhật
-                        var trElement = $("tr[data-id='" + id + "']");
-                        
-                        // Cập nhật các ô thông tin sản phẩm
-                        trElement.find('.ten-san-pham').text(ten);
+
+                // Tìm thẻ tr chứa thông tin sản phẩm cần cập nhật
+                var trElement = $("tr[data-id='" + id + "']");
+
+                // Cập nhật các ô thông tin sản phẩm
+                trElement.find('.ten-san-pham').text(ten);
 
                     } else {
                         alert('Sửa thất bại: ' + response.message);
