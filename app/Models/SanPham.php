@@ -21,6 +21,10 @@ class SanPham extends Model
         return $this->belongsTo(NhaCungCap::class);
     }
 
+    public function loai()
+    {
+        return $this->belongsTo(Loai::class);
+    }
 
     public function chi_tiet_san_pham()
     {
