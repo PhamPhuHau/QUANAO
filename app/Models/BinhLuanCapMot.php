@@ -13,6 +13,8 @@ class BinhLuanCapMot extends Model
         return $this->belongsTo(KhachHang::class);
     }
     public function binh_luan_cap_hai() {
+        
         return $this->hasMany(BinhLuanCapHai::class);
+        
     }
 }
