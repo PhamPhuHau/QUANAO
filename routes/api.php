@@ -47,13 +47,18 @@ route::get('gia-tang',[SanPhamAPIController::class,'GiaTang']);
 
 route::get('gia-giam',[SanPhamAPIController::class,'GiaGiam']);
 //------------------BÌNH LUẬN---------------------------
+
 route::post('luu-binh-luan', [BinhLuanAPIController::class, 'ThemBinhLuanCapMot']);
 route::get('danh-sach-binh-luan-cap-mot/{id}', [BinhLuanAPIController::class, 'DanhSachBinhLuanCapMot']);
+
+Route::post('/tim-binh-luan',[BinhLuanAPIController::class,'TimBinhLuan'])->middleware('api');
+
+route::post('luu-binh-luan-cap-hai', [BinhLuanAPIController::class, 'ThemBinhLuanCapHai']);
+route::post('danh-sach-binh-luan-cap-hai', [BinhLuanAPIController::class, 'DanhSachBinhLuanCapHai']);
 
 //-----------------LOAI----------------------------
 
 route::get('danh-sach-loai',[LoaiAPIController::class,'DanhSachLoai']);
 
-route::post('luu-binh-luan-cap-hai', [BinhLuanAPIController::class, 'ThemBinhLuanCapHai']);
-route::post('danh-sach-binh-luan-cap-hai', [BinhLuanAPIController::class, 'DanhSachBinhLuanCapHai']);
+
 
