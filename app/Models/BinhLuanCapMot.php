@@ -17,4 +17,8 @@ class BinhLuanCapMot extends Model
         return $this->hasMany(BinhLuanCapHai::class);
         
     }
+
+    public function san_pham() {
+        return $this->belongsTo(SanPham::class);
+    }
 }
