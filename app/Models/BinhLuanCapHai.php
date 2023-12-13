@@ -11,4 +11,8 @@ class BinhLuanCapHai extends Model
     public function khach_hang() {
         return $this->belongsTo(KhachHang::class);
     }
+
+    public function san_pham() {
+        return $this->belongsTo(SanPham::class);
+    }
 }

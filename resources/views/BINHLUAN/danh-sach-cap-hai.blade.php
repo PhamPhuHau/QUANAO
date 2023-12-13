@@ -13,7 +13,6 @@
                                     <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
                                     <th scope="col">TÊN SẢN PHẨM</th>
                                     <th scope="col">TÊN KHÁCH HÀNG</th>
-                                    <th scope="col">BÌNH LUẬN CẤP 1</th>
                                     <th scope="col">BÌNH LUẬN CẤP 2</th>
                                     <th></th>
                                 </tr>
@@ -27,9 +26,7 @@
 
                                     <td style="width: 25%;">{{ $BinhLuan->noi_dung }}</td>
 
-                                    
-                                    <td><a class="btn btn-outline-primary" href="{{ route('binh-luan.danh-sach-cap-hai', ['id'=>$BinhLuan->id]) }}">Xem</a></td>
-                                    <td><a class="btn btn-outline-danger" href="{{ route('binh-luan.xoa-cap-mot', ['id'=>$BinhLuan->id]) }}">Xóa</a></td>
+                                    <td><a class="btn btn-outline-danger" href="{{ route('binh-luan.xoa-cap-hai', ['id'=>$BinhLuan->id]) }}">Xóa</a></td>
                                 </tr>
                                 
                             </tbody>

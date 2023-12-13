@@ -151,6 +151,10 @@ Route::prefix('tai-khoan')->group(function(){
 //-----------------------------------------BINHLUAN-------------------------------------------------
 Route::prefix('binh-luan')->group(function(){
     Route::name('binh-luan.')->group(function(){
-        Route::get('/danh-sach',[BinhLuanController::class,'View'])->name('danh-sach');
+        Route::get('/danh-sach',[BinhLuanController::class,'DanhSachBinhLuanCapMot'])->name('danh-sach');
+        Route::get('/danh-sach/{id}',[BinhLuanController::class,'DanhSachBinhLuanCapHai'])->name('danh-sach-cap-hai');
+        Route::get('/xoa-cap-mot/{id}',[BinhLuanController::class,'XoaCapMot'])->name('xoa-cap-mot');
+        Route::get('/xoa-cap-hai/{id}',[BinhLuanController::class,'XoaCapHai'])->name('xoa-cap-hai');
+
     });
 });
