@@ -53,3 +53,7 @@ route::get('danh-sach-binh-luan-cap-mot/{id}', [BinhLuanAPIController::class, 'D
 //-----------------LOAI----------------------------
 
 route::get('danh-sach-loai',[LoaiAPIController::class,'DanhSachLoai']);
+
+route::post('luu-binh-luan-cap-hai', [BinhLuanAPIController::class, 'ThemBinhLuanCapHai']);
+route::post('danh-sach-binh-luan-cap-hai', [BinhLuanAPIController::class, 'DanhSachBinhLuanCapHai']);
+
