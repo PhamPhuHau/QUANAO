@@ -63,4 +63,12 @@ class BinhLuanAPIController extends Controller
     //     ]);
     // }
     
+    public function TimBinhLuan(request $request)
+    {
+        $binhLuan = ThemBinhLuanCapMot::where('id',$request->id)->first();
+        return response()->json([
+            'success' => true,
+            'data' => $binhLuan,
+        ]);
+    }
 }
