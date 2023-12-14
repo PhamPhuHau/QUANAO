@@ -1,5 +1,7 @@
 @extends('ADMIN/index')
 @section('content')
+
+<!-- đây là danh sách khách hàng -->
 <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -54,6 +56,60 @@
                 </div>
 </div>
 
+
+<!-- đây là danh sách quản lý -->
+
+
+
+<div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">TÀI KHOẢN QUẢN LÝ</h6>
+                        <div class="hien-danh-dach">
+                        <a href="{{ route('tai-khoan.them') }}" type="button" class="btn btn-sm btn-outline-secondary">Thêm mới</a>
+</div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-dark">
+                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                                   
+                                    <th scope="col">ID</th>
+                                    <th scope="col">TÊN ĐĂNG NHẬP</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach($quanLy as $QuanLy)
+                            <tbody>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                   
+                                    <td>{{ $QuanLy->id }}</td>
+                                    <td>{{ $QuanLy->ten_dang_nhap }}</td>
+                                   
+                                    
+                                    <td><a class="btn btn-outline-primary" href="{{ route('tai-khoan.cap-nhat',['id'=>$QuanLy->id]) }}">Cập nhật mật khẩu</a>
+                                        <a class="btn btn-outline-danger" href="{{ route('tai-khoan.xoa',['id'=>$QuanLy->id]) }}">xoá</a></td>
+                                </tr>
+                                
+                            </tbody>
+                            @endforeach
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-10">
+
+                            </div>
+                            <div class="col-sm-2">
+                            <div class="phantrang">
+                        {{ $quanLy->links() }}
+                        </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+</div>
 @endsection
 @section('chon')
     <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>

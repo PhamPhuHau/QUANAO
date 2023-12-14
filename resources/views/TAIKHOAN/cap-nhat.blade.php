@@ -1,6 +1,6 @@
 @extends('ADMIN/index')
 @section('content')
-<form method="POST" action="{{route('loai.xl-cap-nhat',['id'=>$loai->id])}}">
+<form method="POST" action="{{ route('tai-khoan.xu-ly-cap-nhat',['id'=>$quanLy->id]) }}">
 		@csrf
 	<div class="row">
 		<div class="col-lg-12 col-md-12">
@@ -12,9 +12,9 @@
 					<div class="row p-5 border-bottom">
 						<div class="col-sm-12 col-md-12 col-xl-3">
 							<div class="form-group">
-								<label for="color-name" class="form-label text-muted">Tên loại:</label>
+								<label for="color-name" class="form-label text-muted">Tên tài khoản: {{ $quanLy->ten_dang_nhap }}</label>
 								<div class="input-group">
-									<input id="color-name" name="ten" type="text" class="form-control text-dark" placeholder="Nhập tên màu" value="{{$loai->ten}}">
+									<input id="color-name" name="password" type="text" class="form-control text-dark" placeholder="Nhập mật khẩu mới" value="">
 
 								</div>
 							</div>
@@ -25,7 +25,7 @@
 
 					<div class="row p-5">
 						<div class="btn-list text-end">
-							<a class="btn btn-outline-danger"href ="{{route('loai.danh-sach')}}">
+							<a class="btn btn-outline-danger"href ="">
 
 								Cancel
 </a>

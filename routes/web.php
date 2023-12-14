@@ -137,15 +137,16 @@ Route::prefix('tai-khoan')->group(function(){
         Route::get('/danh-sach-khoa',[TaiKhoanController::class,'HienKhoa'])->name('danh-sach-khoa');
         Route::get('/danh-sach/{id}',[TaiKhoanController::class,'Khoa'])->name('khoa');
         Route::get('/danh-sach-khoa/{id}',[TaiKhoanController::class,'MoKhoa'])->name('mo-khoa');
+        Route::get('/them',[TaiKhoanController::class,'Them'])->name('them');
+        Route::post('/xu-ly-them',[TaiKhoanController::class,'XLThem'])->name('xu-ly-them');
+        Route::get('/cap-nhat/{id}',[TaiKhoanController::class,'CapNhat'])->name('cap-nhat');
+        Route::post('/xu-ly-cap-nhat/{id}',[TaiKhoanController::class,'XLCapNhat'])->name('xu-ly-cap-nhat');
+        Route::get('/xoa/{id}',[TaiKhoanController::class,'Xoa'])->name('xoa');
+
     });
 });
 
-Route::prefix('tai-khoan')->group(function(){
-    Route::name('tai-khoan.')->group(function(){
-        Route::get('/danh-sach',[TaiKhoanController::class,'View'])->name('danh-sach');
-        Route::get('/danh-sach-khoa',[TaiKhoanController::class,'HienKhoa'])->name('danh-sach-khoa');
-    });
-});
+
 
 
 //-----------------------------------------BINHLUAN-------------------------------------------------
