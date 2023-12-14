@@ -28,6 +28,8 @@ Route::post('me',[KhachHangAPIController::class,'me'])->middleware('api');
 Route::post('/logout',[KhachHangAPIController::class,'logout'])->middleware('api');
 
 Route::post('/regester',[KhachHangAPIController::class,'Regester'])->middleware('api');
+Route::post('/doi-mat-khau',[KhachHangAPIController::class,'doiMatKhau'])->middleware('api');
+Route::post('/cap_nhat_thong_tin',[KhachHangAPIController::class,'capNhatThongTin'])->middleware('api');
 
 
 //---------------SẢN PHẨM-----------------------------------

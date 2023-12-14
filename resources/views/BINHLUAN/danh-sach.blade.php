@@ -14,7 +14,6 @@
                                     <th scope="col">TÊN SẢN PHẨM</th>
                                     <th scope="col">TÊN KHÁCH HÀNG</th>
                                     <th scope="col">BÌNH LUẬN CẤP 1</th>
-                                    <th scope="col">BÌNH LUẬN CẤP 2</th>
                                     <th></th>
                                 </tr>
                             </thead>
