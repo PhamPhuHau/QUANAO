@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->double('tong_tien');
             $table->foreignId('khach_hang_id');
+            $table->integer('trang_thai');
             $table->softDeletes();
             $table->timestamps();
         });
