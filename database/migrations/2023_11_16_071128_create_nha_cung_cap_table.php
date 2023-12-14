@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('ten',200);
             $table->string('dia_chi',300)->nullable();
             $table->string('email',200);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -9,6 +9,14 @@
 				<div class="card-header border-bottom">
 					<h4 class="mb-0">Cập nhật</h4>
 				</div>
+				@if ($errors->any())
+					<div class="alert alert-danger">
+						
+						@foreach($errors->all() as $error)
+						{{$error }}<br>
+					@endforeach
+					</div>
+				@endif
 				<div class="card-body p-0 create-project-main">
 					<div class="row p-5 border-bottom">
 						<div class="col-sm-12 col-md-12 col-xl-3">
@@ -79,5 +87,8 @@
                             <a href="{{ Route('san-pham.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
                             <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
-                    </div>                    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
+						<a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
+					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
+                    <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
+                    <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
 @endsection

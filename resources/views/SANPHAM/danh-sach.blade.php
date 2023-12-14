@@ -36,7 +36,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $SanPham->id }}</td>
-                                    
+
                                     <!-- ... Các cột thông tin sản phẩm ... -->
                                     <td class="ten-san-pham">{{ $SanPham->ten }}</td>
                                     <!-- ... Các cột khác ... -->
@@ -55,7 +55,7 @@
 
                             </tbody>
                             @endforeach
-                            
+
                         </table>
                         <div class="row">
                             <div class="col-sm-10">
@@ -68,60 +68,62 @@
                             </div>
 
                         </div>
-                        
-                      
-                      
+
+
+
                     </div>
-                  
+
                 </div>
 </div>
+
 <div id="sua"></div>
 @endsection
 @section('js')
     <script>
         function them(id,ten){
-            $('#sua').html(` 
+            $('#sua').html(`
             <div class="col-xl-3 from-cap-nhat">
                 <h4>SỬA SẢN PHẨM</h4>
                 <h6>ID: `+id+`</h6>
                 <div style="display: flex; align-items: center;">
-                    <lable for="ten">tên:</lable> 
-                    <input  name="ten" id="inputTen" type="text" class="form-control text-dark" value="`+ten+`" placeholder="Nhập tên sản phẩm" > 
-                </div> 
-                <button onclick="XuLySua(${id},document.getElementById('inputTen').value)"> thuc hien </button> 
-            </div>`);                  
+                    <lable for="ten">tên:</lable>
+                    <input  name="ten" id="inputTen" type="text" class="form-control text-dark" value="`+ten+`" placeholder="Nhập tên sản phẩm" >
+                </div>
+                <button class="btn btn-outline-success" onclick="XuLySua(${id},document.getElementById('inputTen').value)"> SAVE </button>
+            </div>`);
        }
 
        function XuLySua(id, ten) {
-    $.ajax({
-        method: "POST",
-        url: "{{ route('san-pham.sua') }}",
-        data: {
-            "_token": "{{ csrf_token() }}",
-            "id": id,
-            "ten": ten
-        },
-        success: function(response) {
-            if (response.success) {
-                alert('Sửa thành công');
+            $.ajax({
+                method: "POST",
+                url: "{{ route('san-pham.sua') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id": id,
+                    "ten": ten
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Sửa thành công');
 
-                // Cập nhật nội dung trang mà không cần tải lại trang
-                // Ví dụ: nếu có thông tin cập nhật từ server, bạn có thể sử dụng nó để cập nhật nội dung
+                        // Cập nhật nội dung trang mà không cần tải lại trang
+                        // Ví dụ: nếu có thông tin cập nhật từ server, bạn có thể sử dụng nó để cập nhật nội dung
+
 
                 // Tìm thẻ tr chứa thông tin sản phẩm cần cập nhật
                 var trElement = $("tr[data-id='" + id + "']");
-                
+
                 // Cập nhật các ô thông tin sản phẩm
                 trElement.find('.ten-san-pham').text(ten);
 
-            } else {
-                alert('Sửa thất bại: ' + response.message);
-            }
-        },
-        error: function(error) {
-            console.log(error);
-            alert('Lỗi khi thực hiện sửa sản phẩm');
-        }
+                    } else {
+                        alert('Sửa thất bại: ' + response.message);
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert(error.responseJSON.message);
+                }
     });
 }
 
@@ -141,5 +143,8 @@
                             <a href="{{ Route('san-pham.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
                             <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
-                    </div>    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
+                        <a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
+					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
+                    <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
+                    <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
 @endsection

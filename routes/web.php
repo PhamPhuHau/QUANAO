@@ -9,6 +9,10 @@ use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\LoaiController;
 use App\Http\Controllers\QuanLyController;
+use App\Http\Controllers\HoaDonController;
+use App\Http\Controllers\DonHangController;
+use App\Http\Controllers\TaiKhoanController;
+use App\Http\Controllers\BinhLuanController;
 
 
 /*
@@ -112,3 +116,46 @@ Route::post('/dang-nhap',[QuanLyController::class, 'xuLyDangNhap'])->name('xl-da
 });
 
 
+//-----------------------------------------HOADON-------------------------------------------------
+Route::prefix('hoa-don')->group(function(){
+    Route::name('hoa-don.')->group(function(){
+        Route::get('/danh-sach',[HoaDonController::class,'View'])->name('danh-sach');
+    });
+});
+
+//-----------------------------------------DONHANG-------------------------------------------------
+Route::prefix('don-hang')->group(function(){
+    Route::name('don-hang.')->group(function(){
+        Route::get('/danh-sach',[DonHangController::class,'View'])->name('danh-sach');
+    });
+});
+
+//-----------------------------------------TAIKHOAN-------------------------------------------------
+Route::prefix('tai-khoan')->group(function(){
+    Route::name('tai-khoan.')->group(function(){
+        Route::get('/danh-sach',[TaiKhoanController::class,'View'])->name('danh-sach');
+        Route::get('/danh-sach-khoa',[TaiKhoanController::class,'HienKhoa'])->name('danh-sach-khoa');
+        Route::get('/danh-sach/{id}',[TaiKhoanController::class,'Khoa'])->name('khoa');
+        Route::get('/danh-sach-khoa/{id}',[TaiKhoanController::class,'MoKhoa'])->name('mo-khoa');
+        Route::get('/them',[TaiKhoanController::class,'Them'])->name('them');
+        Route::post('/xu-ly-them',[TaiKhoanController::class,'XLThem'])->name('xu-ly-them');
+        Route::get('/cap-nhat/{id}',[TaiKhoanController::class,'CapNhat'])->name('cap-nhat');
+        Route::post('/xu-ly-cap-nhat/{id}',[TaiKhoanController::class,'XLCapNhat'])->name('xu-ly-cap-nhat');
+        Route::get('/xoa/{id}',[TaiKhoanController::class,'Xoa'])->name('xoa');
+
+    });
+});
+
+
+
+
+//-----------------------------------------BINHLUAN-------------------------------------------------
+Route::prefix('binh-luan')->group(function(){
+    Route::name('binh-luan.')->group(function(){
+        Route::get('/danh-sach',[BinhLuanController::class,'DanhSachBinhLuanCapMot'])->name('danh-sach');
+        Route::get('/danh-sach/{id}',[BinhLuanController::class,'DanhSachBinhLuanCapHai'])->name('danh-sach-cap-hai');
+        Route::get('/xoa-cap-mot/{id}',[BinhLuanController::class,'XoaCapMot'])->name('xoa-cap-mot');
+        Route::get('/xoa-cap-hai/{id}',[BinhLuanController::class,'XoaCapHai'])->name('xoa-cap-hai');
+
+    });
+});

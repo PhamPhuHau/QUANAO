@@ -62,7 +62,7 @@
                                         {{$chi_tiet_san_pham->san_pham->ten}}
                                     </td>
                                     <td>
-                                        {{ $chi_tiet_san_pham->Loai->ten }}
+                                    {{$chi_tiet_san_pham->san_pham->loai->ten}}
                                     </td>
                                     <td>
                                         {{ $chi_tiet_san_pham->Mau->ten }}
@@ -84,10 +84,14 @@
 
                             @endforeach
                         </table>
+                        <div class="thongtin">
+                            <h1 class="danh-sach-chi-tiet-hinh-anh">THÔNG TIN</h1>
+                            {{$sanPham->thong_tin}}
+                        </div>
                         <div class="sua"></div>
                         
                         <div class="row">
-                            <h1 class="danh-sach-chi-tiet-hinh-anh">HINH ANH</h1>
+                            <h1 class="danh-sach-chi-tiet-hinh-anh">HÌNH ẢNH</h1>
                         @foreach($hinh_Anh as $item)
 
                         <div class="col-sm-6">
@@ -123,6 +127,7 @@
                                     <button type="submit" class="btn btn-outline-success" >LƯU</button>
                                 </td>
 
+
                             </form>
 
                     </div>
@@ -144,5 +149,8 @@
                             <a href="{{ Route('san-pham.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
                             <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
-                    </div>    <a href="#" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
+                        <a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
+					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
+                    <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
+                    <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
 @endsection

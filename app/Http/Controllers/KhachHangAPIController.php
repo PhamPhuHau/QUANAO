@@ -22,7 +22,33 @@ class KhachHangAPIController extends Controller
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
+    public function doiMatKhau(Request $request)
+    {
+        $credentials = request(['email', 'password']);
+        if (! $token = auth('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        $khachHang = KhachHang::where('email',$request->email)->first();
+        $khachHang->password=hash::make($request->newPassWord);
+        $khachHang->save();
+        return response()->json([
+            "success"=>true,
+            "message"=>"thành công",
+        ]);
+    }
+    public function capNhatThongTin(Request $request)
+    {
+        $khachHang = KhachHang::where('email',$request->email)->first();
+        $khachHang->ho_ten=$request->ho_ten;
+        $khachHang->so_dien_thoai=$request->so_dien_thoai;
+        $khachHang->dia_chi=$request->dia_chi;
 
+        $khachHang->save();
+        return response()->json([
+            "success"=>true,
+            "message"=>"thành công",
+        ]);
+    }
     public function me()
     {
         return response()->json(auth('api')->user());

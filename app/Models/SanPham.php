@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SanPham extends Model
 {
+    use SoftDeletes;
     use HasFactory;
     protected $table = 'san_pham';
 
@@ -17,5 +19,15 @@ class SanPham extends Model
     public function nha_cung_cap()
     {
         return $this->belongsTo(NhaCungCap::class);
+    }
+
+    public function loai()
+    {
+        return $this->belongsTo(Loai::class);
+    }
+
+    public function chi_tiet_san_pham()
+    {
+        return $this->hasMany(ChiTietSanPham::class);
     }
 }

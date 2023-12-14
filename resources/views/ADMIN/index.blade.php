@@ -91,7 +91,7 @@
                     </div>
                     <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="{{ route('dang-xuat') }}">Sign out</a>
+      <a class="nav-link px-3" href="{{ route('dang-xuat') }}">Đăng xuất</a>
     </div>
   </div>
                 </div>

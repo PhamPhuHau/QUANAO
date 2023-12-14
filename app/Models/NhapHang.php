@@ -9,4 +9,8 @@ class NhapHang extends Model
 {
     use HasFactory;
     protected $table = 'nhap_hang';
+    public function nha_cung_cap()
+    {
+        return $this->belongsTo(NhaCungCap::class);
+    }
 }

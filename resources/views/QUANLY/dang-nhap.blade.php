@@ -39,8 +39,17 @@
     <div class="heading">Sign In</div>
     <form action="{{route('dang-nhap')}}" class="form" method="POST">
     @csrf
-      <input required="" class="input" type="text" name="ten_dang_nhap" id="ten_dang_nhap" placeholder="Account">
-      <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+	@if ($errors->any())
+		<div class="alert alert-danger">
+		
+		@foreach($errors->all() as $error)
+		{{$error }}<br>
+	@endforeach
+
+</div>
+@endif
+      <input class="input" type="text" name="ten_dang_nhap" id="ten_dang_nhap" placeholder="Account">
+      <input class="input" type="password" name="password" id="password" placeholder="Password">
       <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
       <input class="login-button" type="submit" value="Sign In">
 
