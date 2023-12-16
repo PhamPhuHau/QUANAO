@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('chi_tiet_hoa_don', function (Blueprint $table) {
             $table->id();
             $table->foreignId('hoa_don_id');
-            $table->foreignId('san_pham_id');
+            $table->foreignId('chi_tiet_san_pham_id');
             $table->integer('so_luong');
             $table->double('thanh_tien');
 

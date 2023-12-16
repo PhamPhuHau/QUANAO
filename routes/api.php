@@ -6,7 +6,7 @@ use App\Http\Controllers\KhachHangAPIController;
 use  App\Http\Controllers\SanPhamAPIController;
 use  App\Http\Controllers\BinhLuanAPIController;
 use  App\Http\Controllers\LoaiAPIController;
-
+use  App\Http\Controllers\HoaDonAPIController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -62,5 +62,7 @@ route::post('danh-sach-binh-luan-cap-hai', [BinhLuanAPIController::class, 'DanhS
 
 route::get('danh-sach-loai',[LoaiAPIController::class,'DanhSachLoai']);
 
+//---------------------HOÁ ĐƠN-------------------
 
 
+route::post('thanh-toan',[HoaDonAPIController::class,'ThanhToan']);

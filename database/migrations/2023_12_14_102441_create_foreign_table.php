@@ -54,7 +54,7 @@ return new class extends Migration
         });
 
         Schema::table('chi_tiet_hoa_don', function (Blueprint $table) {
-            $table->foreign('san_pham_id')->references('id')->on('san_pham');
+            $table->foreign('chi_tiet_san_pham_id')->references('id')->on('chi_tiet_san_pham');
         });
 
         Schema::table('hinh_anh', function (Blueprint $table) {
