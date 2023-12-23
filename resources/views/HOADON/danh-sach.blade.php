@@ -3,8 +3,17 @@
 <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
-                        <a href="{{ route('loai.them') }}" type="button" class="btn btn-sm btn-outline-secondary">Thêm mới</a>
+                        <h6 class="mb-0">DANH SÁCH HOÁ ĐƠN</h6>
+                        <select onchange="window.location.href=this.value">
+                        <option></option>
+                            <option value="{{ route('hoa-don.danh-sach') }}">tất cả</option>
+                            <option value="{{ route('hoa-don.loc', ['id'=>0]) }}">đã huỷ</option>
+                            <option value="{{ route('hoa-don.loc', ['id'=>1]) }}">chờ xác nhận</option>
+                            <option value="{{ route('hoa-don.loc', ['id'=>2]) }}">đã xác nhận</option>
+                            <option value="{{ route('hoa-don.loc', ['id'=>3]) }}">đang vận chuyển</option>
+                            <option value="{{ route('hoa-don.loc', ['id'=>4]) }}">đã giao</option>
+                        </select>
+
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -13,19 +22,50 @@
                                     <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
                                     <th scope="col">ID</th>
                                     <th scope="col">TÊN</th>
-                                    
+                                    <th>TỔNG TIỀN</th>
+                                    <th>TRẠNG THÁI</th>
                                 </tr>
                             </thead>
-                            @foreach($loai as $Loai)
+                            @foreach($hoaDon as $HoaDon)
                             <tbody>
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                    <td style="width: 25%;">{{ $Loai->id }}</td>
+                                    <td style="width: 25%;">{{ $HoaDon->id }}</td>
                                     
-                                    <td>{{ $Loai->ten }}</td>
+                                    <td>{{ $HoaDon->khach_hang->ho_ten }}</td>
+                                    <td>{{ $HoaDon->tong_tien }}</td>
+                                    <td>
                                     
-                                    <td><a class="btn btn-outline-primary" href="{{ route('loai.cap-nhat', ['id'=>$Loai->id]) }}">Cập nhật</a>
-                                    <a class="btn btn-outline-danger" href="{{ route('loai.xoa', ['id'=>$Loai->id]) }}">Xóa</a></td>
+                                    @switch($HoaDon->trang_thai) 
+                                        @case(0) Đã huỷ @break
+                                        @case(1) Chờ xác nhận @break
+                                        @case(2) Đã xác nhận @break
+                                        @case(3) Đã bàn giao cho vận chuyển @break
+                                        @case(4) Đã giao @break
+                                        @default trạng thái không xác định 
+                                    @endswitch
+
+
+
+                                    </td>
+                                    <td><a class="btn btn-outline-primary" href="{{ route('hoa-don.danh-sach-chi-tiet', ['id'=>$HoaDon->id]) }}">Xem chi tiết</a>
+                                   
+                                    @switch($HoaDon->trang_thai) 
+                                       
+                                        @case(1) <a class="btn btn-outline-success" href="{{ route('hoa-don.xac-nhan', ['id'=>$HoaDon->id]) }}">Xác nhận</a>
+                                        <a class="btn btn-outline-danger" href="{{ route('hoa-don.huy', ['id'=>$HoaDon->id]) }}">Huỷ</a> @break
+
+                                        @case(2) <a class="btn btn-outline-success" href="{{ route('hoa-don.van-chuyen', ['id'=>$HoaDon->id]) }}">Vận Chuyển</a>
+                                        <a class="btn btn-outline-danger" href="{{ route('hoa-don.huy', ['id'=>$HoaDon->id]) }}">Huỷ</a> @break
+
+                                        @case(3) <a class="btn btn-outline-success" href="{{ route('hoa-don.thanh-cong', ['id'=>$HoaDon->id]) }}">Thành công</a>
+                                        <a class="btn btn-outline-danger" href="{{ route('hoa-don.huy', ['id'=>$HoaDon->id]) }}">Huỷ</a> @break
+
+                                       
+                                        @default 
+                                    @endswitch
+                                    
+                                </td>
                                 </tr>
                                 
                             </tbody>
@@ -33,11 +73,11 @@
                         </table>
                         <div class="row">
                             <div class="col-sm-10">
-
+                            {{ $hoaDon->links() }}
                             </div>
                             <div class="col-sm-2">
                             <div class="phantrang">
-                        {{ $loai->links() }}
+                       
                         </div>
                             </div>
 
@@ -50,7 +90,7 @@
 @section('chon')
     <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
     <a href="{{ Route('san-pham.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
-                    <a href="{{ Route('loai.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
+                    <a href="{{ Route('loai.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
                     <a href="{{ Route('mau.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
                     <a href="{{ Route('size.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
                     <a href="{{ Route('nha-cung-cap.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-home me-2"></i>NHÀ CUNG CẤP</a>
@@ -61,7 +101,7 @@
                             <a href="{{ Route('san-pham.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
                             <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
-                        <a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
+                        <a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link active"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
                     <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
                     <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>

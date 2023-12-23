@@ -9,4 +9,8 @@ class HoaDon extends Model
 {
     use HasFactory;
     protected $table = "hoa_don";
+
+    public function khach_hang() {
+        return $this->belongsTo(KhachHang::class);
+    }
 }

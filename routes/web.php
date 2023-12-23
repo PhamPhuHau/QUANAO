@@ -120,6 +120,12 @@ Route::post('/dang-nhap',[QuanLyController::class, 'xuLyDangNhap'])->name('xl-da
 Route::prefix('hoa-don')->group(function(){
     Route::name('hoa-don.')->group(function(){
         Route::get('/danh-sach',[HoaDonController::class,'View'])->name('danh-sach');
+        Route::get('/danh-sach-chi-tiet/{id}',[HoaDonController::class,'HienChiTiet'])->name('danh-sach-chi-tiet');
+        Route::get('/huy/{id}',[HoaDonController::class,'Huy'])->name('huy');
+        Route::get('/xac-nhan/{id}',[HoaDonController::class,'XacNhan'])->name('xac-nhan');
+        Route::get('/van-chuyen/{id}',[HoaDonController::class,'VanChuyen'])->name('van-chuyen');
+        Route::get('/thanh-cong/{id}',[HoaDonController::class,'ThanhCong'])->name('thanh-cong');
+        Route::get('/loc/{id}',[HoaDonController::class,'Loc'])->name('loc');
     });
 });
 
