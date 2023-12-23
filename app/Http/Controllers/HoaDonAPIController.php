@@ -34,20 +34,50 @@ class HoaDonAPIController extends Controller
            
             if($chiTietSanPham)
             {
-                
             $chiTietHoaDon = new ChiTietHoaDon(); 
             $chiTietHoaDon->hoa_don_id = $hoaDon->id;
             $chiTietHoaDon->chi_tiet_san_pham_id = $chiTietSanPham->id;
             $chiTietHoaDon->so_luong = (int)$request->so_luong[$i];
             $chiTietHoaDon->thanh_tien =  (int) $request->so_luong[$i] * $request->gia[$i] ;
             $chiTietHoaDon->save();
+
+            $chiTietSanPham->so_luong -= (int)$request->so_luong[$i];
+            $chiTietSanPham->save();
+
+            $sanPham->so_luong -= (int)$request->so_luong[$i];
+            $sanPham->save();
             }
         }
 
         //truyền thông tin vào hoá đơn
         return response()->json([
+            
             "success"=>true,
             "message"=>"thành công",
+            "data"=>$hoaDon->id,
         ]);
     }
+    public function KiemTraDonHang(Request $request)
+    {
+        $hoaDon = HoaDon::where('id',$request->hdID)->first();
+        return response()->json([
+            "success"=>true,
+            "message"=>"thành công",
+            "data"=>$hoaDon,
+        ]);
+    }
+
+
+    public function ThanhCong(Request $request)
+    {
+        $hoaDon = HoaDon::where('id',$request->hdID)->first();
+        $hoaDon->trang_thai = 4;
+        $hoaDon->save();
+        return response()->json([
+            "success"=>true,
+            "message"=>"thành công",
+            "data"=>$hoaDon,
+        ]);
+    }
+    
 }

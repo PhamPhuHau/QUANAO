@@ -66,3 +66,7 @@ route::get('danh-sach-loai',[LoaiAPIController::class,'DanhSachLoai']);
 
 
 route::post('thanh-toan',[HoaDonAPIController::class,'ThanhToan']);
+
+
+route::post('kiem-tra-don-hang',[HoaDonAPIController::class,'KiemTraDonHang']);
+route::post('da-nhan-duoc-hang',[HoaDonAPIController::class,'ThanhCong']);
