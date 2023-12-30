@@ -60,10 +60,16 @@ class HoaDonAPIController extends Controller
     public function KiemTraDonHang(Request $request)
     {
         $hoaDon = HoaDon::where('id',$request->hdID)->first();
+        $chiTietHoaDon = ChiTietHoaDon::where('hoa_don_id',$hoaDon->id)->get();
+        foreach($chiTietHoaDon as $danhSach)
+        {
+            $danhSach->chi_tiet_san_pham->san_pham;
+        }
         return response()->json([
             "success"=>true,
             "message"=>"thành công",
             "data"=>$hoaDon,
+            "dataCTHoaDon"=>$chiTietHoaDon,
         ]);
     }
 
@@ -77,6 +83,19 @@ class HoaDonAPIController extends Controller
             "success"=>true,
             "message"=>"thành công",
             "data"=>$hoaDon,
+        ]);
+    }
+
+    public function LayHoaDonKhachHang(Request $request)
+    {
+        $hoaDon = HoaDon::where('khach_hang_id',$request->KhachHang)->get();
+        
+        
+        return response()->json([
+            "success"=>true,
+            "message"=>"thành công",
+            "data"=>$hoaDon,
+           
         ]);
     }
     

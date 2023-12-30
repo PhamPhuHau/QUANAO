@@ -299,3 +299,37 @@
 .phantrang{
     margin-top: 15px;
 }
+
+.doanhThuTren{
+    margin-top: 50px;
+}  
+
+.doanhThuTren h3{
+    padding: 20px;
+    background-color: #4baddb;
+}
+
+.doanhThuTren h1{
+    padding: 20px;
+    background-color: #4baddb;
+    text-align: center;
+    margin-top: -40px;
+}
+
+.doanhThuGiua h1{
+    text-align: center;
+}
+
+.doanhThuGiua{
+    margin-top: 50px;
+}
+
+
+.doanhThuDuoi{
+    margin-top: 50px;
+}
+
+
+.trangchu{
+    margin-top: 70px;
+}
