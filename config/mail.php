@@ -40,8 +40,8 @@ return [
             'host' => 'smtp.gmail.com',//mặc định thay đổi
             'port' =>  587,//mặc định thay đổi
             'encryption' => 'tls',//mặc định thay đổi
-            'username' => 'chinhvo853@gmail.com',//mặc định thay đổi
-            'password' => 'gietytorwugvrztu',//mặc định thay đổi
+            'username' => '',//mặc định thay đổi
+            'password' => '',//mặc định thay đổi
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
