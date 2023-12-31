@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\models\KhachHang;
 use Illuminate\Support\Facades\Hash;
+use Mail;
+use Illuminate\Support\Str;
+
 class KhachHangAPIController extends Controller
 {
     public function login(Request $rq)
@@ -74,4 +77,25 @@ class KhachHangAPIController extends Controller
             'message' => 'thanh cong'
         ]);
     }
+
+    public function LayLaiMatKhau(Request $request)
+    {
+        $khachHang = KhachHang::where('email', $request->email)->first();
+        $matKhauMoi = Str::random(6);
+        $khachHang->password=Hash::make($matKhauMoi);
+        if (!$khachHang) {
+            return response()->json([
+                'message' => 'Không tìm thấy người dùng với địa chỉ email này.'
+            ]);
+        }
+    
+        Mail::send('EMAIL.gui-mail', compact('khachHang','matKhauMoi'), function ($email) use ($khachHang) {
+            $email->to($khachHang->email, $khachHang->ho_ten);
+        });
+    
+        return response()->json([
+            'message' => 'Thành công'
+        ]);
+    }
+    
 }

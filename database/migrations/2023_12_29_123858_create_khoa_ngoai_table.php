@@ -81,12 +81,14 @@ return new class extends Migration
             $table->foreign('binh_luan_cap_mot_id')->references('id')->on('binh_luan_cap_mot');
         });
 
-        Schema::table('san_pham_yeu_thich', function (Blueprint $table) {
-            $table->foreign('id_khach_hang')->references('id')->on('khach_hang');
+  
+
+        Schema::table('danh_gia', function (Blueprint $table) {
+            $table->foreign('san_pham_id')->references('id')->on('san_pham');
         });
 
-        Schema::table('san_pham_yeu_thich', function (Blueprint $table) {
-            $table->foreign('san_pham_id')->references('id')->on('san_pham');
+        Schema::table('danh_gia', function (Blueprint $table) {
+            $table->foreign('khach_hang_id')->references('id')->on('khach_hang');
         });
     }
 
@@ -95,6 +97,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('foreign');
+        Schema::dropIfExists('khoa_ngoai');
     }
 };

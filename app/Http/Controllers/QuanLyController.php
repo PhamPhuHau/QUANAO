@@ -4,6 +4,12 @@ use Illuminate\Http\Request;
 use App\Models\QuanLy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
+use App\Models\KhachHang;
+use App\Models\SanPham;
+use App\Models\NhapHang;
+use App\Models\HoaDon;
+
 
 class QuanLyController extends Controller
 {
@@ -11,9 +17,35 @@ class QuanLyController extends Controller
     {
         return view('QUANLY.dang-nhap');
     }
-    public function trangChu(Request $request)
+    public function trangChu()
     {
-        return view('ADMIN.trang-chu');
+        $khachHang = KhachHang::all();
+        $demSanPham = SanPham::all();
+        $nhapHang = NhapHang::sum('tong_tien');
+        $HoaDon = HoaDon::all();
+        // Lấy tháng hiện tại
+        $thangHienTai = Carbon::now()->month;
+
+        // Lấy tháng trước
+        $thangTruoc = Carbon::now()->subMonth()->month;
+
+        // Lấy tháng trước trước nữa
+        $haiThangTruoc = Carbon::now()->subMonths(2)->month;
+
+       
+        $sanPham = SanPham::latest()->take(5)->get();
+
+        return view('ADMIN.trang-chu', [
+            'khachHang' => $khachHang,
+            'demSanPham' => $demSanPham,
+            'nhapHang' => $nhapHang,
+            'HoaDon' => $HoaDon,
+            'thangHienTai' => $thangHienTai,
+            'thangTruoc' => $thangTruoc,
+            'haiThangTruoc' => $haiThangTruoc,
+            'sanPham' => $sanPham,
+        ]);
+        
     }
     public function xuLyDangNhap(Request $request)
     {

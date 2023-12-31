@@ -37,11 +37,11 @@ return [
         'smtp' => [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => 'smtp.gmail.com',//mặc định thay đổi
+            'port' =>  587,//mặc định thay đổi
+            'encryption' => 'tls',//mặc định thay đổi
+            'username' => '',//mặc định thay đổi
+            'password' => '',//mặc định thay đổi
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
@@ -99,8 +99,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'chinhvo853@gmail.com',//mặc định thay đổi
+        'name' => 'Hachiba',//mặc định thay đổi
     ],
 
     /*

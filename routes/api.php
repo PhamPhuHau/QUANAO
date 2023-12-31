@@ -7,6 +7,7 @@ use  App\Http\Controllers\SanPhamAPIController;
 use  App\Http\Controllers\BinhLuanAPIController;
 use  App\Http\Controllers\LoaiAPIController;
 use  App\Http\Controllers\HoaDonAPIController;
+use  App\Http\Controllers\DanhGiaAPIController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //-------------TÀI KHOẢNG-------------------
-Route::post('login',[KhachHangAPIController::class,'login'])->middleware('api');
+Route::post('/login',[KhachHangAPIController::class,'login'])->middleware('api');
 Route::post('me',[KhachHangAPIController::class,'me'])->middleware('api');
 
 Route::post('/logout',[KhachHangAPIController::class,'logout'])->middleware('api');
@@ -30,6 +31,7 @@ Route::post('/logout',[KhachHangAPIController::class,'logout'])->middleware('api
 Route::post('/regester',[KhachHangAPIController::class,'Regester'])->middleware('api');
 Route::post('/doi-mat-khau',[KhachHangAPIController::class,'doiMatKhau'])->middleware('api');
 Route::post('/cap_nhat_thong_tin',[KhachHangAPIController::class,'capNhatThongTin'])->middleware('api');
+Route::post('/lay-lai-mat-khau',[KhachHangAPIController::class,'LayLaiMatKhau']);
 
 
 //---------------SẢN PHẨM-----------------------------------
@@ -66,7 +68,13 @@ route::get('danh-sach-loai',[LoaiAPIController::class,'DanhSachLoai']);
 
 
 route::post('thanh-toan',[HoaDonAPIController::class,'ThanhToan']);
-
-
 route::post('kiem-tra-don-hang',[HoaDonAPIController::class,'KiemTraDonHang']);
 route::post('da-nhan-duoc-hang',[HoaDonAPIController::class,'ThanhCong']);
+route::post('lay-hoa-don-khach-hang',[HoaDonAPIController::class,'LayHoaDonKhachHang']);
+
+//--------------------ĐÁNH GIÁ-----------------------
+
+route::post('them-danh-gia',[DanhGiaAPIController::class,'ThemDanhGia']);
+route::get('danh-sach-danh-gia/{id}',[DanhGiaAPIController::class,'LayDanhGia']);
+
+
