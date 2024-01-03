@@ -13,6 +13,7 @@ use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\PDFController;
 
 
 /*
@@ -165,3 +166,6 @@ Route::prefix('binh-luan')->group(function(){
 
     });
 });
+
+//----------------------------------------------PDF-----------------------------------
+Route::get('/export-pdf', [PDFController::class,'exportPDF'])->name('thuchien');
