@@ -7,12 +7,25 @@ use App\models\KhachHang;
 use Illuminate\Support\Facades\Hash;
 use Mail;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Validator;
 class KhachHangAPIController extends Controller
 {
-    public function login(Request $rq)
+    public function login(Request $request)
     {
-        
+        $validation = validator::make(request(['email','password']),[
+            'email'=>'required',
+            'password' => 'required',
+        ],[
+            'email.required'=>'không được để trống',
+            'password.required'=>'không được để trống',
+
+        ]);
+
+        if($validation->fails())
+        {
+            return response()->json(['errors' => $validation->errors()], 422);
+        }
+
         $credentials = request(['email', 'password']);
         
         if (! $token = auth('api')->attempt($credentials)) {
