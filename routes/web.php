@@ -168,4 +168,4 @@ Route::prefix('binh-luan')->group(function(){
 });
 
 //----------------------------------------------PDF-----------------------------------
-Route::get('/export-pdf', [PDFController::class,'exportPDF'])->name('thuchien');
+Route::get('/export-pdf/{id}', [PDFController::class,'exportPDF'])->name('thuchien');

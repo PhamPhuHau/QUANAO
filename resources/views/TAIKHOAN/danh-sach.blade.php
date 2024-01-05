@@ -36,6 +36,10 @@
                                     <td>{{ $KhachHang->dia_chi }}</td>
                                     
                                     <td><a class="btn btn-outline-danger" href="{{ route('tai-khoan.khoa',['id'=>$KhachHang->id]) }}">Khoá</a></td>
+                                    <td><a href="{{ route('thuchien',['id'=>$KhachHang->id]) }}" class="btn btn-outline-success">
+								<i class="fe fe-check-circle"></i>
+								XUẤT PDF
+        </a></td>
                                 </tr>
                                 
                             </tbody>
