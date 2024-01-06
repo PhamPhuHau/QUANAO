@@ -14,12 +14,24 @@ class HoaDonAPIController extends Controller
 {
     public function ThanhToan(Request $request)
     {
-   
+       
+        for ($i = 0; $i < count($request->ten); $i++) {
+            $mau = Mau::where('ten',$request->mau[$i])->first();
+            $size = Size::where('ten',$request->size[$i])->first();    
+            $sanPham = SanPham::where('ten',$request->ten[$i])->first();
+            $chiTietSanPham = ChiTietSanPham::where('san_pham_id',$sanPham->id)
+            ->where('mau_id',$mau->id)
+            ->where('size_id',$size->id)->first();
+        // Assuming so_luong is a single value, remove [i] index
+        if ($chiTietSanPham->so_luong < $request->so_luong[$i]) {
+            return response()->json(['errors' => 'Vui lòng giảm số lượng sản phẩm'], 422);
+        }
+    }
         //tạo mới hoá đơn
         $hoaDon = new HoaDon();
         
         $hoaDon->khach_hang_id = $request->khach_hang;
-        
+        $hoaDon->tien_ship = $request->tien_ship;
         $hoaDon->tong_tien = $request->tong_tien;
         
         $hoaDon->trang_thai = 1;
