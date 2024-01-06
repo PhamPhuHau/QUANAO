@@ -72,6 +72,8 @@ route::post('kiem-tra-don-hang',[HoaDonAPIController::class,'KiemTraDonHang']);
 route::post('da-nhan-duoc-hang',[HoaDonAPIController::class,'ThanhCong']);
 route::post('lay-hoa-don-khach-hang',[HoaDonAPIController::class,'LayHoaDonKhachHang']);
 
+route::get('huy-don-hang/{id}',[HoaDonAPIController::class,'Huy']);
+
 //--------------------ĐÁNH GIÁ-----------------------
 
 route::post('them-danh-gia',[DanhGiaAPIController::class,'ThemDanhGia']);
