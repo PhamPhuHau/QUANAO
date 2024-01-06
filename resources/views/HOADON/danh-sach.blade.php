@@ -66,6 +66,10 @@
                                     @endswitch
                                     
                                 </td>
+                                <td><a href="{{ route('thuchien',['id'=>$HoaDon->khach_hang->id]) }}" class="btn btn-outline-success">
+								<i class="fe fe-check-circle"></i>
+								XUẤT PDF
+        </a></td>
                                 </tr>
                                 
                             </tbody>

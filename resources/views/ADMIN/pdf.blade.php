@@ -14,8 +14,8 @@
 <h5 class="mb-0">THÔNG TIN KHÁCH HÀNG</h5>
 <p>Tên: {{ $hoaDon->khach_hang->ho_ten }},</p>
 <p>Email: {{ $hoaDon->khach_hang->email }},</p>
-<p>Sdt: {{$hoaDon->khach_hang->so_dien_thoai }},</p>
-<p>Dc: {{ $hoaDon->khach_hang->dia_chi }}</p>
+<p>So dien thoai: {{$hoaDon->khach_hang->so_dien_thoai }},</p>
+<p>Dia chi: {{ $hoaDon->khach_hang->dia_chi }}</p>
 
 <h5 class="mb-0">NỘI DUNG HÀNG</h5>
 @foreach($chiTietHoaDon as $cthd)
