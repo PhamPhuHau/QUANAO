@@ -35,100 +35,33 @@
 <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Danh sách chi tiết</h6>
-                        <a href="{{ Route('san-pham.danh-sach') }}">Quay lại</a>
+                        <h6 class="mb-0">Danh sách slide</h6>
                     </div>
                     <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">
-                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
-                                    <th scope="col">ID</th>
-                                    <th scope="col">TÊN</th>
-                                    <th scope="col">LOẠI</th>
-                                    <th scope="col">MÀU</th>
-                                    <th scope="col">SIZE</th>
-
-                                </tr>
-                            </thead>
-                           @foreach($CT_San_Pham as $chi_tiet_san_pham)
-                            <tbody>
-                                <tr>
-                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                   <td>
-                                        {{ $chi_tiet_san_pham->id }}
-                                    </td>
-                                    <td>
-                                        {{$chi_tiet_san_pham->san_pham->ten}}
-                                    </td>
-                                    <td>
-                                    {{$chi_tiet_san_pham->san_pham->loai->ten}}
-                                    </td>
-                                    <td>
-                                        {{ $chi_tiet_san_pham->Mau->ten }}
-                                    </td>
-                                    <td>
-                                        {{ $chi_tiet_san_pham->Size->ten }}
-                                    </td>
 
 
-
-
-
-                                    <td><a class="btn btn-outline-primary" href="">Cập nhật</a></td>
-
-                                </tr>
-
-                            </tbody>
-
-
-                            @endforeach
-                        </table>
-                        <div class="thongtin">
-                            <h1 class="danh-sach-chi-tiet-hinh-anh">THÔNG TIN</h1>
-                            {{$sanPham->thong_tin}}
-                        </div>
                         <div class="sua"></div>
 
                         <div class="row">
-                            <h1 class="danh-sach-chi-tiet-hinh-anh">HÌNH ẢNH</h1>
-                        @foreach($hinh_Anh as $item)
+                        <h1 class="danh-sach-slideshow">HÌNH ẢNH</h1>
+
+                        @foreach($slideShow as $item)
 
                         <div class="col-sm-6">
                             <img src="{{ asset($item->url) }}"  class="AnhSP"/>
-                            <a class="btn btn-outline-danger" href="{{ route('san-pham.xoa-anh', ['id' => $item->id ])}}">Xoá</a>
+                            <a class="btn btn-outline-danger" href="{{ route('slideshow.xoa-anh', ['id' => $item->id ]) }}">Xoá</a>
 
                         </div>
-
-
-
-
-
-
-
                             @endforeach
                             </div>
 
 
-                            <form method="POST"  enctype="multipart/form-data" action="">
-                                @csrf
-
-
-                                <td >
-
-                                <input class="form-control" type="file" name="HinhAnh[]" multiple required="true"  ><br>
-                                </td>
-
-
-
-
-
-                                <td>
-                                    <button type="submit" class="btn btn-outline-success" >LƯU</button>
-                                </td>
-
-
-                            </form>
+                            <form method="POST" action="{{ route('slideshow.them-anh') }}" enctype="multipart/form-data">
+    @csrf
+    <!-- Nội dung form -->
+    <input class="form-control" type="file" name="SlideShow[]" multiple required="true" ><br>
+    <button type="submit" class="btn btn-outline-success">LƯU</button>
+</form>
 
                     </div>
                 </div>
@@ -137,7 +70,7 @@
 @endsection
 @section('chon')
     <a href="/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-    <a href="{{ Route('san-pham.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
+    <a href="{{ Route('san-pham.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
                     <a href="{{ Route('loai.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
                     <a href="{{ Route('mau.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
                     <a href="{{ Route('size.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>SIZE</a>
@@ -153,6 +86,6 @@
 					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
                     <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
                     <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
-                    <a href="{{ Route('slideshow.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SLIDESHOW</a>
+                    <a href="{{ Route('slideshow.danh-sach') }}" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>SLIDESHOW</a>
 
 @endsection

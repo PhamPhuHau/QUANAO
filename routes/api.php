@@ -8,6 +8,8 @@ use  App\Http\Controllers\BinhLuanAPIController;
 use  App\Http\Controllers\LoaiAPIController;
 use  App\Http\Controllers\HoaDonAPIController;
 use  App\Http\Controllers\DanhGiaAPIController;
+use App\Http\Controllers\SlideShowAPIController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -76,5 +78,9 @@ route::post('lay-hoa-don-khach-hang',[HoaDonAPIController::class,'LayHoaDonKhach
 
 route::post('them-danh-gia',[DanhGiaAPIController::class,'ThemDanhGia']);
 route::get('danh-sach-danh-gia/{id}',[DanhGiaAPIController::class,'LayDanhGia']);
+
+//-------------------------Slide-----------------------
+// Ví dụ:
+
 
 

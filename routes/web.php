@@ -13,6 +13,9 @@ use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\SlideShowController;
+use App\Http\Controllers\SlideShowAPIController;
+
 
 
 /*
@@ -165,3 +168,14 @@ Route::prefix('binh-luan')->group(function(){
 
     });
 });
+//---------------------------------SlideShow------------------
+Route::prefix('slideshow')->group(function () {
+    Route::name('slideshow.')->group(function () {
+
+        Route::get('/danh-sach', [SlideShowController::class, 'view'])->name('danh-sach');
+        Route::post('/them-anh', [SlideShowController::class, 'them_Anh'])->name('them-anh');
+        Route::get('/xoa-anh/{id}', [SlideShowController::class, 'xoa_Anh'])->name('xoa-anh');
+    });
+});
+
+
