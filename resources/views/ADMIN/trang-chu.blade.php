@@ -3,6 +3,7 @@
 
 <div class="container-fluid pt-4 px-4 trangchu">
     <div class="navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+        
         <div class="row">
             <div class="col-sm-4 doanhThuTren">
                 <h3>Thành viên</h3>
@@ -27,7 +28,7 @@
                 <canvas id="SoDoCot" width="400" height="400" aria-label="Column Chart" role="img"></canvas>
             </div>
         </div>
-
+        
         <div class="doanhThuDuoi">
         <div class="d-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0">Các sản phẩm mới</h1>

@@ -48,6 +48,8 @@
                                     <th scope="col">LOẠI</th>
                                     <th scope="col">MÀU</th>
                                     <th scope="col">SIZE</th>
+                                    <th scope="col">SỐ LƯỢNG</th>
+
 
                                 </tr>
                             </thead>
@@ -70,10 +72,9 @@
                                     <td>
                                         {{ $chi_tiet_san_pham->Size->ten }}
                                     </td>
-
-
-
-
+                                    <td>
+                                        {{ $chi_tiet_san_pham->so_luong }}
+                                    </td>
 
                                     <td><a class="btn btn-outline-primary" href="">Cập nhật</a></td>
 
@@ -99,12 +100,6 @@
                             <a class="btn btn-outline-danger" href="{{ route('san-pham.xoa-anh', ['id' => $item->id ])}}">Xoá</a>
 
                         </div>
-
-
-
-
-
-
 
                             @endforeach
                             </div>

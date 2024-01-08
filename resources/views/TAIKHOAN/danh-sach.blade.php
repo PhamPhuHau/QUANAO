@@ -36,6 +36,7 @@
                                     <td>{{ $KhachHang->dia_chi }}</td>
                                     
                                     <td><a class="btn btn-outline-danger" href="{{ route('tai-khoan.khoa',['id'=>$KhachHang->id]) }}">Khoá</a></td>
+                                   
                                 </tr>
                                 
                             </tbody>

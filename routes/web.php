@@ -13,8 +13,7 @@ use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\BinhLuanController;
-use App\Http\Controllers\SlideShowController;
-use App\Http\Controllers\SlideShowAPIController;
+use App\Http\Controllers\PDFController;
 
 
 
@@ -179,3 +178,6 @@ Route::prefix('slideshow')->group(function () {
 });
 
 
+
+//----------------------------------------------PDF-----------------------------------
+Route::get('/export-pdf/{id}', [PDFController::class,'exportPDF'])->name('thuchien');

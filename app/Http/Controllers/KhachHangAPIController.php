@@ -7,12 +7,25 @@ use App\models\KhachHang;
 use Illuminate\Support\Facades\Hash;
 use Mail;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Validator;
 class KhachHangAPIController extends Controller
 {
-    public function login(Request $rq)
+    public function login(Request $request)
     {
-        
+        $validation = validator::make(request(['email','password']),[
+            'email'=>'required',
+            'password' => 'required',
+        ],[
+            'email.required'=>'không được để trống',
+            'password.required'=>'không được để trống',
+
+        ]);
+
+        if($validation->fails())
+        {
+            return response()->json(['errors' => $validation->errors()], 422);
+        }
+
         $credentials = request(['email', 'password']);
         
         if (! $token = auth('api')->attempt($credentials)) {
@@ -27,6 +40,17 @@ class KhachHangAPIController extends Controller
     }
     public function doiMatKhau(Request $request)
     {
+        $validation = Validator::make(request()->all(), [ 
+        'password' => 'required|min:6',
+    ], [
+        'password.required' => 'Không thể để trống',
+        'password.min' => 'Tối thiểu 6 ký tự',
+    ]);
+    
+    if ($validation->fails()) {
+        return response()->json(['errors' => $validation->errors()], 422);
+    }
+    
         $credentials = request(['email', 'password']);
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -41,6 +65,23 @@ class KhachHangAPIController extends Controller
     }
     public function capNhatThongTin(Request $request)
     {
+        $validation = Validator::make(request()->all(), [
+            'ho_ten' => 'required',
+            'so_dien_thoai' => 'required|numeric',
+            'dia_chi' => 'required',
+        ], [
+            'ho_ten.required' => 'không được để trống',
+            'so_dien_thoai.required' => 'không được để trống',
+            'so_dien_thoai.numeric' => 'phải là số',
+            
+            'dia_chi.required' => 'không được để trống',
+        ]);
+        
+        if($validation->fails())
+        {
+            return response()->json(['errors' => $validation->errors()], 422);
+        }
+
         $khachHang = KhachHang::where('email',$request->email)->first();
         $khachHang->ho_ten=$request->ho_ten;
         $khachHang->so_dien_thoai=$request->so_dien_thoai;
@@ -66,6 +107,35 @@ class KhachHangAPIController extends Controller
 
     public function Regester(request $rq)
     {
+        $validation = Validator::make(request()->all(), [
+            'email' => 'required',
+            'password' => 'required|min:6',
+            'hoTen' => 'required',
+            'soDienThoai' => 'required|numeric',
+            'diaChi' => 'required',
+        ], [
+            'email.required' => 'không được để trống',
+            'password.required' => 'không được để trống',
+            'password.min' => 'mật khẩu ít nhất 6 ký tự',
+            'hoTen.required' => 'không được để trống',
+            'soDienThoai.required' => 'không được để trống',
+            'soDienThoai.numeric' => 'phải là số',
+            
+            'diaChi.required' => 'không được để trống',
+        ]);
+        
+        if($validation->fails())
+        {
+            return response()->json(['errors' => $validation->errors()], 422);
+        }
+
+        $khachHang = KhachHang::where('email',$rq->email)->first();
+       
+        if($khachHang)
+        {
+            return response()->json(['errors' => 'tài khoản đã tồn tại'], 422);
+        }
+       
         $khachHang = new KhachHang();
         $khachHang->ho_ten = $rq->hoTen;
         $khachHang->email = $rq->email;
@@ -80,15 +150,30 @@ class KhachHangAPIController extends Controller
 
     public function LayLaiMatKhau(Request $request)
     {
+
+        $validation = validator::make(request(['email']),[
+            'email'=>'required',
+           
+        ],[
+            'email.required'=>'Email không được để trống',
+        ]);
+
+        if($validation->fails())
+        {
+            return response()->json(['errors' => $validation->errors()], 422);
+        }
+
         $khachHang = KhachHang::where('email', $request->email)->first();
-        $matKhauMoi = Str::random(6);
-        $khachHang->password=Hash::make($matKhauMoi);
+
         if (!$khachHang) {
             return response()->json([
                 'message' => 'Không tìm thấy người dùng với địa chỉ email này.'
-            ]);
+            ], 404);
         }
-    
+        
+        $matKhauMoi = Str::random(6);
+        $khachHang->password = Hash::make($matKhauMoi);
+        $khachHang->save();
         Mail::send('EMAIL.gui-mail', compact('khachHang','matKhauMoi'), function ($email) use ($khachHang) {
             $email->to($khachHang->email, $khachHang->ho_ten);
         });
