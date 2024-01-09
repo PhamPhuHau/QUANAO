@@ -68,7 +68,7 @@
                 <br>
                     <h5>Tên sản phẩm: {{$chiTietHoaDon->chi_tiet_san_pham->san_pham->ten}}</h5>
                     
-                    <h5>giá bán sản phẩm: {{$chiTietHoaDon->chi_tiet_san_pham->san_pham->gia}}</h5> 
+                    <h5>giá bán sản phẩm: {{$chiTietHoaDon->chi_tiet_san_pham->san_pham->gia_ban}} VNĐ</h5> 
             @endif
             </div>
         </div>
