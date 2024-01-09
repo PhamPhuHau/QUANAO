@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SanPham;
 use App\Models\ChiTietSanPham;
+use App\Models\SlideShow;
 
 
 class SanPhamAPIController extends Controller
@@ -17,9 +18,11 @@ class SanPhamAPIController extends Controller
             $item->hinh_anh;
 
         }
+        $slideShow = SlideShow::all();
         return response()->json([
             'success' => true,
-            'data' => $sanPham
+            'data' => $sanPham,
+            'dataSlideShow' => $slideShow
         ]);
     }
 
@@ -109,7 +112,7 @@ class SanPhamAPIController extends Controller
             $sanPham = SanPham::where('loai_id',$idLoai)->get();
         }
 
-        
+
         foreach($sanPham as $item)
         {
             $item->hinh_anh;
@@ -149,5 +152,5 @@ class SanPhamAPIController extends Controller
         ]);
     }
 
-    
+
 }

@@ -16,6 +16,7 @@ use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\PDFController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -166,6 +167,17 @@ Route::prefix('binh-luan')->group(function(){
 
     });
 });
+//---------------------------------SlideShow------------------
+Route::prefix('slideshow')->group(function () {
+    Route::name('slideshow.')->group(function () {
+
+        Route::get('/danh-sach', [SlideShowController::class, 'view'])->name('danh-sach');
+        Route::post('/them-anh', [SlideShowController::class, 'them_Anh'])->name('them-anh');
+        Route::get('/xoa-anh/{id}', [SlideShowController::class, 'xoa_Anh'])->name('xoa-anh');
+    });
+});
+
+
 
 //----------------------------------------------PDF-----------------------------------
 Route::get('/export-pdf/{id}', [PDFController::class,'exportPDF'])->name('thuchien');

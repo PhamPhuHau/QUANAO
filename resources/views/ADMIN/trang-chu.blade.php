@@ -10,7 +10,7 @@
                 <h1>{{$khachHang->count()}}</h1>
             </div>
             <div class="col-sm-4 doanhThuTren">
-                <h3>Sản phẩm</h3> 
+                <h3>Sản phẩm</h3>
                 <h1>{{ $demSanPham->count()}}</h1>
             </div>
             <div class="col-sm-4 doanhThuTren">
@@ -90,7 +90,7 @@
                                     <th scope="col">GIÁ NHẬP</th>
                                     <th scope="col">GIÁ BÁN</th>
                                     <th scope="col">SỐ LƯỢNG</th>
-                                    
+
                                 </tr>
                             </thead>
                             @foreach($sanPham as $SanPham)
@@ -114,7 +114,7 @@
                                     <td>{{ $SanPham->gia_nhap }}</td>
                                     <td>{{ $SanPham->gia_ban }}</td>
                                     <td>{{ $SanPham->so_luong }}</td>
-                                   
+
 
                                     <td><a class="btn btn-outline-dark" href="{{ route('san-pham.chi-tiet-san-pham',['id'=>$SanPham->id]) }}">Chi tiết</a>
 
@@ -132,7 +132,7 @@
                             </div>
                             <div class="col-sm-2">
                             <div class="phantrang">
-                        
+
                         </div>
                             </div>
 
@@ -261,8 +261,8 @@
 @section('chon')
                     <a href="/" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
 
-                    
-                    
+
+
                     <a href="{{ Route('san-pham.danh-sach') }}" class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>SẢN PHẨM</a>
                     <a href="{{ Route('loai.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>LOẠI</a>
                     <a href="{{ Route('mau.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>MÀU</a>
@@ -277,10 +277,12 @@
                             <a href="{{ Route('san-pham.lich-su-nhap-hang') }}" class="dropdown-item">LỊCH SỬ NHẬP HÀNG</a>
                             <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
-                    </div>                    
+                    </div>
                     <a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
 					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
                     <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
                     <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
-                         
+                    <a href="{{ Route('slideshow.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>SLIDESHOW</a>
+
+
 @endsection
