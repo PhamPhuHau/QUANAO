@@ -27,7 +27,14 @@
                             <tbody>
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                    <td></td>
+                                 
+                                    <td>
+                                        @if($KhachHang->avatar)
+                                        <?php $hinhAnhMinId = $KhachHang->min('id'); ?>
+                                        <?php $hinhAnhMin = $KhachHang->where('id', $hinhAnhMinId)->first();?>
+                                        <img src="{{ asset('avatar/' . $hinhAnhMin->avatar) }}" width="100%" height="50px" alt="">
+                                        @endif
+                                    </td>
                                     <td>{{ $KhachHang->id }}</td>
                                     
                                     <td>{{ $KhachHang->ho_ten }}</td>

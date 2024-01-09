@@ -182,5 +182,46 @@ class KhachHangAPIController extends Controller
             'message' => 'Thành công'
         ]);
     }
+
+
+public function ThemAvatar(Request $request)
+{
+        // Kiểm tra xem request có chứa file hình ảnh hay không
+        $validation = Validator::make(request()->all(), [
+            'image' => 'required',
+            'khachHangID' => 'required|numeric',
+            
+        ], [
+            'image.required' => 'hãy chọn ảnh',
+            'khachHangID.required' => 'vui lóng đăng nhập',
+           
+        ]);
+        
+        if($validation->fails())
+        {
+            return response()->json(['errors' => $validation->errors()], 422);
+        }
+
+        // Lưu hình ảnh vào thư mục public/avatar
+        $image = $request->file('image');
+        $imageName = time().'.'.$image->extension();
+        $image->move(public_path('avatar'), $imageName);
+
+        // Cập nhật trường "avatar" trong bảng KhachHang
+        $khachHang = KhachHang::find($request->khachHangID);
+
+        // Kiểm tra xem có khách hàng tương ứng không
+        if(!$khachHang) {
+            return response()->json(['message' => 'Không tìm thấy khách hàng'], 404);
+        }
+
+        // Cập nhật avatar
+        $khachHang->avatar = $imageName;
+        $khachHang->save();
+
+        // Trả về phản hồi thành công
+        return response()->json(['success' => true, 'image_name' => $imageName]);
+    }
+
     
 }

@@ -9,7 +9,7 @@ use App\Models\KhachHang;
 use App\Models\SanPham;
 use App\Models\NhapHang;
 use App\Models\HoaDon;
-
+use App\Models\ChiTietHoaDon;
 
 class QuanLyController extends Controller
 {
@@ -21,29 +21,34 @@ class QuanLyController extends Controller
     {
         $khachHang = KhachHang::all();
         $demSanPham = SanPham::all();
-        $nhapHang = NhapHang::sum('tong_tien');
-        $HoaDon = HoaDon::all();
-        // Lấy tháng hiện tại
-        $thangHienTai = Carbon::now()->month;
+        $nhapHang = NhapHang::all();
+        $namHienTai = now()->year;
+        $HoaDon = HoaDon::whereYear('created_at', $namHienTai)->get();
+        $chiTietHoaDon = ChiTietHoaDon::select('chi_tiet_san_pham_id', \DB::raw('count(*) as count'))
+        ->groupBy('chi_tiet_san_pham_id')
+        ->orderByDesc('count')
+        ->with('chi_tiet_san_pham')
+        ->first();
 
-        // Lấy tháng trước
-        $thangTruoc = Carbon::now()->subMonth()->month;
 
-        // Lấy tháng trước trước nữa
-        $haiThangTruoc = Carbon::now()->subMonths(2)->month;
+        $hoaDonNhieuNhat = HoaDon::select('khach_hang_id', \DB::raw('count(*) as count'))
+        ->groupBy('khach_hang_id')
+        ->orderByDesc('count')
+        ->with('khach_hang')
+        ->first();
 
-       
         $sanPham = SanPham::latest()->take(5)->get();
-
+      
+        
         return view('ADMIN.trang-chu', [
             'khachHang' => $khachHang,
             'demSanPham' => $demSanPham,
             'nhapHang' => $nhapHang,
             'HoaDon' => $HoaDon,
-            'thangHienTai' => $thangHienTai,
-            'thangTruoc' => $thangTruoc,
-            'haiThangTruoc' => $haiThangTruoc,
             'sanPham' => $sanPham,
+            'namHienTai' => $namHienTai,
+            'hoaDonNhieuNhat' => $hoaDonNhieuNhat,
+            'chiTietHoaDon' => $chiTietHoaDon,
         ]);
         
     }

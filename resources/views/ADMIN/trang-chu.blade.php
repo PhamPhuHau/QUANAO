@@ -15,21 +15,66 @@
             </div>
             <div class="col-sm-4 doanhThuTren">
                 <h3>Nhập hàng</h3>
-                <h1>{{$nhapHang}} </h1>
+                <h1>{{$nhapHang->sum('tong_tien')}} </h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6 doanhThuGiua">
-                <h1>Đơn hàng</h1>
-                <canvas id="SoDoDonHang" width="400" height="400" aria-label="Hello ARIA World" role="img"></canvas>
+       
+           <div class='doanhThuGiua'>
+           <div class="row">
+                <div class="col-sm-6">
+                    <?php
+                        // Tính tổng doanh thu trong năm nay
+                        $tongDoanhThu = 0;
+                        $namHienTai = now()->year; // Lấy năm hiện tại
+
+                        foreach ($HoaDon as $hoaDon) {
+                            // Kiểm tra xem ngày tạo có trong năm hiện tại không
+                            if ($hoaDon->created_at->year == $namHienTai) {
+                                $tongDoanhThu += $hoaDon->tong_tien;
+                            }
+                        }
+                    ?>
+                    <p>Tổng doanh thu năm nay là: {{ number_format($tongDoanhThu) }} VND</p>
+                </div>
+                <div class="col-sm-6">
+                   
+                </div>
             </div>
-            <div class="col-sm-6 doanhThuGiua">
-                <h1>Doanh Thu 3 Tháng</h1>
-                <canvas id="SoDoCot" width="400" height="400" aria-label="Column Chart" role="img"></canvas>
+
+                
+                <canvas id="SoDoCot"  aria-label="Column Chart" role="img"></canvas>
             </div>
-        </div>
         
         <div class="doanhThuDuoi">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>khách hàng mua nhiều</h3>
+                    @if($hoaDonNhieuNhat->khach_hang->avatar)
+                    <?php $hinhAnhMinId = $hoaDonNhieuNhat->khach_hang->min('id'); ?>
+                    <?php $hinhAnhMin = $hoaDonNhieuNhat->khach_hang->where('id', $hinhAnhMinId)->first();?>
+                    <img src="{{ asset('avatar/' . $hinhAnhMin->avatar) }}" width="200px" height="200px" alt="">
+                    @endif
+                    <br>
+                    <h5>họ tên: {{$hoaDonNhieuNhat->khach_hang->ho_ten}}</h5>
+                    
+                    <h5>email: {{$hoaDonNhieuNhat->khach_hang->email}}</h5> 
+            </div>
+            <div class="col-sm-6">
+            <h3>sản phẩm bán chạy</h3>
+            @if($chiTietHoaDon->chi_tiet_san_pham->san_pham->hinh_anh)
+                <?php $hinhAnhMinId = $chiTietHoaDon->chi_tiet_san_pham->san_pham->hinh_anh->min('id'); ?>
+                <?php $hinhAnhMin = $chiTietHoaDon->chi_tiet_san_pham->san_pham->hinh_anh->where('id', $hinhAnhMinId)->first();?>
+                <img src="{{ asset($hinhAnhMin->url) }}" width="200px" height="200px" alt="">
+                <br>
+                    <h5>Tên sản phẩm: {{$chiTietHoaDon->chi_tiet_san_pham->san_pham->ten}}</h5>
+                    
+                    <h5>giá bán sản phẩm: {{$chiTietHoaDon->chi_tiet_san_pham->san_pham->gia_ban}} VNĐ</h5> 
+            @endif
+            </div>
+        </div>
+
+
+
         <div class="d-flex align-items-center justify-content-between mb-4">
                         <h1 class="mb-0">Các sản phẩm mới</h1>
                     </div>
@@ -72,8 +117,6 @@
                                    
 
                                     <td><a class="btn btn-outline-dark" href="{{ route('san-pham.chi-tiet-san-pham',['id'=>$SanPham->id]) }}">Chi tiết</a>
-                                    <a class="btn btn-outline-primary" onclick="them({{ $SanPham->id }}, '{{ $SanPham->ten }}')">Cập nhật</a>
-                                    <a class="btn btn-outline-danger" href="{{ route('san-pham.xoa',['id'=>$SanPham->id]) }}">Xóa</a>
 
                                     </td>
 
@@ -103,102 +146,82 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-<script>
-    // Biểu đồ tròn
-    let ChoXacNhan = 0;
-    let DaXacNhan = 0;
-    let DangVanChuyen = 0;
-    let DaNhanHang = 0;
-    let DaHuy = 0;
 
+<script>
     // Biểu đồ cột
     let ThangNay = 0;
     let ThangTruoc = 0;
     let HaiThangTruoc = 0;
 
+    let itemDataBar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    
     @foreach($HoaDon as $HoaDon)
-        @switch($HoaDon->trang_thai)
+    @if($hoaDon->created_at->year == $namHienTai)
+        @switch($HoaDon->created_at->month)
             @case(1)
-                ChoXacNhan++;
-                @break;
+                itemDataBar[0] +=  {{ $HoaDon->tong_tien }};
+            @break
+
             @case(2)
-                DaXacNhan++;
-                @break;
+                itemDataBar[1] +=  {{ $HoaDon->tong_tien }};
+            @break
+
             @case(3)
-                DangVanChuyen++;
-                @break;
+                itemDataBar[2] +=  {{ $HoaDon->tong_tien }};
+            @break
+
             @case(4)
-                DaNhanHang++;
-                @break;
-            @case(0)
-                DaHuy++;
-                @break;
-            @default
-                // Default case
+                itemDataBar[3] +=  {{ $HoaDon->tong_tien }};
+            @break
+
+            @case(5)
+                itemDataBar[4] +=  {{ $HoaDon->tong_tien }};
+            @break
+
+            @case(6)
+                itemDataBar[5] +=  {{ $HoaDon->tong_tien }};
+            @break
+
+            @case(7)
+                itemDataBar[6] +=  {{ $HoaDon->tong_tien }};
+            @break
+
+            @case(8)
+                itemDataBar[7] +=  {{ $HoaDon->tong_tien }};
+            @break
+
+            @case(9)
+                itemDataBar[8] +=  {{ $HoaDon->tong_tien }};
+            @break
+
+            @case(10)
+                itemDataBar[9] +=  {{ $HoaDon->tong_tien }};
+            @break
+
+            @case(11)
+                itemDataBar[10] +=  {{ $HoaDon->tong_tien }};
+            @break
+
+            @case(12)
+                itemDataBar[11] +=  {{ $HoaDon->tong_tien }};
+            @break
         @endswitch
-
-        @if($HoaDon->created_at->month == $thangHienTai)
-            ThangNay += {{ $HoaDon->tong_tien }};
-        @endif
-
-        @if($HoaDon->created_at->month == $thangTruoc)
-            ThangTruoc += {{ $HoaDon->tong_tien }};
-        @endif
-
-        @if($HoaDon->created_at->month == $haiThangTruoc)
-            HaiThangTruoc += {{ $HoaDon->tong_tien }};
         @endif
     @endforeach
 
-    //-------------------------SƠ ĐỒ TRÒN---------------------------
-    let labelsPolar = ['Chờ xác nhận','đã xác nhận', 'Đang vận chuyển' , 'Đã nhận hàng', 'Đã huỷ'];
-    let itemDataPolar = [ChoXacNhan , DaXacNhan, DangVanChuyen, DaNhanHang,DaHuy];
-
-    const dataPolar = {
-        labels: labelsPolar,
-        datasets: [{
-            label: 'bản dử liệu',
-            data: itemDataPolar,
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(75, 192, 192)',
-                'rgb(255, 205, 86)',
-                'rgb(54, 162, 235)',  // Thêm màu mới
-                'rgb(255, 159, 64)'
-            ]
-        }]
-    };
-
-    const configPolar = {
-        type: 'polarArea',
-        data: dataPolar,
-        options: {
-            responsive: false, // Ngăn chặn biểu đồ tự động thay đổi kích thước
-            maintainAspectRatio: false, // Bảo toàn tỷ lệ khía cạnh
-            width: 400, // Kích thước chiều rộng
-            height: 400 // Kích thước chiều cao
-        }
-    };
-
-    const chartPolar = new Chart(
-        document.getElementById('SoDoDonHang'),
-        configPolar
-    );
-
-
     //----------------------------SƠ ĐỒ CỘT----------------------------------
-    let labelsBar = ['Hai tháng trước', 'Tháng trước', 'Tháng này'];
-    let itemDataBar = [HaiThangTruoc, ThangTruoc, ThangNay];
-
+    let labelsBar = ['tháng 1', 'tháng 2', 'tháng 3', 'tháng 4', 'tháng 5', 'tháng 6', 'tháng 7', 'tháng 8', 'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12'];
+   
     const dataBar = {
         labels: labelsBar,
         datasets: [{
-            label: 'Doanh thu thang',
+            label: 'Doanh thu từng tháng',
             data: itemDataBar,
             backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(75, 192, 192)',
                 'rgb(255, 205, 86)',
+                'rgb(0, 205, 86)',
             ]
         }]
     };
@@ -207,10 +230,22 @@
         type: 'bar',
         data: dataBar,
         options: {
-            responsive: false,
-            maintainAspectRatio: false,
+            height: 500, // Đặt chiều cao là 500px
             width: 400,
-            height: 400
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Tháng'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Doanh thu'
+                    }
+                }
+            }
         }
     };
 
@@ -219,6 +254,7 @@
         configBar
     );
 </script>
+
 
 @endsection
 

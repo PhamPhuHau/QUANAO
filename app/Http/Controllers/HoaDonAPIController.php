@@ -24,7 +24,8 @@ class HoaDonAPIController extends Controller
             ->where('size_id',$size->id)->first();
         // Assuming so_luong is a single value, remove [i] index
         if ($chiTietSanPham->so_luong < $request->so_luong[$i]) {
-            return response()->json(['errors' => 'Vui lòng giảm số lượng sản phẩm'], 422);
+            return response()->json(['errors' => 'Vui lòng giảm số lượng '. $request->ten[$i] . ', màu '
+            . $request->mau[$i] .', size '. $request->size[$i]], 422);
         }
     }
         //tạo mới hoá đơn
