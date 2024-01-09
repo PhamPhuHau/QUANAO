@@ -32,6 +32,8 @@ Route::post('/regester',[KhachHangAPIController::class,'Regester'])->middleware(
 Route::post('/doi-mat-khau',[KhachHangAPIController::class,'doiMatKhau'])->middleware('api');
 Route::post('/cap_nhat_thong_tin',[KhachHangAPIController::class,'capNhatThongTin'])->middleware('api');
 Route::post('/lay-lai-mat-khau',[KhachHangAPIController::class,'LayLaiMatKhau']);
+Route::post('/them-avatar',[KhachHangAPIController::class,'ThemAvatar']);
+
 
 
 //---------------SẢN PHẨM-----------------------------------
