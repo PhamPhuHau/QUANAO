@@ -21,9 +21,9 @@ class QuanLyController extends Controller
     {
         $khachHang = KhachHang::all();
         $demSanPham = SanPham::all();
-        $nhapHang = NhapHang::all();
         $namHienTai = now()->year;
-        $HoaDon = HoaDon::whereYear('created_at', $namHienTai)->get();
+        $nhapHang = NhapHang::whereYear('created_at', $namHienTai)->get();
+        $HoaDon = HoaDon::whereYear('created_at', $namHienTai)->where('trang_thai',4)->get();
         $chiTietHoaDon = ChiTietHoaDon::select('chi_tiet_san_pham_id', \DB::raw('count(*) as count'))
         ->groupBy('chi_tiet_san_pham_id')
         ->orderByDesc('count')
@@ -39,6 +39,16 @@ class QuanLyController extends Controller
 
         $sanPham = SanPham::latest()->take(5)->get();
       
+        $tongDoanhThu = 0;
+        $namHienTai = now()->year; // Lấy năm hiện tại
+
+        foreach ($HoaDon as $hoaDon) {
+            // Kiểm tra xem ngày tạo có trong năm hiện tại không
+            if ($hoaDon->created_at->year == $namHienTai) {
+                $tongDoanhThu += $hoaDon->tong_tien;
+            }
+        }
+     
         
         return view('ADMIN.trang-chu', [
             'khachHang' => $khachHang,
@@ -49,9 +59,32 @@ class QuanLyController extends Controller
             'namHienTai' => $namHienTai,
             'hoaDonNhieuNhat' => $hoaDonNhieuNhat,
             'chiTietHoaDon' => $chiTietHoaDon,
+            'tongDoanhThu' => $tongDoanhThu
         ]);
         
     }
+
+    public function ThayDoiBieuDo(Request $request)
+    {
+        $HoaDon = HoaDon::whereYear('created_at', $request->Nam)->where('trang_thai',4)->get();
+        $tongDoanhThu = 0;
+        $namHienTai = now()->year; // Lấy năm hiện tại
+
+        foreach ($HoaDon as $hoaDon) {
+            // Kiểm tra xem ngày tạo có trong năm hiện tại không
+            if ($hoaDon->created_at->year == $request->Nam) {
+                $tongDoanhThu += $hoaDon->tong_tien;
+            }
+        }
+       
+        return response()->json([
+            'success' => true,
+            'data' => $HoaDon,
+            'Nam' => $request->Nam,
+            'tongDoanhThu' => $tongDoanhThu
+        ]);
+    }
+
     public function xuLyDangNhap(Request $request)
     {
         $request->validate([

@@ -74,7 +74,6 @@
                 </table>
             <div class="thongtin"></div>
             </div>
-            <td><a class="btn btn-outline-primary" style="margin: 15px 0 0 0;"    >THÊM HÀNG</a></td>
             <td><button class="btn btn-outline-success" style="margin: 15px 0 0 0;" type="submit">LƯU</button></td>
         </div>
 

@@ -101,7 +101,7 @@ class HoaDonAPIController extends Controller
 
     public function LayHoaDonKhachHang(Request $request)
     {
-        $hoaDon = HoaDon::where('khach_hang_id',$request->KhachHang)->get();
+        $hoaDon = HoaDon::where('khach_hang_id',$request->KhachHang)->orderBy('id', 'desc')->get();
         
         
         return response()->json([

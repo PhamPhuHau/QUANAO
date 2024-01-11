@@ -10,7 +10,7 @@ class MauController extends Controller
 {
     public function View()
     {
-        $Mau = Mau::paginate(9);
+        $Mau = Mau::paginate(10);
         return view('MAU/danh-sach',compact('Mau'));
     }
     public function xuLyThemMoi(Request $request)

@@ -82,14 +82,14 @@ class SanPhamAPIController extends Controller
     {
         if(isset($request->giaTu) && $request->giaDen)
         {
-            $sanPham= SanPham::where('ten', 'like', '%' . $ten . '%')->whereBetween('gia_ban', [$request->giaTu, $request->giaDen])->get();
+            $sanPham= SanPham::where('ten', 'like', '%' . $ten . '%')->whereBetween('gia_ban', [$request->giaTu, $request->giaDen])->orderBy('id', 'desc')->get();
             foreach($sanPham as $item)
             {
                 $item->hinh_anh;
             }
         }
         else{
-            $sanPham = SanPham::where('ten','like','%'.$ten.'%')->get();
+            $sanPham = SanPham::where('ten','like','%'.$ten.'%')->orderBy('id', 'desc')->get();
             foreach($sanPham as $item)
             {
                 $item->hinh_anh;
@@ -105,7 +105,7 @@ class SanPhamAPIController extends Controller
     {
         if(isset($request->giaTu) && $request->giaDen)
         {
-            $sanPham = SanPham::where('loai_id',$idLoai)->whereBetween('gia_ban', [$request->giaTu, $request->giaDen])->get();
+            $sanPham = SanPham::where('loai_id',$idLoai)->whereBetween('gia_ban', [$request->giaTu, $request->giaDen])->orderBy('id', 'desc')->get();
         }
         else
         {

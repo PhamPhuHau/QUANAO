@@ -29,6 +29,8 @@ use App\Http\Controllers\PDFController;
 */
 Route::middleware('auth')->group(function(){
 Route::get('/', [QuanLyController::class, 'trangChu'])->name('quan-ly.trang-chu');
+Route::match(['get', 'post'], '/thay-doi-bieu-do', [QuanLyController::class, 'ThayDoiBieuDo'])->name('thay-doi-bieu-do');
+
 /*-----------------------SANPHAM-------------------- */
 Route::prefix('san-pham')->group(function(){
     Route::name('san-pham.')->group(function(){
@@ -115,6 +117,8 @@ Route::middleware('guest')->group(function(){
 Route::get('/dang-nhap',[QuanLyController::class, 'dangNhap'])->name('dang-nhap');
 
 Route::post('/dang-nhap',[QuanLyController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
+
+
 });
 
 
