@@ -19,13 +19,14 @@ class SanPhamController extends Controller
     public function view()
     {
         // $san_Pham = SanPham::all();
-        $san_Pham = SanPham::paginate(9);
-        return view('SANPHAM/danh-sach',compact('san_Pham'));
+        $sanPham = SanPham::with('loai')->with('nha_cung_cap')->paginate(10);
+
+        return view('SANPHAM/danh-sach',compact('sanPham'));
     }
 
     public function lsNhapHang()
     {
-        $nhap_Hang = NhapHang::all();
+        $nhap_Hang = NhapHang::orderBy('id', 'desc')->paginate(10);
         return view('NHAPHANG/lich-su-nhap-hang',compact('nhap_Hang'));
     }
 
@@ -135,7 +136,7 @@ class SanPhamController extends Controller
 
     public function xuLyThemSoLuong(Request $request)
     {
-       
+
         $request->validate([
             "san_Pham" => 'required',
             "so_Luong" => 'required',
@@ -149,41 +150,49 @@ class SanPhamController extends Controller
             "mau.required" => 'Màu không được để trống',
             "size.required" => 'Size không được để trống',
         ]);
-        $nhapHang = ChiTietNhapHang::where('san_pham_id',$request->san_Pham)->first();
-        $sanPham = SanPham::where('id',$request->san_Pham)->first();
-        $sanPham->so_luong += (int)$request->so_Luong;
-        $nhaCungCap = $nhapHang->nhap_hang->nha_cung_cap_id;
 
-        $nhapHang = new NhapHang();
-        $nhapHang->tong_tien = 0;
-        $nhapHang->nha_cung_cap_id = (int)$nhaCungCap;
+        $nhapHang = ChiTietNhapHang::where('san_pham_id',$request->san_Pham)->first();//được dùng để lưu nhà cúng cấp id
+        $nhaCungCap = $nhapHang->nhap_hang->nha_cung_cap_id; //được dùg để luu nhà cung cấp id
+        $sanPham = SanPham::where('id',$request->san_Pham)->first();//tim san pham
+        $sanPham->so_luong += (int)$request->so_Luong;// cap nhat lai so luong san pham
+        
+
+        $nhapHang = new NhapHang(); // tao mới hoá đơn nhập hàng
+        $nhapHang->tong_tien = 0; //cho tong_tien bằng 0 để lưu trước
+        $nhapHang->nha_cung_cap_id = (int)$nhaCungCap; //lưu nhà cung cấp
         
         $nhapHang->save();
 
-        $chiTietNhapHang = new ChiTietNhapHang();
+        $chiTietNhapHang = new ChiTietNhapHang();//tạo mới chi tiết hoá đơn nhập
         $chiTietNhapHang->nhap_hang_id = $nhapHang->id;
         $chiTietNhapHang->san_pham_id = $request->san_Pham;
         $chiTietNhapHang->so_luong = (int)$request->so_Luong;
         
-        if($request->gia_Nhap==null)
+        if($request->gia_Nhap==null)//nếu người dùng không nhập giá nhập thì giá nhập sẽ lấy của sản phẩm đã lưu
         {
             $chiTietNhapHang->gia_nhap = $sanPham->gia_nhap;
-            $chiTietNhapHang->thanh_tien = (int)$request->so_Luong * $sanPham->gia_nhap;
+            $chiTietNhapHang->thanh_tien = (int)$request->so_Luong * $sanPham->gia_nhap;//lưu thành tiền 
+            $nhapHang->tong_tien += (int)$request->so_Luong * $sanPham->gia_nhap;
         }
-        else
+        else//nếu người dùng đã nhập giá nhập thì sẽ update lại giá của sản phẩm và lưu giá nhập mới vào hoá đơn nhập
         {
              $chiTietNhapHang->gia_nhap = $request->gia_Nhap;
+             $sanPham->gia_nhap = $request->gia_Nhap;
              $chiTietNhapHang->thanh_tien = (int)$request->so_Luong * $request->gia_Nhap;
+             $nhapHang->tong_tien += (int)$request->so_Luong * $request->gia_Nhap;
         }
-        if($request->gia_Ban==null)
+        if($request->gia_Ban==null)//nếu người dùng không nhập giá bán thì giá nhập sẽ lấy của sản phẩm đã lưu
         {
             $chiTietNhapHang->gia_ban = $sanPham->gia_ban;
+            
+           
         }
-        else 
+        else //nếu người dùng đã nhập giá nhập thì sẽ update lại giá của sản phẩm và lưu giá nhập mới vào hoá đơn nhập
         {
             $chiTietNhapHang->gia_ban = $request->gia_Ban;
+            $sanPham->gia_ban = $request->gia_Ban;
         }
-        if($request->thong_tin!=null)
+        if($request->thong_Tin)//kiểm tra thông tin có tồn tại chưa nếu có thì update lại thông tin vô sản phẩm
         {
             $sanPham->thong_tin = $request->thong_Tin;  
         }
@@ -192,8 +201,9 @@ class SanPhamController extends Controller
         $chiTietSanPham->so_luong +=  (int)$request->so_Luong;
         $chiTietNhapHang->save();
         $chiTietSanPham->save();
+        $nhapHang->save();
         $sanPham->save();
-        return "thành công";
+        return redirect()->route('san-pham.danh-sach');
        
     }
 

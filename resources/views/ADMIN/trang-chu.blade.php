@@ -14,33 +14,28 @@
                 <h1>{{ $demSanPham->count()}}</h1>
             </div>
             <div class="col-sm-4 doanhThuTren">
-                <h3>Nhập hàng</h3>
+                <h3>Số tiền nhập hàng</h3>
                 <h1>{{$nhapHang->sum('tong_tien')}} </h1>
             </div>
         </div>
        
            <div class='doanhThuGiua'>
            <div class="row">
-                <div class="col-sm-6">
-                    <?php
-                        // Tính tổng doanh thu trong năm nay
-                        $tongDoanhThu = 0;
-                        $namHienTai = now()->year; // Lấy năm hiện tại
-
-                        foreach ($HoaDon as $hoaDon) {
-                            // Kiểm tra xem ngày tạo có trong năm hiện tại không
-                            if ($hoaDon->created_at->year == $namHienTai) {
-                                $tongDoanhThu += $hoaDon->tong_tien;
-                            }
-                        }
-                    ?>
-                    <p>Tổng doanh thu năm nay là: {{ number_format($tongDoanhThu) }} VND</p>
+            
+                <div class="col-sm-6 TongDoanhThu" id="TongDoanhThu">
+                    <p>Tổng doanh thu năm {{$namHienTai}} là: {{ $tongDoanhThu }} VND</p>
                 </div>
+
                 <div class="col-sm-6">
-                   
+                <label for="NamSoDo">Năm</label>
+            <select name="NamSoDo" id="NamSoDo" onchange="ThayDoiBieuDo(this.value)">
+                <option value="{{$namHienTai}}">{{$namHienTai}}</option>
+                <option value="{{$namHienTai - 1 }}">{{$namHienTai - 1 }}</option>
+                <option value="{{$namHienTai - 2 }}">{{$namHienTai - 2}}</option>
+            </select>
                 </div>
             </div>
-
+            
                 
                 <canvas id="SoDoCot"  aria-label="Column Chart" role="img"></canvas>
             </div>
@@ -75,8 +70,8 @@
 
 
 
-        <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0">Các sản phẩm mới</h1>
+        <div class="d-flex align-items-center justify-content-between mb-4" style="margin-top: 40px;">
+                        <h1 class="mb-0"  >Các sản phẩm mới</h1>
                     </div>
         <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -148,15 +143,78 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
 <script>
-    // Biểu đồ cột
-    let ThangNay = 0;
-    let ThangTruoc = 0;
-    let HaiThangTruoc = 0;
+   // Biểu đồ cột
+let ThangNay = 0;
+let ThangTruoc = 0;
+let HaiThangTruoc = 0;
 
-    let itemDataBar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    
+let itemDataBar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+function ThayDoiBieuDo(Nam) {
+    $.ajax({
+        method: "POST",
+        url: "{{ route('thay-doi-bieu-do') }}",
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "Nam": Nam
+        },
+    }).done(function(response) {
+        $('.TongDoanhThu').html(`<p>Tổng doanh thu năm ${Nam} là: ${response.tongDoanhThu} VND</p>
+`);
+        itemDataBar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        if (response.data && response.data.length > 0) {
+           
+            for (const item of response.data) { 
+                console.log(new Date(item.created_at).getMonth());
+                // Kiểm tra năm của mỗi item
+                if (new Date(item.created_at).getFullYear() == Nam) {
+                    // Thực hiện các hành động khi năm trùng khớp
+                    switch (new Date(item.created_at).getMonth() + 1) {
+                        case 1: itemDataBar[0] += item.tong_tien;
+                            break;
+                        case 2: itemDataBar[1] += item.tong_tien;
+                            break;
+                        case 3: itemDataBar[2] += item.tong_tien;
+                            break;
+                        case 4: itemDataBar[3] += item.tong_tien;
+                            break;
+                        case 5: itemDataBar[4] += item.tong_tien;
+                            break;
+                        case 6: itemDataBar[5] += item.tong_tien;
+                            break;
+                        case 7: itemDataBar[6] += item.tong_tien;
+                            break;
+                        case 8: itemDataBar[7] += item.tong_tien;
+                            break;
+                        case 9: itemDataBar[8] += item.tong_tien;
+                            break;
+                        case 10: itemDataBar[9] += item.tong_tien;
+                            break;
+                        case 11: itemDataBar[10] += item.tong_tien;
+                            break;
+                        case 12: itemDataBar[11] += item.tong_tien;
+                            break;
+                    }
+
+                    
+                }
+            }
+        } else {
+            console.error('Invalid response data format or empty data.');
+        }
+        const chart = chartBar // Sửa ID của biểu đồ
+
+                    // Update the chart data and redraw
+                    chart.data.datasets[0].data = itemDataBar;
+                   
+                    chart.update();
+    });
+}
+
+
+
     @foreach($HoaDon as $HoaDon)
-    @if($hoaDon->created_at->year == $namHienTai)
+    @if($HoaDon->created_at->year == $namHienTai)
         @switch($HoaDon->created_at->month)
             @case(1)
                 itemDataBar[0] +=  {{ $HoaDon->tong_tien }};
@@ -253,6 +311,9 @@
         document.getElementById('SoDoCot'),
         configBar
     );
+
+
+ 
 </script>
 
 
