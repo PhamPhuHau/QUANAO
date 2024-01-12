@@ -51,7 +51,7 @@ class DanhGiaAPIController extends Controller
             
         }
         
-        $sanPham->so_sao = $tongSao / $danhGia->count();
+        $sanPham->so_sao = (double)$tongSao / (double)$danhGia->count();
         $sanPham->save();
         
         return response()->json([

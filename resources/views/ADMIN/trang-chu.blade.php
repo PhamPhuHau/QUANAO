@@ -43,6 +43,7 @@
         <div class="doanhThuDuoi">
         <div class="row">
             <div class="col-sm-6">
+                @if($hoaDonNhieuNhat)
                 <h3>khách hàng mua nhiều</h3>
                     @if($hoaDonNhieuNhat->khach_hang->avatar)
                     <?php $hinhAnhMinId = $hoaDonNhieuNhat->khach_hang->min('id'); ?>
@@ -53,17 +54,22 @@
                     <h5>họ tên: {{$hoaDonNhieuNhat->khach_hang->ho_ten}}</h5>
                     
                     <h5>email: {{$hoaDonNhieuNhat->khach_hang->email}}</h5> 
+                    @endif
             </div>
             <div class="col-sm-6">
             <h3>sản phẩm bán chạy</h3>
+            @if($chiTietHoaDon)
             @if($chiTietHoaDon->chi_tiet_san_pham->san_pham->hinh_anh)
                 <?php $hinhAnhMinId = $chiTietHoaDon->chi_tiet_san_pham->san_pham->hinh_anh->min('id'); ?>
                 <?php $hinhAnhMin = $chiTietHoaDon->chi_tiet_san_pham->san_pham->hinh_anh->where('id', $hinhAnhMinId)->first();?>
+                @if($hinhAnhMin)
                 <img src="{{ asset($hinhAnhMin->url) }}" width="200px" height="200px" alt="">
+                @endif
                 <br>
                     <h5>Tên sản phẩm: {{$chiTietHoaDon->chi_tiet_san_pham->san_pham->ten}}</h5>
                     
                     <h5>giá bán sản phẩm: {{$chiTietHoaDon->chi_tiet_san_pham->san_pham->gia_ban}} VNĐ</h5> 
+            @endif
             @endif
             </div>
         </div>
@@ -340,7 +346,6 @@ function ThayDoiBieuDo(Nam) {
                         </div>
                     </div>
                     <a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
-					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
                     <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
                     <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
                     <a href="{{ Route('slideshow.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>SLIDESHOW</a>
