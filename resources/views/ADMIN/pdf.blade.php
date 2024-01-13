@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-     p{display:inline;}
+     p{
+        display:inline;
+    }
+     * {
+        font-family: DejaVu Sans, sans-serif;
+     }
     </style>
 </head>
 <body>

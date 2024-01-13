@@ -14,6 +14,8 @@ use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\SlideShowController;
+
 
 
 
