@@ -13,6 +13,10 @@ use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\SlideShowController;
+
+
 
 
 /*
@@ -27,6 +31,8 @@ use App\Http\Controllers\BinhLuanController;
 */
 Route::middleware('auth')->group(function(){
 Route::get('/', [QuanLyController::class, 'trangChu'])->name('quan-ly.trang-chu');
+Route::match(['get', 'post'], '/thay-doi-bieu-do', [QuanLyController::class, 'ThayDoiBieuDo'])->name('thay-doi-bieu-do');
+
 /*-----------------------SANPHAM-------------------- */
 Route::prefix('san-pham')->group(function(){
     Route::name('san-pham.')->group(function(){
@@ -113,6 +119,8 @@ Route::middleware('guest')->group(function(){
 Route::get('/dang-nhap',[QuanLyController::class, 'dangNhap'])->name('dang-nhap');
 
 Route::post('/dang-nhap',[QuanLyController::class, 'xuLyDangNhap'])->name('xl-dang-nhap');
+
+
 });
 
 
@@ -120,6 +128,12 @@ Route::post('/dang-nhap',[QuanLyController::class, 'xuLyDangNhap'])->name('xl-da
 Route::prefix('hoa-don')->group(function(){
     Route::name('hoa-don.')->group(function(){
         Route::get('/danh-sach',[HoaDonController::class,'View'])->name('danh-sach');
+        Route::get('/danh-sach-chi-tiet/{id}',[HoaDonController::class,'HienChiTiet'])->name('danh-sach-chi-tiet');
+        Route::get('/huy/{id}',[HoaDonController::class,'Huy'])->name('huy');
+        Route::get('/xac-nhan/{id}',[HoaDonController::class,'XacNhan'])->name('xac-nhan');
+        Route::get('/van-chuyen/{id}',[HoaDonController::class,'VanChuyen'])->name('van-chuyen');
+        Route::get('/thanh-cong/{id}',[HoaDonController::class,'ThanhCong'])->name('thanh-cong');
+        Route::get('/loc/{id}',[HoaDonController::class,'Loc'])->name('loc');
     });
 });
 
@@ -159,3 +173,17 @@ Route::prefix('binh-luan')->group(function(){
 
     });
 });
+//---------------------------------SlideShow------------------
+Route::prefix('slideshow')->group(function () {
+    Route::name('slideshow.')->group(function () {
+
+        Route::get('/danh-sach', [SlideShowController::class, 'view'])->name('danh-sach');
+        Route::post('/them-anh', [SlideShowController::class, 'them_Anh'])->name('them-anh');
+        Route::get('/xoa-anh/{id}', [SlideShowController::class, 'xoa_Anh'])->name('xoa-anh');
+    });
+});
+
+
+
+//----------------------------------------------PDF-----------------------------------
+Route::get('/export-pdf/{id}', [PDFController::class,'exportPDF'])->name('thuchien');

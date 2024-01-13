@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('hoa_don', function (Blueprint $table) {
             $table->id();
+            $table->string('ma')->nullable();;
             $table->double('tong_tien');
+            $table->double('tien_ship');
             $table->foreignId('khach_hang_id');
             $table->integer('trang_thai');
+            $table->string('phuong_thuc_thanh_toan');
             $table->softDeletes();
             $table->timestamps();
         });

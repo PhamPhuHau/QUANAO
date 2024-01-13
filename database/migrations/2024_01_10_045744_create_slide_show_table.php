@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('san_pham_yeu_thich', function (Blueprint $table) {
+        Schema::create('slideshow', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_khach_hang');
-            $table->foreignId('san_pham_id');
+            $table->string('url');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('san_pham_yeu_thich');
+        Schema::dropIfExists('slideshow');
     }
 };

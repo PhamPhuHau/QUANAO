@@ -27,7 +27,14 @@
                             <tbody>
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                    <td></td>
+                                 
+                                    <td>
+                                        @if($KhachHang->avatar)
+                                        <?php $hinhAnhMinId = $KhachHang->min('id'); ?>
+                                        <?php $hinhAnhMin = $KhachHang->where('id', $hinhAnhMinId)->first();?>
+                                        <img src="{{ asset('avatar/' . $hinhAnhMin->avatar) }}" width="100%" height="50px" alt="">
+                                        @endif
+                                    </td>
                                     <td>{{ $KhachHang->id }}</td>
                                     
                                     <td>{{ $KhachHang->ho_ten }}</td>
@@ -36,6 +43,7 @@
                                     <td>{{ $KhachHang->dia_chi }}</td>
                                     
                                     <td><a class="btn btn-outline-danger" href="{{ route('tai-khoan.khoa',['id'=>$KhachHang->id]) }}">Khoá</a></td>
+                                   
                                 </tr>
                                 
                             </tbody>
@@ -126,8 +134,9 @@
                             <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
                         <a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
-					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
                     <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
                     <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
+                    <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
+
 @endsection
 

@@ -19,10 +19,12 @@
                                     <th scope="col">GIÁ NHẬP</th>
                                     <th scope="col">GIÁ BÁN</th>
                                     <th scope="col">SỐ LƯỢNG</th>
-                                    <th scope="col">TRẠNG THÁI</th>
+                                    <th scope="col">LOẠI</th>
+                                    <th scope="col">NHÀ CUNG CẤP</th>
+                                    <th scope="col">SỐ SAO</th>
                                 </tr>
                             </thead>
-                            @foreach($san_Pham as $SanPham)
+                            @foreach($sanPham as $SanPham)
                             <tbody>
                             <tr data-id="{{ $SanPham->id }}">
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
@@ -35,7 +37,7 @@
                                         <img src="{{ asset($hinhAnhMin->url) }}" width="100%" height="50px" alt="">
                                         @endif
                                     </td>
-                                    <td>{{ $SanPham->id }}</td>
+                                    <td >{{ $SanPham->id }}</td>
 
                                     <!-- ... Các cột thông tin sản phẩm ... -->
                                     <td class="ten-san-pham">{{ $SanPham->ten }}</td>
@@ -43,10 +45,12 @@
                                     <td>{{ $SanPham->gia_nhap }}</td>
                                     <td>{{ $SanPham->gia_ban }}</td>
                                     <td>{{ $SanPham->so_luong }}</td>
-                                    <td>{{ $SanPham->trang_thai}}</td>
+                                    <td>{{ $SanPham->loai->ten}}</td>
+                                    <td>{{ $SanPham->nha_cung_cap->ten}}</td>
+                                    <td>{{ $SanPham->so_sao }}</td>
 
-                                    <td><a class="btn btn-outline-dark" href="{{ route('san-pham.chi-tiet-san-pham',['id'=>$SanPham->id]) }}">Chi tiết</a>
-                                    <button class="btn btn-outline-primary" onclick="them({{ $SanPham->id }}, '{{ $SanPham->ten }}')">Cập nhật</button>
+                                    <td style="text-align: center;"><a class="btn btn-outline-dark" href="{{ route('san-pham.chi-tiet-san-pham',['id'=>$SanPham->id]) }}">Chi tiết</a>
+                                    <a class="btn btn-outline-primary" onclick="them({{ $SanPham->id }}, '{{ $SanPham->ten }}')">Cập nhật</a>
                                     <a class="btn btn-outline-danger" href="{{ route('san-pham.xoa',['id'=>$SanPham->id]) }}">Xóa</a>
 
                                     </td>
@@ -63,7 +67,7 @@
                             </div>
                             <div class="col-sm-2">
                             <div class="phantrang">
-                        {{ $san_Pham->links() }}
+                        {{ $sanPham->links() }}
                         </div>
                             </div>
 
@@ -144,7 +148,8 @@
                             <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
                         <a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
-					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
                     <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
                     <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
+                    <a href="{{ Route('slideshow.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>SLIDESHOW</a>
+
 @endsection

@@ -16,7 +16,6 @@
                                     <th scope="col">TỔNG TIỀN</th>
                                     <th scope="col">NHÀ CUNG CẤP</th>
                                     <th scope="col">NGÀY NHẬP</th>
-                                    <th scope="col">TRẠNG THÁI</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -26,12 +25,12 @@
                                 <td style="width: 25%;">{{ $nhap_hang->tong_tien }}</td>
                                 <td style="width: 25%;">{{ $nhap_hang->nha_cung_cap->ten }}</td>
                                 <td style="width: 25%;">{{ $nhap_hang->created_at }}</td>
-                                <td style="width: 25%;">{{ $nhap_hang->trang_thai }}</td>
                                 <td><a class="btn btn-sm btn-primary" href="{{ route('san-pham.lich-su-chi-tiet-nhap-hang',['id'=>$nhap_hang->id]) }}">Detail</a></td>
                             </tbody>
                             @endforeach
                         </table>
                     </div>
+                    {{ $nhap_Hang->links() }}
                 </div>
 </div>
 
@@ -51,7 +50,8 @@
                             <a href="{{ Route('san-pham.nhap-so-luong') }}" class="dropdown-item">THÊM SỐ LUỌNG</a>
                         </div>
                         <a href="{{ Route('hoa-don.danh-sach') }}" class="nav-item nav-link"><i class="far fa-file-alt me-2"></i>HÓA ĐƠN</a>
-					<a href="{{ Route('don-hang.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-cloud me-2"></i>ĐƠN HÀNG</a>
                     <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
                     <a href="{{ Route('binh-luan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-envelope me-2"></i>BÌNH LUẬN</a>
+                    <a href="{{ Route('tai-khoan.danh-sach') }}" class="nav-item nav-link"><i class="fa fa-regular fa-user me-2"></i>TÀI KHOẢN</a>
+
 @endsection
